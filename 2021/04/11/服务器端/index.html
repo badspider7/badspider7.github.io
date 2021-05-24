@@ -1,0 +1,852 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" type="image/png" href="/img/favicon.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#ED9282">
+  <meta name="description" content="大一软件工程">
+  <meta name="author" content="badspider7">
+  <meta name="keywords" content="c,python,java">
+  <title>服务器端 - 念伊の小窝</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/tomorrow-night.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_2001540_zomrzvqglli.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/mycss.css">
+
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>念伊の小窝</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-xianxingxuexiao"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-guidang"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-wreath"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-biaoqian"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/love/">
+                <i class="iconfont icon-cunqianguan"></i>
+                小艾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-guanyu"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/server-banner.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-04-11 13:44" pubdate>
+      2021年4月11日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">服务器端</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h2 id="1-服务器端基础概念"><a href="#1-服务器端基础概念" class="headerlink" title="1.服务器端基础概念"></a>1.服务器端基础概念</h2><h4 id="1-1URL"><a href="#1-1URL" class="headerlink" title="1.1URL"></a>1.1URL</h4><p>统一资源定位符，又叫 URL(Uniform Resource Locator),是专门为标识 Internet 网上资源位置而设的一种编址方式，我们平时所说的网页地址指的即是 URL</p>
+<p><strong>URL 的组成</strong></p>
+<p><span style="color:red">传输协议：</span>服务器 ip 或域名:端口<span style="color:red">资源所在位置标识</span></p>
+
+<p><span style="color:red">http:</span>//www.badspider.top/<span style="color:red">page/1024.html</span></p>
+
+<p>http:超文本传输协议，提供了一种发布和接受 HTML 页面的方法</p>
+<blockquote>
+<p>关于端口，我们输入网址的时候是不需要写的，因为浏览器在请求的时候会默认加上 80 端口</p>
+</blockquote>
+<h4 id="1-2-开发过程中客户端和服务器端说明"><a href="#1-2-开发过程中客户端和服务器端说明" class="headerlink" title="1.2 开发过程中客户端和服务器端说明"></a>1.2 开发过程中客户端和服务器端说明</h4><p>在开发阶段，客户端和服务器端使用同一台电脑，即开发人员电脑</p>
+<p>​ 开发人员电脑</p>
+<div style="color:white; background-color:skyblue; width:200px; text-align:center;height:30px;line-height:30px">客户端(浏览器)
+    </div>
+<div style="color:white; background-color:skyblue; width:200px; text-align:center;height:30px;line-height:30px">
+    服务器端(Node)
+</div>
+
+<p>本机域名：localhost</p>
+<p>本地 ip:127.0.0.1</p>
+<h2 id="2-创建-web-服务器"><a href="#2-创建-web-服务器" class="headerlink" title="2.创建 web 服务器"></a>2.创建 web 服务器</h2><h4 id="2-1-创建-web-服务器"><a href="#2-1-创建-web-服务器" class="headerlink" title="2.1 创建 web 服务器"></a>2.1 创建 web 服务器</h4><div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//引用系统模块</span>
+<span class="hljs-keyword">const</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;http&quot;</span>);
+<span class="hljs-comment">//创建web服务器</span>
+<span class="hljs-keyword">const</span> app = http.createSever();
+<span class="hljs-comment">//当客户端发送请求的时候</span>
+app.on(<span class="hljs-string">&quot;request&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;
+  <span class="hljs-comment">//响应</span>
+  res.end(<span class="hljs-string">&quot;&lt;h1&gt;hi,user&lt;/h1&gt;&quot;</span>);
+&#125;);
+<span class="hljs-comment">//监听3000端口</span>
+app.listen(<span class="hljs-number">3000</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;服务器已经启动，监听3000端口，请访问localhost:3000&quot;</span>);</code></pre></div>
+
+<h4 id="2-2Http-协议的概念"><a href="#2-2Http-协议的概念" class="headerlink" title="2.2Http 协议的概念"></a>2.2Http 协议的概念</h4><p><strong>报文</strong></p>
+<p>在 http 请求和响应的过程中传递的数据块就叫报文，包括要传送的数据和一些附加信息，并且要遵守规定好的格式</p>
+<p><img src="../%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF/server01.png" srcset="/img/loading.gif" alt="QQ截图20210408083639"></p>
+<h4 id="2-3-请求报文"><a href="#2-3-请求报文" class="headerlink" title="2.3 请求报文"></a>2.3 请求报文</h4><p>1.请求方式（Request Method)</p>
+<ul>
+<li><p>GET 请求数据</p>
+</li>
+<li><p>POST 发送数据 (更安全)</p>
+<p>2.请求地址(Request URL)</p>
+</li>
+</ul>
+<div class="hljs"><pre><code class="hljs javascript">app.on(<span class="hljs-string">&quot;request&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;
+  req.headers; <span class="hljs-comment">//获取请求报文</span>
+  req.url; <span class="hljs-comment">//获取请求地址</span>
+  req.method; <span class="hljs-comment">//获取请求方法</span>
+&#125;);</code></pre></div>
+
+<h4 id="2-4-响应报文"><a href="#2-4-响应报文" class="headerlink" title="2.4 响应报文"></a>2.4 响应报文</h4><ol>
+<li><p>http 状态码</p>
+<ul>
+<li>200 请求成功</li>
+<li>404 请求的资源没有被找到</li>
+<li>500 服务器端错误</li>
+<li>400 客户端请求有语法错误</li>
+</ul>
+</li>
+<li><p>内容类型</p>
+<ul>
+<li>text/html</li>
+<li>text/css</li>
+<li>application/javascript</li>
+<li>image/jepg</li>
+<li>application/ json</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-HTTP-请求与响应处理"><a href="#3-HTTP-请求与响应处理" class="headerlink" title="3.HTTP 请求与响应处理"></a>3.HTTP 请求与响应处理</h2><h4 id="3-1-请求参数"><a href="#3-1-请求参数" class="headerlink" title="3.1 请求参数"></a>3.1 请求参数</h4><p>客户端向服务器端发送请求时，有时需要携带一些客户信息，客户信息需要通过请求参数的形式传递到服务器端，比如登录操作</p>
+<h5 id="3-1-1-GET-请求参数"><a href="#3-1-1-GET-请求参数" class="headerlink" title="3.1.1 GET 请求参数"></a>3.1.1 GET 请求参数</h5><ul>
+<li>参数被放置在浏览器地址栏中，例如： <a target="_blank" rel="noopener" href="http://127.0.0.1:3000/?name=zhangsan&amp;age=20">http://127.0.0.1:3000?name=zhangsan&amp;age=20</a></li>
+</ul>
+<blockquote>
+<p>问号后面的就是参数，如果传递多个用&amp;分隔</p>
+</blockquote>
+<h5 id="3-1-2-POST-请求参数"><a href="#3-1-2-POST-请求参数" class="headerlink" title="3.1.2 POST 请求参数"></a>3.1.2 POST 请求参数</h5><p>method： 指定当前表单提交的方式</p>
+<p>action： 指定当前表单提交的地址</p>
+<p><strong>post 参数是通过事件的方式接收的</strong></p>
+<ol>
+<li>data 当请求参数传递的时候触发 data 事件</li>
+<li>end 当参数传递完成的时候触发 end 事件</li>
+</ol>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//当客户端有请求来的时候</span>
+app.on(<span class="hljs-string">&quot;request&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">let</span> postParams = <span class="hljs-string">&quot;&quot;</span>;
+  req.on(<span class="hljs-string">&quot;data&quot;</span>, <span class="hljs-function">(<span class="hljs-params">params</span>) =&gt;</span> &#123;
+    postParams += params;
+  &#125;);
+  req.on(<span class="hljs-string">&quot;end&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;
+    <span class="hljs-built_in">console</span>.log(postParams);
+  &#125;);
+  res.end(<span class="hljs-string">&quot;ok&quot;</span>);
+&#125;);</code></pre></div>
+
+<h4 id="3-2-路由"><a href="#3-2-路由" class="headerlink" title="3.2 路由"></a>3.2 路由</h4><p>路由是指客户端请求地址与服务器端程序代码的对应关系。简单的说，就是请求什么响应什么<img src="../%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF/server02.png" srcset="/img/loading.gif" alt="QQ截图20210409091759"></p>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//当客户端发来请求的时候</span>
+app.on(<span class="hljs-string">&quot;request&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;
+  <span class="hljs-comment">//获取客户端的请求路径</span>
+  <span class="hljs-keyword">let</span> &#123; pathname &#125; = url.parse(req.url);
+  <span class="hljs-keyword">if</span> (pathname == <span class="hljs-string">&quot;/&quot;</span> || pathname == <span class="hljs-string">&quot;/index&quot;</span>) &#123;
+    res.end(<span class="hljs-string">&quot;welcome to index&quot;</span>);
+  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pathname == <span class="hljs-string">&quot;/list&quot;</span>) &#123;
+    res.end(<span class="hljs-string">&quot;welcome to list &quot;</span>);
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    res.end(<span class="hljs-string">&quot;sorry,404 not found&quot;</span>);
+  &#125;
+&#125;);</code></pre></div>
+
+<h4 id="3-3-静态资源"><a href="#3-3-静态资源" class="headerlink" title="3.3 静态资源"></a>3.3 静态资源</h4><p>服务器端不需要处理，可以直接响应给客户端的资源就是静态资源，例如 CSS,Javascript，image 文件</p>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;http&quot;</span>);
+<span class="hljs-keyword">const</span> url = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;url&quot;</span>);
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;path&quot;</span>);
+<span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;fs&quot;</span>);
+
+<span class="hljs-keyword">var</span> app = http.createServer();
+
+app.on(<span class="hljs-string">&quot;request&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;
+  res.writeHead(<span class="hljs-number">200</span>, &#123;
+    <span class="hljs-string">&quot;content-type&quot;</span>: <span class="hljs-string">&quot;text/html;charset=utf8&quot;</span>,
+  &#125;);
+  <span class="hljs-comment">//获取用户的请求路径</span>
+  <span class="hljs-keyword">let</span> pathname = url.parse(req.url).pathname;
+  <span class="hljs-comment">//将用户的请求路径转换为实际的服务器硬盘路径</span>
+  <span class="hljs-keyword">let</span> readpath = path.join(__dirname, <span class="hljs-string">&quot;public&quot;</span> + pathname);
+  <span class="hljs-comment">//读取文件</span>
+  fs.readFile(readpath, <span class="hljs-function">(<span class="hljs-params">error, result</span>) =&gt;</span> &#123;
+    <span class="hljs-keyword">if</span> (error != <span class="hljs-literal">null</span>) &#123;
+      res.end(<span class="hljs-string">&quot;文件读取失败&quot;</span>);
+      <span class="hljs-keyword">return</span>;
+    &#125;
+    res.end(result);
+  &#125;);
+&#125;);
+
+app.listen(<span class="hljs-number">3000</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;It&#x27;s working&quot;</span>);</code></pre></div>
+
+<h4 id="3-4-动态资源"><a href="#3-4-动态资源" class="headerlink" title="3.4 动态资源"></a>3.4 动态资源</h4><p>相同的请求地址不同的响应资源，这种资源就是动态资源</p>
+<h2 id="4-Node-js-异步编程"><a href="#4-Node-js-异步编程" class="headerlink" title="4.Node.js 异步编程"></a>4.Node.js 异步编程</h2><h4 id="4-1-同步-API-异步-API"><a href="#4-1-同步-API-异步-API" class="headerlink" title="4.1 同步 API,异步 API"></a>4.1 同步 API,异步 API</h4><p><strong>同步 api：只有当前 api 执行完成后，才能继续执行下一个 api</strong></p>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;before&quot;</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;after&quot;</span>);</code></pre></div>
+
+<p><strong>异步 api：当前 api 的执行不会阻塞后续代码的执行</strong></p>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;before&#x27;</span>)
+<span class="hljs-built_in">setTimeout</span>(
+	()=&gt;&#123;<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;last&#x27;</span>)&#125;
+),<span class="hljs-number">2000</span>)
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;after&#x27;</span>)</code></pre></div>
+
+<h4 id="4-2-同步-api，异步-api-的区别（获取返回值）"><a href="#4-2-同步-api，异步-api-的区别（获取返回值）" class="headerlink" title="4.2 同步 api，异步 api 的区别（获取返回值）"></a>4.2 同步 api，异步 api 的区别（获取返回值）</h4><p>同步 api 可以从返回值中拿到 api 执行的结果，但是异步 api 是不可以的</p>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//同步</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sum</span>(<span class="hljs-params">s1, s2</span>) </span>&#123;
+  <span class="hljs-keyword">return</span> s1 + s2;
+&#125;
+<span class="hljs-keyword">const</span> result = sum(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>);</code></pre></div>
+
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//异步</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getMsg</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-keyword">return</span> (msg: <span class="hljs-string">&quot;hello node.js&quot;</span>);
+  &#125;, <span class="hljs-number">2000</span>);
+&#125;
+
+<span class="hljs-keyword">const</span> msg = getMsg();
+<span class="hljs-built_in">console</span>.log(msg); <span class="hljs-comment">//undefined</span></code></pre></div>
+
+<h4 id="4-3-回调函数"><a href="#4-3-回调函数" class="headerlink" title="4.3 回调函数"></a>4.3 回调函数</h4><p>自己定义函数让别人去调用</p>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//getData 函数定义</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getData</span>(<span class="hljs-params">callback</span>) </span>&#123;&#125;
+<span class="hljs-comment">//getData 函数调用</span>
+getData(<span class="hljs-function">() =&gt;</span> &#123;&#125;);</code></pre></div>
+
+<h4 id="4-4-同步-api，异步-api-的区别（代码执行顺序）"><a href="#4-4-同步-api，异步-api-的区别（代码执行顺序）" class="headerlink" title="4.4 同步 api，异步 api 的区别（代码执行顺序）"></a>4.4 同步 api，异步 api 的区别（代码执行顺序）</h4><p>同步 api 从上到下依次执行，前面代码会阻塞后面代码的执行</p>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">1000</span>; i++) &#123;
+  <span class="hljs-built_in">console</span>.log(i);
+&#125;
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;it&#x27;s ending&quot;</span>);</code></pre></div>
+
+<p>异步 api 不会等待 api 执行完成后再向下执行代码</p>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;代码开始执行&quot;</span>);
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;ssss&quot;</span>);
+&#125;, <span class="hljs-number">2000</span>);
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;aaa&quot;</span>);
+&#125;, <span class="hljs-number">0</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;it&#x27;s ending&quot;</span>);</code></pre></div>
+
+<p><img src="../%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF/server03.png" srcset="/img/loading.gif" alt="屏幕截图 2021-04-09 194140"></p>
+<blockquote>
+<p>会先执行完同步代码再去回调函数队列中拿回调函数执行</p>
+</blockquote>
+<h4 id="4-5Node-js-中的异步-api"><a href="#4-5Node-js-中的异步-api" class="headerlink" title="4.5Node.js 中的异步 api"></a>4.5Node.js 中的异步 api</h4><p><code>fs.readFile(&#39;./demon.text&#39;,(err,result)=&gt;&#123;&#125;)</code></p>
+<p><strong>回调地狱</strong></p>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;fs&quot;</span>);
+
+fs.readFile(<span class="hljs-string">&quot;./1.text&quot;</span>, <span class="hljs-string">&quot;utf8&quot;</span>, <span class="hljs-function">(<span class="hljs-params">err, result1</span>) =&gt;</span> &#123;
+  <span class="hljs-built_in">console</span>.log(result1);
+  fs.readFile(<span class="hljs-string">&quot;./2.text&quot;</span>, <span class="hljs-string">&quot;utf8&quot;</span>, <span class="hljs-function">(<span class="hljs-params">err, result2</span>) =&gt;</span> &#123;
+    <span class="hljs-built_in">console</span>.log(result2);
+    fs.readFile(<span class="hljs-string">&quot;./3.text&quot;</span>, <span class="hljs-string">&quot;utf8&quot;</span>, <span class="hljs-function">(<span class="hljs-params">err, result3</span>) =&gt;</span> &#123;
+      <span class="hljs-built_in">console</span>.log(result3);
+    &#125;);
+  &#125;);
+&#125;);</code></pre></div>
+
+<h4 id="4-6Promise"><a href="#4-6Promise" class="headerlink" title="4.6Promise"></a>4.6Promise</h4><p>Promise 出现的目的是解决 Node.js 异步编程中回调地狱的问题</p>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> promise = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve,reject</span>)=&gt;</span>&#123;
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">()=&gt;</span>&#123;
+        <span class="hljs-keyword">if</span>(<span class="hljs-literal">true</span>)&#123;
+			resolve(&#123;<span class="hljs-attr">name</span>:<span class="hljs-string">&#x27;张三&#x27;</span>&#125;)
+        &#125;
+        <span class="hljs-keyword">else</span> &#123;
+            reject(<span class="hljs-string">&quot;失败了&quot;</span>)
+        &#125;
+    &#125;，<span class="hljs-number">2000</span>)
+&#125;)
+promise.then(<span class="hljs-function"><span class="hljs-params">result</span>=&gt;</span><span class="hljs-built_in">console</span>.log(result))		<span class="hljs-comment">//&#123;name:&#x27;张三&#x27;&#125;</span>
+	.catch(<span class="hljs-function"><span class="hljs-params">error</span>=&gt;</span><span class="hljs-built_in">console</span>(error))				<span class="hljs-comment">//失败了</span></code></pre></div>
+
+<h4 id="4-7-异步函数"><a href="#4-7-异步函数" class="headerlink" title="4.7 异步函数"></a>4.7 异步函数</h4><p>异步函数是异步编程语法的终极解决方案，它可以让外面将异步代码写出同步的形式，让代码不再有回调函数嵌套，使代码变得清晰明了</p>
+<p><code>const fn = async()=&gt;&#123;&#125;</code></p>
+<p><code>async function fn()&#123;&#125;</code></p>
+<blockquote>
+<p>1.在普通函数定义的前面加上 async 关键字，普通函数就变成了异步函数</p>
+<p>2.异步函数默认的返回值是 promise 对象</p>
+<p>3.在异步函数内部使用 return 关键字进行结果返回 结果会被包裹的 promise 对象中 return 关键字代替了 resolve 方法</p>
+<p>4.在异步函数内部使用 throw 关键字抛出异常</p>
+<p>5.调用异步函数再链式调用 then 方法获取异步函数执行结果</p>
+<p>6.调用异步函数再链式调用 catch 方法获取异步函数执行的错误信息</p>
+<p>7.await 关键字只能出现在异步函数中</p>
+<p>8.await promise await 后面只能写 promise 对象 写其他类型的 api 是不可以的</p>
+<p>9.await 关键字可以暂停异步函数向下执行 直到 promise 返回结果</p>
+</blockquote>
+<p><img src="../%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF/server04.png" srcset="/img/loading.gif" alt="QQ截图20210409202447"></p>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;fs&quot;</span>);
+<span class="hljs-comment">//改造现有异步函数api 让其返回promise对象</span>
+<span class="hljs-keyword">const</span> promisify = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;util&quot;</span>).promisify;
+<span class="hljs-keyword">const</span> readFile = promisify(fs.readFile);
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">let</span> r1 = <span class="hljs-keyword">await</span> readFile(<span class="hljs-string">&quot;./1.txt&quot;</span>, <span class="hljs-string">&quot;utf8&quot;</span>);
+  <span class="hljs-keyword">let</span> r2 = <span class="hljs-keyword">await</span> readFile(<span class="hljs-string">&quot;./2.txt&quot;</span>, <span class="hljs-string">&quot;utf8&quot;</span>);
+  <span class="hljs-keyword">let</span> r3 = <span class="hljs-keyword">await</span> readFile(<span class="hljs-string">&quot;./3.txt&quot;</span>, <span class="hljs-string">&quot;utf8&quot;</span>);
+  <span class="hljs-built_in">console</span>.log(r1);
+  <span class="hljs-built_in">console</span>.log(r2);
+  <span class="hljs-built_in">console</span>.log(r3);
+&#125;
+run();</code></pre></div>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF/">服务器端</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/11/Gulp/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Gulp</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/29/node/">
+                        <span class="hidden-mobile">Node</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz",
+          app_key: "D8I6TpV3UhkLxcVVgWlWegOg",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    waitElementVisible('vcomments', loadValine);
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container custom post-content mx-auto">
+      <img src="/img/xiaoai.gif" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:200px; height:120px;">
+    </div>
+  </div>
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">赣ICP备2020010680号</a>
+    
+      <a
+        href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=http://beian.miit.gov.cn/"
+        rel="nofollow noopener"
+        class="beian-police"
+        target="_blank"
+      >
+        <span class="beian-police-sep">&nbsp;|&nbsp;</span>
+        
+          <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon" />
+        
+        <span>赣ICP备2020010680号</span>
+      </a>
+     
+  </div>
+
+
+    
+  </div>
+  <div id="jsi-flying-fish-container"></div>
+  <script src='js/fish.js'></script>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  
+<script src="/js/fish.js"></script>
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "服务器端&nbsp;",
+      ],
+      cursorChar: "🐾",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+  <script>(function (i, s, o, g, r, a, m) {
+      i['DaoVoiceObject'] = r;
+      i[r] = i[r] ||
+        function () {
+          (i[r].q = i[r].q || []).push(arguments);
+        };
+      i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      a.charset = 'utf-8';
+      m.parentNode.insertBefore(a, m);
+    })(window, document, 'script', ('https:' === document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0a019f22.js", 'daovoice');
+    daovoice('init', {
+      app_id: "0a019f22",
+    });
+    daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

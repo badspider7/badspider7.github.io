@@ -19,7 +19,7 @@
   <meta name="description" content="大一软件工程">
   <meta name="author" content="badspider7">
   <meta name="keywords" content="c,python,java">
-  <title>变量提升 - 念伊の小窝</title>
+  <title>前后端交互模式 - 念伊の小窝</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,7 +165,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('https://w.wallhaven.cc/full/wy/wallhaven-wyk5rr.jpg') no-repeat center center;
+         style="background: url('/img/gulp-banner.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -178,8 +178,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2021-04-24 20:44" pubdate>
-      2021年4月24日 晚上
+    <time datetime="2021-05-25 14:51" pubdate>
+      2021年5月25日 下午
     </time>
   </div>
 
@@ -189,7 +189,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      1.1k 字
     </span>
   
 
@@ -229,118 +229,178 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">变量提升</h1>
+            <h1 style="display: none">前后端交互模式</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="关于变量提升"><a href="#关于变量提升" class="headerlink" title="关于变量提升"></a>关于变量提升</h2><p>JavaScript 和其他的强类型的语言有所不同，它是<code>弱类型</code>的</p>
-<p>所以 JavaScript 定义变量是不需要考虑是什么类型的，在 ES6 之前我们一般使用 var 来声明一个变量，在 ES6 之后我们会使用 let 和 const 来定义变量(常量)</p>
-<p><strong>那么什么是变量提升呢？</strong></p>
-<blockquote>
-<p>打个比方，这个过程就好像变量和函数声明从它们在代码中出现的位置被”移动”到了最上面—《你不知道的 Javscript 上卷》</p>
-</blockquote>
-<p>在直觉上我们会认为 JavaScript 代码在执行的时候是由上到下一行一行执行的，但是实际上这并不完全准确，有一种特殊情况会导致整个假设错误</p>
-<div class="hljs"><pre><code class="hljs javascript">a = <span class="hljs-number">2</span>;
-<span class="hljs-keyword">var</span> a;
-<span class="hljs-built_in">console</span>.log(a);</code></pre></div>
+              <h2 id="1-前后端交互模式"><a href="#1-前后端交互模式" class="headerlink" title="1.前后端交互模式"></a>1.前后端交互模式</h2><h3 id="1-1-接口调用方式"><a href="#1-1-接口调用方式" class="headerlink" title="1.1 接口调用方式"></a>1.1 接口调用方式</h3><ul>
+<li>原生ajax</li>
+<li>基于jQuery 的ajax</li>
+<li>fetch</li>
+<li>axios</li>
+</ul>
+<p><img src="C:\Users\yellowapple\Desktop\QQ截图20210522200707.png" srcset="/img/loading.gif" alt="QQ截图20210522200707"></p>
+<h3 id="1-2-URL地址格式"><a href="#1-2-URL地址格式" class="headerlink" title="1.2 URL地址格式"></a>1.2 URL地址格式</h3><h4 id="1-2-1-传统形式的URL"><a href="#1-2-1-传统形式的URL" class="headerlink" title="1.2.1 传统形式的URL"></a>1.2.1 传统形式的URL</h4><p><img src="C:\Users\yellowapple\Desktop\QQ截图20210522201043.png" srcset="/img/loading.gif" alt="QQ截图20210522201043"> </p>
+<h4 id="1-2-2-Restful形式的URL"><a href="#1-2-2-Restful形式的URL" class="headerlink" title="1.2.2 Restful形式的URL"></a>1.2.2 Restful形式的URL</h4><ul>
+<li>HTTP请求方式<ul>
+<li>GET   查询</li>
+<li>POST  添加</li>
+<li>PUT   修改</li>
+<li>DELETE    删除</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-Promise-用法"><a href="#2-Promise-用法" class="headerlink" title="2.Promise 用法"></a>2.Promise 用法</h2><h4 id="2-1-异步调用"><a href="#2-1-异步调用" class="headerlink" title="2.1 异步调用"></a>2.1 异步调用</h4><ul>
+<li>异步效果分析<ul>
+<li>定时任务</li>
+<li>Ajax</li>
+<li>事件函数</li>
+</ul>
+</li>
+<li>多次异步调用的依赖分析<ul>
+<li>多次异步调用的结果顺序不确定</li>
+<li>异步调用结果如果存在依赖需要嵌套</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-2-Promise-概述"><a href="#2-2-Promise-概述" class="headerlink" title="2.2 Promise 概述"></a>2.2 Promise 概述</h4><p>Promise 是异步编程的一种解决方案，从语法上讲，Promise是一个对象，从它可以获取异步操作的消息</p>
+<p>使用Promise 主要有以下好处：</p>
+<ul>
+<li>可以避免多层异步调用嵌套问题（回调地狱）</li>
+<li>Promise 对象提供了简洁的API，使得控制异步操作更加容易</li>
+</ul>
+<h4 id="2-3-Promise-基本用法"><a href="#2-3-Promise-基本用法" class="headerlink" title="2.3 Promise 基本用法"></a>2.3 Promise 基本用法</h4><ul>
+<li>实例化==Promise==对象，构造函数中传递函数，该函数用于处理异步任务</li>
+<li>==resolve==和==reject==两个参数用于处理成功和失败两种情况，并通过==p.then==获取处理结果</li>
+</ul>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve,reject</span>)</span>&#123;
+    <span class="hljs-comment">//成功时调用  resolve()</span>
+    <span class="hljs-comment">//失败时调用  reject()</span>
+&#125;);
 
-<p>你认为这个里面会输出什么呢？</p>
-<p><strong>undefined or 2</strong></p>
-<p>正确答案是 2 ，那么为什么是 2 呢，按道理 a 应该是重新赋值了呀(a=undefined)</p>
-<p><strong>其实这里面就是因为变量提升</strong>，实际上他会变成这样子的：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a;
-a = <span class="hljs-number">2</span>;
-<span class="hljs-built_in">console</span>(a); <span class="hljs-comment">//2</span></code></pre></div>
-
-<p>下面我们再看一段代码</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(a);
-<span class="hljs-keyword">var</span> a = <span class="hljs-number">2</span>;</code></pre></div>
-
-<p>这次会输出什么呢？是 2 ? undefined ? ReferenceError</p>
-<p>其实是 undefined,其实是这样子的：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a;
-<span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">// a is undefined</span>
-a = <span class="hljs-number">2</span>;</code></pre></div>
-
-<h4 id="下面我们来解释一下这个是为什么呢"><a href="#下面我们来解释一下这个是为什么呢" class="headerlink" title="下面我们来解释一下这个是为什么呢"></a>下面我们来解释一下这个是为什么呢</h4><p>引擎会在解释 JavaScript 代码之前<code>首先对其进行编译</code>。编译阶段中的一部分工作就是找到所有的声明，并用合适的作用域将他们关联起来</p>
-<p>因此，正确的思考路线是，包括<code>变量和函数</code>在内的所有声明都会在任何代码被执行前<code>首先被处理</code></p>
-<p>当你看到 <code>var a = 2</code> 时,可能会认为这是一个声明，但 JavaScript 实际上会将其看成两个声明: <code>var a </code> 和 <code>a = 2</code>，第一个定义声明是在编译阶段进行的，第二个赋值声明会被留在原地等待执行阶段，其实就是先有<code>声明</code>后有<code>赋值</code></p>
-<blockquote>
-<p>只有声明本身会被提升，而赋值或其他的运行逻辑会留在原地。如果提升改变了代码执行的顺序，会造成非常严重的破坏</p>
-</blockquote>
-<div class="hljs"><pre><code class="hljs javascript">foo()
-
-<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;
-	<span class="hljs-built_in">console</span>.log(a) 	<span class="hljs-comment">//undefined</span>
-    <span class="hljs-keyword">var</span> a = <span class="hljs-number">2</span>
+p.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ret</span>)</span>&#123;
+	<span class="hljs-comment">//从resolve得到正常结果</span>
+&#125;)，<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ret</span>)</span>&#123;
+	<span class="hljs-comment">//从reject得到错误信息</span>
 &#125;</code></pre></div>
 
-<p>foo 函数的声明(这个例子还包括实际函数的蕴含值)被提升了，因此第一行中的调用可以正常执行</p>
-<p>另外值得注意的是，<code>每个作用域</code>都会进行提升操作。尽管前面大部分的代码片段已经简化了(因为他们只包含全局作用域)，而我们正在讨论的 foo(…)函数本身也会在内部对<code>var a </code>进行提升(显然并不是提升到了整个程序的最上方)。因此这段代码实际上会被理解为下面的形式：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> a;
-  <span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">//undefined</span>
-  a = <span class="hljs-number">2</span>;
+<h4 id="2-4-Promise常用的API"><a href="#2-4-Promise常用的API" class="headerlink" title="2.4 Promise常用的API"></a>2.4 Promise常用的API</h4><ul>
+<li>p.then() 得到异步任务的正确结果</li>
+<li>p.catch() 获取异常信息</li>
+<li>p.finally() 成功与否都会执行（尚且不是正式标准）</li>
+</ul>
+<h4 id="2-5-Promise对象方法"><a href="#2-5-Promise对象方法" class="headerlink" title="2.5 Promise对象方法"></a>2.5 Promise对象方法</h4><ul>
+<li>Promise.all() 并发处理多个异步任务，所有任务都执行完成才能得到结果</li>
+<li>Promise.race() 并发处理多个异步任务，只要有一个任务完成就能得到结果</li>
+</ul>
+<h2 id="3-fetch"><a href="#3-fetch" class="headerlink" title="3.fetch"></a>3.fetch</h2><h4 id="3-1-fetch-概述"><a href="#3-1-fetch-概述" class="headerlink" title="3.1 fetch 概述"></a>3.1 fetch 概述</h4><ol>
+<li>基本特性</li>
+</ol>
+<ul>
+<li>更加简单的数据获取方式，功能更加强大，更灵活，可以看作是xhr的升级版</li>
+<li>基于promise实现</li>
+</ul>
+<ol start="2">
+<li>语法结构</li>
+</ol>
+<div class="hljs"><pre><code class="hljs javascript">fetch(url).then(fn2)
+		.then(fn3)
+		......
+        
+        .catch(fn)</code></pre></div>
+
+<h4 id="3-2-fetch-的基本用法"><a href="#3-2-fetch-的基本用法" class="headerlink" title="3.2 fetch 的基本用法"></a>3.2 fetch 的基本用法</h4><div class="hljs"><pre><code class="hljs javascript">fetch(<span class="hljs-string">&#x27;/abc&#x27;</span>).then(<span class="hljs-function"><span class="hljs-params">data</span>=&gt;</span>&#123;
+    <span class="hljs-keyword">return</span> data.text()
+&#125;).then(<span class="hljs-function"><span class="hljs-params">ret</span>=&gt;</span>&#123;
+    <span class="hljs-comment">//注意这里得到的才是最终的数据</span>
+    <span class="hljs-built_in">console</span>.log(ret)
+&#125;)</code></pre></div>
+
+<h4 id="3-3-fetch-请求参数"><a href="#3-3-fetch-请求参数" class="headerlink" title="3.3 fetch 请求参数"></a>3.3 fetch 请求参数</h4><ul>
+<li>method：HTTP请求方法，默认为GET（GET,POST,PUT,DELETE)</li>
+<li>body:HTTP的请求参数</li>
+<li>headers：HTTP的请求头，默认为{}</li>
+</ul>
+<div class="hljs"><pre><code class="hljs javascript">fetch(<span class="hljs-string">&#x27;/abc&#x27;</span>,&#123;
+	method: <span class="hljs-string">&#x27;get&#x27;</span>
+&#125;).then(<span class="hljs-function"><span class="hljs-params">data</span>=&gt;</span>&#123;
+    <span class="hljs-keyword">return</span> data.text()
+&#125;).then(<span class="hljs-function"><span class="hljs-params">ret</span>=&gt;</span>&#123;
+    <span class="hljs-comment">//注意这里得到的才是最终的数据</span>
+    <span class="hljs-built_in">console</span>.log(ret)
+&#125;)</code></pre></div>
+
+<h4 id="3-4-fetch-响应结果"><a href="#3-4-fetch-响应结果" class="headerlink" title="3.4 fetch 响应结果"></a>3.4 fetch 响应结果</h4><p>响应数据格式</p>
+<ul>
+<li>text(): 将返回体处理成字符串类型</li>
+<li>json(): 返回结果和JSON.parse(responseText) 一样</li>
+</ul>
+<h2 id="4-axios"><a href="#4-axios" class="headerlink" title="4.axios"></a>4.axios</h2><h4 id="4-1-axios-的基本特征"><a href="#4-1-axios-的基本特征" class="headerlink" title="4.1 axios 的基本特征"></a>4.1 axios 的基本特征</h4><ul>
+<li>支持浏览器和node.js</li>
+<li>支持promise</li>
+<li>能拦截请求和响应</li>
+<li>自动转换JSON数据</li>
+</ul>
+<h4 id="4-2-axios-的基本用法"><a href="#4-2-axios-的基本用法" class="headerlink" title="4.2 axios 的基本用法"></a>4.2 axios 的基本用法</h4><div class="hljs"><pre><code class="hljs javascript">axois.get(<span class="hljs-string">&#x27;/data&#x27;</span>)
+	.then(<span class="hljs-function"><span class="hljs-params">ret</span>=&gt;</span>&#123;
+    	<span class="hljs-comment">//data属性名称是固定的，用于获取后台响应的数据</span>
+    	<span class="hljs-built_in">console</span>.log(ret.data)
+&#125;)</code></pre></div>
+
+<h4 id="4-3-axios-的常用API"><a href="#4-3-axios-的常用API" class="headerlink" title="4.3 axios 的常用API"></a>4.3 axios 的常用API</h4><ul>
+<li>get: 查询数据</li>
+<li>post： 添加数据</li>
+<li>put： 修改数据</li>
+<li>delete： 删除数据</li>
+</ul>
+<h4 id="4-4-axios-的响应结果"><a href="#4-4-axios-的响应结果" class="headerlink" title="4.4 axios 的响应结果"></a>4.4 axios 的响应结果</h4><ul>
+<li>data： 实际响应回来的结果</li>
+<li>headers： 响应头信息</li>
+<li>status： 响应状态码</li>
+<li>statusText： 响应状态信息</li>
+</ul>
+<h4 id="4-5-axios-的全局配置"><a href="#4-5-axios-的全局配置" class="headerlink" title="4.5 axios 的全局配置"></a>4.5 axios 的全局配置</h4><ul>
+<li>axios.defaults.timeout = 3000  //超出时间</li>
+<li>axios.defaults.baseURL = ‘<a target="_blank" rel="noopener" href="http://localhost:3000/app&#39;">http://localhost:3000/app&#39;</a>  //默认地址</li>
+<li>axios.defaults.headers[‘mytoken’] = ‘aqwerwqwerqwer2ewrwe23eresdf23’    //设置请求头</li>
+</ul>
+<h4 id="4-6-axios-拦截器"><a href="#4-6-axios-拦截器" class="headerlink" title="4.6 axios 拦截器"></a>4.6 axios 拦截器</h4><ol>
+<li>请求拦截器</li>
+</ol>
+<p>在请求发出之前设置一些信息</p>
+<p>![屏幕截图 2021-05-25 101638](C:\Users\yellowapple\Desktop\屏幕截图 2021-05-25 101638.png)</p>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//添加一个请求拦截器</span>
+axios.interceptors.request.use(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">config</span>)</span>&#123;
+	<span class="hljs-comment">//在请求发出之前进行一些信息设置</span>
+    <span class="hljs-keyword">return</span> config
+&#125;,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>)</span>&#123;
+    <span class="hljs-comment">//处理响应的错误信息</span>
+&#125;)</code></pre></div>
+
+<ol start="2">
+<li>响应拦截器</li>
+</ol>
+<p>在获取数据之前对数据做一些加工处理</p>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//添加一个请求拦截器</span>
+axios.interceptors.response.use(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>)</span>&#123;
+	<span class="hljs-comment">//在请求发出之前进行一些信息设置</span>
+    <span class="hljs-keyword">return</span> res
+&#125;,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>)</span>&#123;
+    <span class="hljs-comment">//处理响应的错误信息</span>
+&#125;)</code></pre></div>
+
+<h2 id="5-async-await-用法"><a href="#5-async-await-用法" class="headerlink" title="5.async/await 用法"></a>5.async/await 用法</h2><ul>
+<li>async/await 是ES7引入的新语法，可以更加方便的进行异步操作</li>
+<li>async 关键字用于函数上(async函数的返回值是Promise实例对象)</li>
+<li>await 关键字用于async函数当中（await 可以得到异步的结果）</li>
+</ul>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">queryData</span>(<span class="hljs-params">id</span>)</span>&#123;
+	<span class="hljs-keyword">const</span> ret = <span class="hljs-keyword">await</span> axios.get(<span class="hljs-string">&#x27;/data&#x27;</span>)
+    <span class="hljs-keyword">return</span> ret
 &#125;
-foo();</code></pre></div>
+queryData.then(<span class="hljs-function"><span class="hljs-params">ret</span>=&gt;</span>&#123;
+    <span class="hljs-built_in">console</span>.log(ret)
+&#125;)</code></pre></div>
 
-<p>可以看到，函数声明会提升，但是函数表达式不会被提升</p>
-<p><strong>函数优先</strong></p>
-<p>函数声明和变量声明都会被提升，但是一个值得注意的细节(这个细节可以出现在有很多个”重复”声明的代码中)是函数会首先被提升，然后才是变量</p>
-<p>考虑以下代码：</p>
-<div class="hljs"><pre><code class="hljs javascript">foo(); <span class="hljs-comment">//1</span>
-
-<span class="hljs-keyword">var</span> foo;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>);
-&#125;
-
-foo = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span>);
-&#125;;</code></pre></div>
-
-<p>会输出 1 而不是 2 ，这个代码片段会被引擎解释理解为如下形式：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>);
-&#125;
-
-foo(); <span class="hljs-comment">//1</span>
-
-foo = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span>);
-&#125;;</code></pre></div>
-
-<p>注意，<code>var foo</code> 尽管出现在 function foo()…的声明之前，但它是重复的声明(因此被忽略了)，因为函数声明会被提升到普通变量之前</p>
-<p>尽管重复的 var 声明会被忽略掉，但出现在后面的函数声明还是可以覆盖前面的</p>
-<div class="hljs"><pre><code class="hljs javascript">foo(); <span class="hljs-comment">//3</span>
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
-  consloe.log(<span class="hljs-number">1</span>);
-&#125;
-
-<span class="hljs-keyword">var</span> foo = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span>);
-&#125;;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">3</span>);
-&#125;</code></pre></div>
-
-<p>虽然这些听起来都是些无用的学院理论，但是它说明了在同一个作用域中进行重复定义是非常糟糕的，而且经常会导致各种奇怪的问题</p>
-<p>一个普通块内部的函数声明通常会被提升到所在作用域的顶部，这个过程不会像下面的代码暗示的那样可以被条件判断所控制：</p>
-<div class="hljs"><pre><code class="hljs javascript">foo(); <span class="hljs-comment">//TypeError: foo is not a function</span>
-
-<span class="hljs-keyword">var</span> a = <span class="hljs-literal">true</span>;
-
-<span class="hljs-keyword">if</span> (a) &#123;
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;a&quot;</span>);
-  &#125;
-&#125; <span class="hljs-keyword">else</span> &#123;
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;b&quot;</span>);
-  &#125;
-&#125;</code></pre></div>
 
             </div>
             <hr>
@@ -350,7 +410,7 @@ foo = <span class="hljs-function"><span class="hljs-keyword">function</span> (<s
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
                     
                   </div>
                 
@@ -358,7 +418,7 @@ foo = <span class="hljs-function"><span class="hljs-keyword">function</span> (<s
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87/">变量提升</a>
+                      <a class="hover-with-bg" href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
                     
                   </div>
                 
@@ -371,18 +431,12 @@ foo = <span class="hljs-function"><span class="hljs-keyword">function</span> (<s
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/05/25/%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%BC%8F/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">前后端交互模式</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/11/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
-                        <span class="hidden-mobile">正则表达式</span>
+                      <a href="/2021/04/24/%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87/">
+                        <span class="hidden-mobile">变量提升</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -611,7 +665,7 @@ foo = <span class="hljs-function"><span class="hljs-keyword">function</span> (<s
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "变量提升&nbsp;",
+        "前后端交互模式&nbsp;",
       ],
       cursorChar: "🐾",
       typeSpeed: 70,

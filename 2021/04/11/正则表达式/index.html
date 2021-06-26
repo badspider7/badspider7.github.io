@@ -239,7 +239,7 @@
             <h1 style="display: none">正则表达式</h1>
             
             <div class="markdown-body" id="post-body">
-              <h4 id="正则表达式的概述"><a href="#正则表达式的概述" class="headerlink" title="正则表达式的概述"></a>正则表达式的概述</h4><p><strong>正则表达式</strong>是用于匹配字符串中字符组合的模式。在JavaScript中，正则表达式也是对象</p>
+              <h4 id="正则表达式的概述"><a href="#正则表达式的概述" class="headerlink" title="正则表达式的概述"></a>正则表达式的概述</h4><p><strong>正则表达式</strong>是用于匹配字符串中字符组合的模式。在 JavaScript 中，正则表达式也是对象</p>
 <blockquote>
 <p>正则表通常被用来检索，替换那些符合某个模式（规则）的文本，例如验证表单：用户名表只能输入英文字母，数字或者下划线，昵称输入框可以输入中文（匹配）。此外，正则表达式还常用于过滤掉页面内容中的一些敏感词汇（替换），或从字符串中获取我们想要的特定部分（提取）等</p>
 </blockquote>
@@ -248,14 +248,14 @@
 </li>
 <li><p>可以迅速地用简单的方式达到字符串的复制控制</p>
 </li>
-<li><p>对于刚接触的人来说，比较难懂，比如：^\w+([-+.]\w+)<em>@\w+([-.]\w+)\</em>\.\w*$</p>
+<li><p>对于刚接触的人来说，比较难懂，比如：^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w*$</p>
 </li>
 <li><p>实际开发，一般都是直接复制写好的正则表达式，但是要求会使用正则表达式并且根据实际情况修改正则表达式</p>
 </li>
 </ol>
-<h4 id="创建正则表达式"><a href="#创建正则表达式" class="headerlink" title="创建正则表达式"></a>创建正则表达式</h4><p>在JavaScript中可以通过两种方法来创建正则表达式</p>
+<h4 id="创建正则表达式"><a href="#创建正则表达式" class="headerlink" title="创建正则表达式"></a>创建正则表达式</h4><p>在 JavaScript 中可以通过两种方法来创建正则表达式</p>
 <ol>
-<li>通过调用RegExp 对象的构造函数创建</li>
+<li>通过调用 RegExp 对象的构造函数创建</li>
 </ol>
 <blockquote>
 <p>var x = new RegExp(/表达式/);</p>
@@ -266,16 +266,16 @@
 <blockquote>
 <p>var x = /表达式/;</p>
 </blockquote>
-<h4 id="测试正则表达式-test"><a href="#测试正则表达式-test" class="headerlink" title="测试正则表达式 test"></a>测试正则表达式 test</h4><p>test()正则对象方法，用于检测字符串是否符合该规则，该对象会返回true 或 false ,其参数是测试字符串</p>
+<h4 id="测试正则表达式-test"><a href="#测试正则表达式-test" class="headerlink" title="测试正则表达式 test"></a>测试正则表达式 test</h4><p>test()正则对象方法，用于检测字符串是否符合该规则，该对象会返回 true 或 false ,其参数是测试字符串</p>
 <blockquote>
 <p>regexObj.test(str);</p>
 </blockquote>
 <ol>
 <li>regexObj 是写的正则表达式</li>
 <li>str 我们要测试的文本</li>
-<li>就是检测str文本是否符合我们写的正则表达式规范</li>
+<li>就是检测 str 文本是否符合我们写的正则表达式规范</li>
 </ol>
-<h4 id="正则表达式中的特殊字符"><a href="#正则表达式中的特殊字符" class="headerlink" title="正则表达式中的特殊字符"></a>正则表达式中的特殊字符</h4><p>一个正则表达式==可以由简单的字符构成==，比如/abc/，==也可以是简答和特殊字符的组合==，比如/ab*c/。其中特殊字符也被称为==元字符==，在正则表达式中是具有特殊意义的专用符号。如 ^  $ + - 等</p>
+<h4 id="正则表达式中的特殊字符"><a href="#正则表达式中的特殊字符" class="headerlink" title="正则表达式中的特殊字符"></a>正则表达式中的特殊字符</h4><p>一个正则表达式==可以由简单的字符构成==，比如/abc/，==也可以是简答和特殊字符的组合==，比如/ab*c/。其中特殊字符也被称为==元字符==，在正则表达式中是具有特殊意义的专用符号。如 ^ $ + - 等</p>
 <h4 id="边界符"><a href="#边界符" class="headerlink" title="边界符"></a>边界符</h4><p>正则表达式中的边界符（位置符）用来==提示字符所处的位置==,主要有两个字符</p>
 <table>
 <thead>
@@ -294,30 +294,30 @@
 </tr>
 </tbody></table>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//边界符</span>
-<span class="hljs-keyword">var</span> rg = <span class="hljs-regexp">/abc/</span>; 	<span class="hljs-comment">//正则表达式里面不需要加引号 不管是数字还是字符串</span>
+<span class="hljs-keyword">var</span> rg = <span class="hljs-regexp">/abc/</span>; <span class="hljs-comment">//正则表达式里面不需要加引号 不管是数字还是字符串</span>
 <span class="hljs-comment">// /abc/ 只要包含有 abc这个字符串返回的都是true</span>
-<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&#x27;abc&#x27;</span>));
-<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&#x27;abcd&#x27;</span>));
-<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&#x27;aabc&#x27;</span>));
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;----------------------------&#x27;</span>);
+<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&quot;abc&quot;</span>));
+<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&quot;abcd&quot;</span>));
+<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&quot;aabc&quot;</span>));
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;----------------------------&quot;</span>);
 <span class="hljs-keyword">var</span> reg = <span class="hljs-regexp">/^abc/</span>;
-<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&#x27;abc&#x27;</span>));   <span class="hljs-comment">//true</span>
-<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&#x27;abcd&#x27;</span>));  <span class="hljs-comment">//true</span>
-<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&#x27;aabc&#x27;</span>));   <span class="hljs-comment">//false</span>
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;-------------&#x27;</span>);
-结尾同理
-<span class="hljs-keyword">var</span> reg = <span class="hljs-regexp">/^abc$/</span>;  <span class="hljs-comment">//精确匹配 要求必须是 abc字符串才符合规范</span>
-<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&#x27;abc&#x27;</span>));   <span class="hljs-comment">//true</span>
-<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&#x27;abcd&#x27;</span>));  <span class="hljs-comment">//false</span>
-<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&#x27;aabc&#x27;</span>));   <span class="hljs-comment">//false</span>
-<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&#x27;abcabc&#x27;</span>)); <span class="hljs-comment">//false</span></code></pre></div>
+<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&quot;abc&quot;</span>)); <span class="hljs-comment">//true</span>
+<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&quot;abcd&quot;</span>)); <span class="hljs-comment">//true</span>
+<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&quot;aabc&quot;</span>)); <span class="hljs-comment">//false</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;-------------&quot;</span>);
+结尾同理;
+<span class="hljs-keyword">var</span> reg = <span class="hljs-regexp">/^abc$/</span>; <span class="hljs-comment">//精确匹配 要求必须是 abc字符串才符合规范</span>
+<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&quot;abc&quot;</span>)); <span class="hljs-comment">//true</span>
+<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&quot;abcd&quot;</span>)); <span class="hljs-comment">//false</span>
+<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&quot;aabc&quot;</span>)); <span class="hljs-comment">//false</span>
+<span class="hljs-built_in">console</span>.log(rg.test(<span class="hljs-string">&quot;abcabc&quot;</span>)); <span class="hljs-comment">//false</span></code></pre></div>
 
 <blockquote>
 <p>如果 ^ 和 $ 在一起就表示必须是精确匹配</p>
 </blockquote>
 <h4 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h4><p>[]表示有一系列字符可供选择，只要匹配其中一个就可以了</p>
 <blockquote>
-<p> [-]  表示范围</p>
+<p>[-] 表示范围</p>
 </blockquote>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> rg = <span class="hljs-regexp">/[abc]/</span>; <span class="hljs-comment">//只要包含有a 或者 有b 或者有c 都返回为true</span>
 consloe.log(rg.test(<span class="hljs-string">&#x27;andy&#x27;</span>));  <span class="hljs-comment">//true</span>
@@ -339,7 +339,7 @@ consloe.log(<span class="hljs-string">&#x27;--------------&#x27;</span>);
 </code></pre></div>
 
 <blockquote>
-<p>如果中括号里面有^ 表示取反的意思  千万别和边界符 混淆了</p>
+<p>如果中括号里面有^ 表示取反的意思 千万别和边界符 混淆了</p>
 </blockquote>
 <p><code>var reg1 = /^[^ a-z]$/;</code>也就是不能取这些</p>
 <h4 id="量词符"><a href="#量词符" class="headerlink" title="量词符"></a>量词符</h4><p>量词符是用来设定某个模式出现的次数</p>
@@ -364,22 +364,22 @@ consloe.log(<span class="hljs-string">&#x27;--------------&#x27;</span>);
 </tr>
 <tr>
 <td>{n}</td>
-<td>重复n次</td>
+<td>重复 n 次</td>
 </tr>
 <tr>
 <td>{n,}</td>
-<td>重复n次或更多次</td>
+<td>重复 n 次或更多次</td>
 </tr>
 <tr>
 <td>{n,m}</td>
-<td>重复n到m次</td>
+<td>重复 n 到 m 次</td>
 </tr>
 </tbody></table>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// * 相当于 &gt;=0 可以出现0次或者很多次</span>
 <span class="hljs-keyword">var</span> reg = <span class="hljs-regexp">/^a*$/</span>;
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;a&#x27;</span>);		<span class="hljs-comment">//true</span>
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;&#x27;</span>);		<span class="hljs-comment">//true</span>
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;aaa&#x27;</span>);		<span class="hljs-comment">//true</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;a&quot;</span>); <span class="hljs-comment">//true</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">//true</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;aaa&quot;</span>); <span class="hljs-comment">//true</span>
 
 <span class="hljs-comment">//+ 相当于 &gt;=1 可以出现1次或者很多次</span>
 <span class="hljs-comment">//&#123;3&#125; 就是三次   &#123;3，&#125; 是大于等于3次   &#123;3，16&#125; 就是3到16次</span></code></pre></div>
@@ -394,11 +394,11 @@ consloe.log(<span class="hljs-string">&#x27;--------------&#x27;</span>);
 </thead>
 <tbody><tr>
 <td align="left">\d</td>
-<td>匹配0-9之间的任一数字，相当于[0-9]</td>
+<td>匹配 0-9 之间的任一数字，相当于[0-9]</td>
 </tr>
 <tr>
 <td align="left">\D</td>
-<td>匹配所有0-9以外的字符，相当于[^0-9]</td>
+<td>匹配所有 0-9 以外的字符，相当于[^0-9]</td>
 </tr>
 <tr>
 <td align="left">\w</td>
@@ -427,7 +427,7 @@ consloe.log(<span class="hljs-string">&#x27;--------------&#x27;</span>);
 <li>返回值是一个替换完毕的新字符串</li>
 </ol>
 <h4 id="正则表达式参数"><a href="#正则表达式参数" class="headerlink" title="正则表达式参数"></a>正则表达式参数</h4><blockquote>
-<p>/表达式/[switch]        /andy/g</p>
+<p>/表达式/[switch] /andy/g</p>
 </blockquote>
 <p>switch(也称为修饰符)按照什么样的模式来匹配，有三种值</p>
 <ul>

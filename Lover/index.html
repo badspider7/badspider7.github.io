@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="念伊的小窝">
 <meta property="og:description" content="小艾            .searchContainer {         display: flex;         justify-content: center;       }       .search {         display: inline-block;         width: 2em;         hei">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-11-29T13:54:13.269Z">
-<meta property="article:modified_time" content="2021-11-29T13:54:13.269Z">
+<meta property="article:published_time" content="2021-11-30T08:51:37.191Z">
+<meta property="article:modified_time" content="2021-11-30T08:51:37.191Z">
 <meta property="article:author" content="Badspider">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -254,6 +254,67 @@
       .searchWeather:focus {
         border-bottom: 2px solid #4285f4;
       }
+      .showInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* border: 2px solid #4285f4; */
+        margin-top: 3em;
+      }
+      .showInfo .temperature {
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        font-size: 85px;
+        font-family: KaiTi, FZShuTi;
+        opacity: 0.5;
+        text-shadow: 4px 6px 2px #ccc;
+      }
+      .showInfo .city {
+        font-size: 30px;
+        font-family: "Lucida Console";
+        margin-bottom: 12px;
+      }
+      .showInfo .weather {
+        margin-top: 12px;
+      }
+      .countDown {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        margin-top: 20px;
+      }
+      .countDown .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .countDown span {
+        font-size: 40px;
+      }
+      .lovelyPic {
+        display: inline-block;
+        position: absolute;
+        right: -48px;
+        bottom: -15px;
+        width: 250px;
+        height: 140px;
+        background-image: url(/img/comment.webp);
+      }
+
+      @media screen and (max-width: 400px) {
+        .countDown{
+          height: 160px;
+          background-image: url(/img/comment.webp);
+          background-repeat: no-repeat;
+        }
+        .lovelyPic {
+          width: 0;
+          height: 0;
+        }
+      }
     </style>
   </head>
   <body>
@@ -269,18 +330,25 @@
       </span>
     </div>
     <div class="showInfo">
-      <div class="city">所在地为：</div>
+      <div class="city"></div>
+      <div class="temperature"></div>
       <div class="weather">当前的天气为：</div>
-      <div class="temperature">当前的温度为：</div>
-      <div class="countDown">
-        <div class="container">和我的小艾猪猪在一起</div>
-        <div class="containerT">已经</div>
+    </div>
+    <div class="countDown">
+      <div class="container">
+        和我的<span style="font-size: 20px; color: rgb(156, 48, 48)"
+          >小艾猪猪</span
+        >在一起
+      </div>
+      <div class="timeBox">
         <span class="day"></span>天 <span class="hour"></span>时
         <span class="minute"></span>分 <span class="second"></span>秒
       </div>
     </div>
+    <span class="lovelyPic"></span>
   </body>
-
+  <!-- 把汉字转换为拼音 -->
+  <script src="https://cdn.jsdelivr.net/gh/zh-lx/pinyin-pro@latest/dist/pinyin-pro.js"></script>
   <!-- 获取IP地址 -->
   <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
@@ -316,6 +384,7 @@
     // 获取天气信息
     async function getInfo(chengshi = "新余") {
       try {
+        var { pinyin } = pinyinPro;
         const { data } = await axios({
           method: "GET",
           url: `https://api.seniverse.com/v3/weather/now.json?key=S8iUfojW28_QulLmE&location=${chengshi}&language=zh-Hans&unit=c`,
@@ -324,10 +393,9 @@
         const weatherInfo = getData.now;
         const locationInfo = getData.location;
         // 为页面添加数据
-        city.innerHTML = city.innerHTML.substr(0, 5) + locationInfo.name;
+        city.innerHTML = pinyin(locationInfo.name) + locationInfo.name;
         weather.innerHTML = weather.innerHTML.substr(0, 7) + weatherInfo.text;
-        temperature.innerHTML =
-          temperature.innerHTML.substr(0, 7) + weatherInfo.temperature + "℃";
+        temperature.innerHTML = weatherInfo.temperature + "℃";
       } catch (err) {
         if (err.response.status === 404) {
           alert("sorry,找不到所在的城市");

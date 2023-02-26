@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="念伊的小窝">
 <meta property="og:description" content="小艾        .searchContainer {       display: flex;       justify-content: center;     }      .search {       display: inline-block;       width: 2em;       height: 2em;       text-align">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-26T13:00:09.346Z">
-<meta property="article:modified_time" content="2023-02-26T13:00:09.346Z">
+<meta property="article:published_time" content="2023-02-26T13:25:11.094Z">
+<meta property="article:modified_time" content="2023-02-26T13:25:11.094Z">
 <meta property="article:author" content="Badspider">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -388,7 +388,7 @@
         }
       };
     }
-
+    let address = "";
     //获取ip地址
     async function getIp(){
       const {data} = await axios({
@@ -396,15 +396,18 @@
         url:"https://www.mxnzp.com/api/ip/self?app_id=qkojmgehinljmiur&app_secret=aU5BcjZsQStqWWNxMEtxN0w5ZlB1QT09"
       })
 
-      const ip = data.ip;
-      const address = await axios({
+      console.log(data.data.ip);
+      const ip = data.data.ip;
+      address = await axios({
         method:"get",
         url:`https://freeapi.ipip.net/${ip}`
       })
-      return address
+      console.log(address.data[2]);
+      getInfo(address.data[2])
     }
     // 根据ip地址先显示当前地址的天气
-    getInfo(address);
+    getIp();
+ 
     // 获取天气信息
     async function getInfo(chengshi = "新余") {
       try {

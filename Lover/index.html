@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Badspider">
   <meta name="keywords" content="">
-  <meta name="description" content="小艾            .searchContainer {         display: flex;         justify-content: center;       }       .search {         display: inline-block;         width: 2em;         hei">
+  <meta name="description" content="小艾        .searchContainer {       display: flex;       justify-content: center;     }      .search {       display: inline-block;       width: 2em;       height: 2em;       text-align">
 <meta property="og:type" content="website">
 <meta property="og:title" content="最可爱的小猪">
 <meta property="og:url" content="http://badspider.top/Lover/index.html">
 <meta property="og:site_name" content="念伊的小窝">
-<meta property="og:description" content="小艾            .searchContainer {         display: flex;         justify-content: center;       }       .search {         display: inline-block;         width: 2em;         hei">
+<meta property="og:description" content="小艾        .searchContainer {       display: flex;       justify-content: center;     }      .search {       display: inline-block;       width: 2em;       height: 2em;       text-align">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-08T05:45:56.520Z">
-<meta property="article:modified_time" content="2021-11-30T09:14:45.141Z">
+<meta property="article:published_time" content="2023-02-26T13:00:09.346Z">
+<meta property="article:modified_time" content="2023-02-26T13:00:09.346Z">
 <meta property="article:author" content="Badspider">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -218,144 +218,153 @@
   
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>小艾</title>
-    <style>
-      .searchContainer {
-        display: flex;
-        justify-content: center;
-      }
-      .search {
-        display: inline-block;
-        width: 2em;
-        height: 2em;
-        text-align: center;
-        border: none;
-        border-radius: 20%;
-        margin-left: 1.5em;
-      }
-      .search i {
-        width: 2em;
-        height: 2em;
-        font-size: 25px;
-      }
-      .search:hover {
-        cursor: pointer;
-      }
-      .searchWeather {
-        height: 2em;
-        outline: none;
-        border: none;
-        border-bottom: 1px solid #ccc;
-      }
-      .searchWeather:focus {
-        border-bottom: 2px solid #4285f4;
-      }
-      .showInfo {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        /* border: 2px solid #4285f4; */
-        margin-top: 3em;
-      }
-      .showInfo .temperature {
-        border: 2px solid #ccc;
-        border-radius: 6px;
-        font-size: 85px;
-        font-family: KaiTi, FZShuTi;
-        opacity: 0.5;
-        text-shadow: 4px 6px 2px #ccc;
-      }
-      .showInfo .city {
-        font-size: 30px;
-        font-family: "Lucida Console";
-        margin-bottom: 12px;
-      }
-      .showInfo .weather {
-        margin-top: 12px;
-      }
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>小艾</title>
+  <style>
+    .searchContainer {
+      display: flex;
+      justify-content: center;
+    }
+
+    .search {
+      display: inline-block;
+      width: 2em;
+      height: 2em;
+      text-align: center;
+      border: none;
+      border-radius: 20%;
+      margin-left: 1.5em;
+    }
+
+    .search i {
+      width: 2em;
+      height: 2em;
+      font-size: 25px;
+    }
+
+    .search:hover {
+      cursor: pointer;
+    }
+
+    .searchWeather {
+      height: 2em;
+      outline: none;
+      border: none;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .searchWeather:focus {
+      border-bottom: 2px solid #4285f4;
+    }
+
+    .showInfo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      /* border: 2px solid #4285f4; */
+      margin-top: 3em;
+    }
+
+    .showInfo .temperature {
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      font-size: 85px;
+      font-family: KaiTi, FZShuTi;
+      opacity: 0.5;
+      text-shadow: 4px 6px 2px #ccc;
+    }
+
+    .showInfo .city {
+      font-size: 30px;
+      font-family: "Lucida Console";
+      margin-bottom: 12px;
+    }
+
+    .showInfo .weather {
+      margin-top: 12px;
+    }
+
+    .countDown {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    .countDown .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .countDown span {
+      font-size: 40px;
+    }
+
+    .lovelyPic {
+      display: inline-block;
+      position: absolute;
+      right: -48px;
+      bottom: -15px;
+      width: 250px;
+      height: 140px;
+      background-image: url(/img/comment.webp);
+    }
+
+    @media screen and (max-width: 900px) {
       .countDown {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        font-size: 18px;
-        margin-top: 20px;
-      }
-      .countDown .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .countDown span {
-        font-size: 40px;
-      }
-      .lovelyPic {
-        display: inline-block;
-        position: absolute;
-        right: -48px;
-        bottom: -15px;
-        width: 250px;
-        height: 140px;
+        height: 160px;
         background-image: url(/img/comment.webp);
+        background-repeat: no-repeat;
+        background-position: 34% 0;
       }
 
-      @media screen and (max-width: 900px) {
-        .countDown{
-          height: 160px;
-          background-image: url(/img/comment.webp);
-          background-repeat: no-repeat;
-          background-position: 34% 0;
-        }
-        .lovelyPic {
-          width: 0;
-          height: 0;
-        }
+      .lovelyPic {
+        width: 0;
+        height: 0;
       }
-    </style>
-  </head>
-  <body>
-    <div class="searchContainer">
-      <input
-        type="text"
-        placeholder="输入你的城市..."
-        class="searchWeather"
-        autocomplete="off"
-      />
-      <span class="search">
-        <i class="iconfont icon-search"></i>
-      </span>
-    </div>
-    <div class="showInfo">
-      <div class="city"></div>
-      <div class="temperature"></div>
-      <div class="weather">当前的天气为：</div>
-    </div>
-    <div class="countDown">
-      <div class="container">
-        和我的<span style="font-size: 20px; color: rgb(156, 48, 48)"
-          >小艾猪猪</span
-        >在一起
-      </div>
-      <div class="timeBox">
-        <span class="day"></span>天 <span class="hour"></span>时
-        <span class="minute"></span>分 <span class="second"></span>秒
-      </div>
-    </div>
-    <span class="lovelyPic"></span>
-  </body>
-  <!-- 把汉字转换为拼音 -->
-  <script src="https://cdn.jsdelivr.net/gh/zh-lx/pinyin-pro@latest/dist/pinyin-pro.js"></script>
-  <!-- 获取IP地址 -->
-  <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
-  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    }
+  </style>
+</head>
 
-  <script type="module">
-    let input = document.querySelector(".searchWeather");
+<body>
+  <div class="searchContainer">
+    <input type="text" placeholder="输入你的城市..." class="searchWeather" autocomplete="off" />
+    <span class="search">
+      <i class="iconfont icon-search"></i>
+    </span>
+  </div>
+  <div class="showInfo">
+    <div class="city"></div>
+    <div class="temperature"></div>
+    <div class="weather">当前的天气为：</div>
+  </div>
+  <div class="countDown">
+    <div class="container">
+      和我的<span style="font-size: 20px; color: rgb(156, 48, 48)">小艾猪猪</span>在一起
+    </div>
+    <div class="timeBox">
+      <span class="day"></span>天 <span class="hour"></span>时
+      <span class="minute"></span>分 <span class="second"></span>秒
+    </div>
+  </div>
+  <span class="lovelyPic"></span>
+</body>
+<!-- 把汉字转换为拼音 -->
+<script src="https://cdn.jsdelivr.net/gh/zh-lx/pinyin-pro@latest/dist/pinyin-pro.js"></script>
+<!-- 获取IP地址 -->
+<!-- <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script> -->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+<script type="module">
+  let input = document.querySelector(".searchWeather");
     let search = document.querySelector(".search");
     let weather = document.querySelector(".weather");
     let temperature = document.querySelector(".temperature");
@@ -380,8 +389,22 @@
       };
     }
 
+    //获取ip地址
+    async function getIp(){
+      const {data} = await axios({
+        method:"get",
+        url:"https://www.mxnzp.com/api/ip/self?app_id=qkojmgehinljmiur&app_secret=aU5BcjZsQStqWWNxMEtxN0w5ZlB1QT09"
+      })
+
+      const ip = data.ip;
+      const address = await axios({
+        method:"get",
+        url:`https://freeapi.ipip.net/${ip}`
+      })
+      return address
+    }
     // 根据ip地址先显示当前地址的天气
-    getInfo(returnCitySN["cip"]);
+    getInfo(address);
     // 获取天气信息
     async function getInfo(chengshi = "新余") {
       try {
@@ -457,8 +480,8 @@
       second.innerHTML = s;
     }
   </script>
-</html>
 
+</html>
 
   
 </article>

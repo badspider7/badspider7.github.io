@@ -16,18 +16,38 @@
   <meta name="description" content="">
   <meta name="author" content="Badspider">
   <meta name="keywords" content="">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="http://badspider.top/archives/2020/index.html">
+  <meta name="description" content="什么是跨域呢？  就是一个域下的文档试图去请求另一个域的文档，这个就是跨域 同源策略 同源策略&#x2F;SOP（Same origin policy）是一种约定，由Netscape公司1995年引入浏览器，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，浏览器很容易受到XSS、CSFR等攻击。所谓同源是指”协议+域名+端口”三者相同，即便两个不同的域名指向同一个ip地址，也非同源。 前端解决跨域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端跨域的常见解决办法">
+<meta property="og:url" content="http://badspider.top/2023/02/22/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F%E7%9A%84%E5%B8%B8%E8%A7%81%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/index.html">
 <meta property="og:site_name" content="念伊的小窝">
+<meta property="og:description" content="什么是跨域呢？  就是一个域下的文档试图去请求另一个域的文档，这个就是跨域 同源策略 同源策略&#x2F;SOP（Same origin policy）是一种约定，由Netscape公司1995年引入浏览器，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，浏览器很容易受到XSS、CSFR等攻击。所谓同源是指”协议+域名+端口”三者相同，即便两个不同的域名指向同一个ip地址，也非同源。 前端解决跨域">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-22T14:29:35.000Z">
+<meta property="article:modified_time" content="2023-02-28T15:26:05.092Z">
 <meta property="article:author" content="Badspider">
+<meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary_large_image">
   
-  <title>归档 - 念伊的小窝</title>
+  <title>前端跨域的常见解决办法 - 念伊的小窝</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -58,7 +78,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -166,14 +186,48 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/top2.png') no-repeat center center;
+         style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="前端跨域的常见解决办法">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-02-22 22:29" pubdate>
+        2023年2月22日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      346 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      1 分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -186,94 +240,129 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 29 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/2020/11/16/database/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">数据库原理</span>
-      <time style="float: right;">11-16</time>
-    </a>
-  
-    
-    <a href="/2020/09/22/css3/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">小艾的CSS3笔记</span>
-      <time style="float: right;">09-22</time>
-    </a>
-  
-    
-    <a href="/2020/09/03/music/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">关于在hexo中添加全局音乐</span>
-      <time style="float: right;">09-03</time>
-    </a>
-  
-    
-    <a href="/2020/08/31/shuangfa/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">哈希算法（python）</span>
-      <time style="float: right;">08-31</time>
-    </a>
-  
-    
-    <a href="/2020/08/27/css/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">小艾的CSS笔记下</span>
-      <time style="float: right;">08-27</time>
-    </a>
-  
-    
-    <a href="/2020/08/18/html/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">day 02 学习HTML（下）</span>
-      <time style="float: right;">08-18</time>
-    </a>
-  
-    
-    <a href="/2020/08/14/web/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">day 01  学习HTML（上）</span>
-      <time style="float: right;">08-14</time>
-    </a>
-  
-    
-    <a href="/2020/08/12/hexo/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">关于用hexo和GitHub搭建自己的免费博客</span>
-      <time style="float: right;">08-12</time>
-    </a>
-  
-    
-    <a href="/2020/08/02/c/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">c语言求阶乘的两种办法</span>
-      <time style="float: right;">08-02</time>
-    </a>
-  
-    
-    <a href="/2020/08/02/hello-world/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Hello World</span>
-      <time style="float: right;">08-02</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">前端跨域的常见解决办法</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2023年2月28日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>什么是跨域呢？</p>
+</blockquote>
+<p>就是一个域下的文档试图去请求另一个域的文档，这个就是跨域</p>
+<p><strong>同源策略</strong></p>
+<p>同源策略/SOP（Same origin policy）是一种约定，由Netscape公司1995年引入浏览器，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，浏览器很容易受到XSS、CSFR等攻击。所谓同源是指”协议+域名+端口”三者相同，即便两个不同的域名指向同一个ip地址，也非同源。</p>
+<h2 id="前端解决跨域的办法"><a href="#前端解决跨域的办法" class="headerlink" title="前端解决跨域的办法"></a>前端解决跨域的办法</h2><p>1、 通过jsonp跨域<br>2、 document.domain + iframe跨域<br>3、 location.hash + iframe<br>4、 window.name + iframe跨域<br>5、 postMessage跨域<br>6、 跨域资源共享（CORS）<br>7、 nginx代理跨域<br>8、 nodejs中间件代理跨域<br>9、 WebSocket协议跨域</p>
 
-
-
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/23/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">回流与重绘</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/22/%E5%8E%9F%E5%9E%8B%E9%93%BE/">
+                        <span class="hidden-mobile">原型链</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","appKey":"D8I6TpV3UhkLxcVVgWlWegOg","path":"window.location.pathname","placeholder":"Hi，我是小宁","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -409,6 +498,19 @@
   
 
 
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
 
 
 

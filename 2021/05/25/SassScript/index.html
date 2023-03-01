@@ -600,8 +600,8 @@
 <p>表达式：<code>@for $var from &lt;start&gt; through &lt;end&gt;</code> 或 <code>@for $var from &lt;start&gt; to &lt;end&gt;</code></p>
 <p>through 和 to 的相同点与不同点：</p>
 <ul>
-<li>相同点：两者均包含<start>的值</li>
-<li>不同点：through包含<end>的值，但to不包含<end>的值</li>
+<li>相同点：两者均包含<start>的值</start></li>
+<li>不同点：through包含<end>的值，但to不包含<end>的值</end></end></li>
 </ul>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-keyword">@for</span> <span class="hljs-variable">$i</span> from <span class="hljs-number">1</span> through <span class="hljs-number">3</span> &#123;<br>  <span class="hljs-selector-class">.item-</span>#&#123;<span class="hljs-variable">$i</span>&#125; &#123; <span class="hljs-attribute">width</span>: <span class="hljs-number">2em</span> * <span class="hljs-variable">$i</span>; &#125;<br>&#125;<br><br><span class="hljs-comment">// compile:</span><br><span class="hljs-selector-class">.item-1</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">2em</span>; &#125;<br><span class="hljs-selector-class">.item-2</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">4em</span>; &#125;<br><span class="hljs-selector-class">.item-3</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">6em</span>; &#125;<br></code></pre></td></tr></table></figure>
 

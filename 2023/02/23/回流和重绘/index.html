@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="念伊的小窝">
 <meta property="og:description" content="回流与重绘回流必定引起重绘，重绘不一定引起回流 在HTML中，每个元素都可以理解成一个盒子，在浏览器解析过程中，会涉及到回流与重绘。 回流：布局引擎会根据各种样式计算每个盒子在页面上的大小与位置。 在页面初始渲染阶段，回流不可避免的触发，可以理解成页面一开始是空白的元素，后面添加了新的元素使页面布局发生改变。 当渲染树的一部分因为元素的规模尺寸、布局、隐藏等改变需要重新构建的操作，会影响布局的操作">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18922785-d19ecfc5ad5fa5a6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/554/format/webp">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18922785-a6c55c2c10e425d7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/585/format/webp">
+<meta property="og:image" content="http://badspider.top/2023/02/23/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/%E5%9B%9E%E6%B5%81.jpg">
+<meta property="og:image" content="http://badspider.top/2023/02/23/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/%E9%87%8D%E7%BB%98.jpg">
 <meta property="article:published_time" content="2023-02-23T14:29:35.000Z">
-<meta property="article:modified_time" content="2023-02-28T15:26:27.565Z">
+<meta property="article:modified_time" content="2023-03-01T04:10:00.205Z">
 <meta property="article:author" content="Badspider">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/18922785-d19ecfc5ad5fa5a6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/554/format/webp">
+<meta name="twitter:image" content="http://badspider.top/2023/02/23/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/%E5%9B%9E%E6%B5%81.jpg">
   
   <title>回流与重绘 - 念伊的小窝</title>
 
@@ -257,7 +257,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2023年2月28日 晚上
+                  本文最后更新于：2023年3月1日 中午
                 
               </p>
             
@@ -279,13 +279,12 @@
 <p>offsetWidth、offsetHeight、scrollTop、scrollLeft、scrollWidth、scrollHeight、clientTop、clientLeft、clientWidth、clientHeigh。这些属性有一个共性，就是需要通过即时计算得到。因此浏览器为了获取这些值，也会进行回流。</p>
 <p>6）当你修改网页的默认字体时。</p>
 <p>常见的回流：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/18922785-d19ecfc5ad5fa5a6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/554/format/webp" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="/2023/02/23/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/%E5%9B%9E%E6%B5%81.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>回流</p>
 <p>重绘<strong>触发时机</strong></p>
-<p>**<br>**</p>
 <p><strong>回流必定会发生重绘，重绘不一定会引发回流。</strong></p>
 <p>常见的重绘：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/18922785-a6c55c2c10e425d7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/585/format/webp" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="/2023/02/23/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/%E9%87%8D%E7%BB%98.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>重绘</p>
 <h4 id="如何减少回流呢？"><a href="#如何减少回流呢？" class="headerlink" title="如何减少回流呢？"></a>如何减少回流呢？</h4><p>1）使用 transform 替代 top</p>
 <p>2）不要把节点的属性值放在一个循环里当成循环里的变量。</p>
@@ -319,6 +318,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">变量的本质和垃圾回收</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

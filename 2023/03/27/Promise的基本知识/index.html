@@ -16,29 +16,20 @@
   <meta name="description" content="">
   <meta name="author" content="Badspider">
   <meta name="keywords" content="">
-  <meta name="description" content="渲染引擎的执行原理 我们输入URL按下回车，发生了什么？   主进程中的UI线程会判断输入框中的是Query还是URL，如果是URL，则通知网络进程处理，网络进程是负责发送请求和接收响应的； UI线程得到网络进程返回的数据后，包装成渲染任务放入任务队列中，渲染进程的主线程开始渲染任务；  什么是浏览器的渲染？ 首先拿到的数据是一个    HTML字符串  –&gt;  渲染 –&gt; 像素信息(">
+  <meta name="description" content="PromisePromise 是 ES6 新出的一个类，因为 js 是单线程的，为了加快性能，提出了异步这个方法,Promise 只接受一个函数，它由两个参数 resolve,reject  Promise 的一些优点： 可以链式调用，解决回调地狱 Promise 里面是同步调用的，then 里面才是微任务 Promise 有三个状态：Pending , resolved(fulfilled),r">
 <meta property="og:type" content="article">
-<meta property="og:title" content="渲染引擎的执行原理">
-<meta property="og:url" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:title" content="Promise的基本知识">
+<meta property="og:url" content="http://badspider.top/2023/03/27/Promise%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="念伊的小窝">
-<meta property="og:description" content="渲染引擎的执行原理 我们输入URL按下回车，发生了什么？   主进程中的UI线程会判断输入框中的是Query还是URL，如果是URL，则通知网络进程处理，网络进程是负责发送请求和接收响应的； UI线程得到网络进程返回的数据后，包装成渲染任务放入任务队列中，渲染进程的主线程开始渲染任务；  什么是浏览器的渲染？ 首先拿到的数据是一个    HTML字符串  –&gt;  渲染 –&gt; 像素信息(">
+<meta property="og:description" content="PromisePromise 是 ES6 新出的一个类，因为 js 是单线程的，为了加快性能，提出了异步这个方法,Promise 只接受一个函数，它由两个参数 resolve,reject  Promise 的一些优点： 可以链式调用，解决回调地狱 Promise 里面是同步调用的，then 里面才是微任务 Promise 有三个状态：Pending , resolved(fulfilled),r">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/DOM%E6%A0%91.png">
-<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/Tree.png">
-<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/CSSOM.png">
-<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%B8%83%E5%B1%80.png">
-<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%88%86%E5%9D%97.png">
-<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%85%89%E6%A0%85%E5%8C%96.png">
-<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%A3%E6%9E%90%E5%8E%9F%E7%90%86.png">
-<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E9%87%8D%E7%BB%98.png">
-<meta property="article:published_time" content="2023-03-01T03:44:25.000Z">
-<meta property="article:modified_time" content="2023-03-01T03:59:27.599Z">
+<meta property="article:published_time" content="2023-03-27T13:45:51.000Z">
+<meta property="article:modified_time" content="2023-03-27T13:47:04.585Z">
 <meta property="article:author" content="Badspider">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/DOM%E6%A0%91.png">
   
-  <title>渲染引擎的执行原理 - 念伊的小窝</title>
+  <title>Promise的基本知识 - 念伊的小窝</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -200,7 +191,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="渲染引擎的执行原理">
+            <span class="h2" id="subtitle" title="Promise的基本知识">
               
             </span>
 
@@ -210,8 +201,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-03-01 11:44" pubdate>
-        2023年3月1日 中午
+      <time datetime="2023-03-27 21:45" pubdate>
+        2023年3月27日 晚上
       </time>
     </span>
   
@@ -221,7 +212,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      738 字
+      2.9k 字
     </span>
   
 
@@ -230,7 +221,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      9 分钟
     </span>
   
 
@@ -259,81 +250,81 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">渲染引擎的执行原理</h1>
+            <h1 style="display: none">Promise的基本知识</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2023年3月1日 中午
+                  本文最后更新于：2023年3月27日 晚上
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="渲染引擎的执行原理"><a href="#渲染引擎的执行原理" class="headerlink" title="渲染引擎的执行原理"></a>渲染引擎的执行原理</h1><blockquote>
-<p>我们输入URL按下回车，发生了什么？</p>
-</blockquote>
-<ol>
-<li>主进程中的UI线程会判断输入框中的是Query还是URL，如果是URL，则通知网络进程处理，网络进程是负责发送请求和接收响应的；</li>
-<li>UI线程得到网络进程返回的数据后，包装成渲染任务放入任务队列中，渲染进程的主线程开始渲染任务；</li>
-</ol>
-<p><strong>什么是浏览器的渲染？</strong></p>
-<p>首先拿到的数据是一个    HTML字符串  –&gt;  渲染 –&gt; 像素信息(绘制指令) –&gt; GPU </p>
-<p>1.<em>PARESE HTML</em></p>
-<p>对HTML文本进行解析： 元素标签，CSS，JS</p>
-<ul>
-<li>元素标签</li>
-</ul>
-<p>生成 DOM 树 （c++对象）</p>
-<p>控制台里面的元素不是HTML，而是一个DOM树</p>
-<p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/DOM%E6%A0%91.png" srcset="/img/loading.gif" lazyload alt="DOM树"></p>
-<ol start="2">
-<li>CSS Parser</li>
-</ol>
-<p>blink内核的默认CSS样式：<a target="_blank" rel="noopener" href="https://github.com/chromium/chromium/blob/main/third_party/blink/renderer/core/html/resources/html.css">https://github.com/chromium/chromium/blob/main/third_party/blink/renderer/core/html/resources/html.css</a></p>
-<p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/Tree.png" srcset="/img/loading.gif" lazyload alt="Tree解析"></p>
-<p>所以CSS 是不会堵塞DOM的解析的，但是会堵塞DOM的渲染</p>
-<p>2.1 CSSOM</p>
-<p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/CSSOM.png" srcset="/img/loading.gif" lazyload alt="CSSOM"></p>
-<p>2.2 样式计算</p>
-<p>通过CSSOM 和 DOM 生成</p>
-<p>含有所有 CSS 的 DOM 节点</p>
-<ol start="3">
-<li>布局(layout)</li>
-</ol>
-<p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%B8%83%E5%B1%80.png" srcset="/img/loading.gif" lazyload alt="布局"></p>
+              <h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><p>Promise 是 ES6 新出的一个类，因为 js 是单线程的，为了加快性能，提出了异步这个方法,Promise 只接受一个函数，它由两个参数 <em>resolve,reject</em></p>
 <blockquote>
-<p>display:none 和 opcity:0 的区别</p>
-<p>display:none  在生成布局树的时候就不会加进去了，没有几何信息</p>
+<p>Promise 的一些优点： 可以链式调用，解决回调地狱</p>
+<p>Promise 里面是同步调用的，then 里面才是微任务</p>
+<p>Promise 有三个状态：Pending , resolved(fulfilled),rejected</p>
+<p>一个 promise 对象只能改变一次状态，成功或者失败后都会返回结果数据。</p>
 </blockquote>
-<p><strong>内容必须在行盒中</strong></p>
-<p><strong>行盒不能和快盒相邻</strong></p>
-<ol start="4">
-<li>分层</li>
+<p>一些异步的操作:</p>
+<ul>
+<li>setTimeOut</li>
+<li>ajax</li>
+<li>回调函数</li>
+<li>事件监听</li>
+<li>Promise</li>
+</ul>
+<p>普通的 ajax 请求</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//创建一个xhr对象</span><br><span class="hljs-keyword">const</span> xhr = <span class="hljs-keyword">new</span> XMLHttpRequset();<br>xhr.open(<span class="hljs-string">&quot;GET&quot;</span>, <span class="hljs-string">&quot;http://localhost:2010&quot;</span>);<br>xhr.send();<br><br><span class="hljs-comment">//接受响应</span><br>xhr.onReadyStateChange = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (xhr.readyState == <span class="hljs-number">4</span>) &#123;<br>    <span class="hljs-keyword">if</span> (xhr.status &gt;= <span class="hljs-number">200</span> &amp;&amp; xhr.status &lt;= <span class="hljs-number">300</span>) &#123;<br>      <span class="hljs-built_in">console</span>.log(xhr.response);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-built_in">console</span>.log(xhr.status);<br>    &#125;<br>  &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>对 ajax 的 Promise 封装</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">//创建一个xhr对象</span><br>  <span class="hljs-keyword">const</span> xhr = <span class="hljs-keyword">new</span> XMLHttpRequset();<br>  xhr.open(<span class="hljs-string">&quot;GET&quot;</span>, <span class="hljs-string">&quot;http://localhost:2010&quot;</span>);<br>  xhr.send();<br><br>  <span class="hljs-comment">//接受响应</span><br>  xhr.onReadyStateChange = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">if</span> (xhr.readyState == <span class="hljs-number">4</span>) &#123;<br>      <span class="hljs-keyword">if</span> (xhr.status &gt;= <span class="hljs-number">200</span> &amp;&amp; xhr.status &lt;= <span class="hljs-number">300</span>) &#123;<br>        <span class="hljs-comment">//响应成功</span><br>        resolve(xhr.response);<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-comment">//响应失败</span><br>        reject(xhr.status);<br>      &#125;<br>    &#125;<br>  &#125;;<br>&#125;);<br><br>p.then(<br>  <span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(value);<br>  &#125;,<br>  <span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(error);<br>  &#125;<br>);<br></code></pre></td></tr></table></figure>
+
+<h2 id="Promise-的一些-API"><a href="#Promise-的一些-API" class="headerlink" title="Promise 的一些 API"></a>Promise 的一些 API</h2><blockquote>
+<p>Promise.rejected()</p>
+</blockquote>
+<p>如果返回的是一个普通的对象，就返回一个成功的 Promise 对象</p>
+<p>如果返回的是一个 Promise 对象，则根据这个 Promise 返回的结果返回结果</p>
+<blockquote>
+<p>Promise.all([])</p>
+</blockquote>
+<p>如果所有的都返回成功的话，则会返回成功的结果的一个数组</p>
+<p>如果有一个返回失败的话，则会返回那个失败的结果</p>
+<blockquote>
+<p>Promise.race([])</p>
+</blockquote>
+<p>它的返回结果由最先完成的那个 promise 结果来决定，第一个返回的如果是成功就是是成功的结果，如果是失败就是失败</p>
+<blockquote>
+<p>Promise.finally()</p>
+</blockquote>
+<p>无论成功还是失败，都会执行的回调函数</p>
+<blockquote>
+<p>Promise.then(()=&gt;{},()=&gt;{})</p>
+</blockquote>
+<p>如果成功，将会执行这个回调函数的第一个函数</p>
+<blockquote>
+<p>Promise.catch</p>
+</blockquote>
+<p>如果失败，则会执行这个回调函数</p>
+<h2 id="中断-Promise-链"><a href="#中断-Promise-链" class="headerlink" title="中断 Promise 链"></a>中断 Promise 链</h2><p>能够中断 Promise 的执行的，只有<pending>状态下的 Promise</pending></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>  resolve(<span class="hljs-string">&quot;OK&quot;</span>);<br>&#125;);<br><br>p.then(<span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">res, rej</span>) =&gt;</span> &#123;<br>    resolve(<span class="hljs-string">&quot;1&quot;</span>);<br>  &#125;);<br>&#125;)<br>  .then(<span class="hljs-function">(<span class="hljs-params">val</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;2&quot;</span>);<br>  &#125;)<br>  .then(<span class="hljs-function">(<span class="hljs-params">val</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;3&quot;</span>);<br>  &#125;);<br><br><span class="hljs-comment">//如果想要中断这个回调函数链的话，只有返回一个pending才能中断</span><br>p.then(<span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">res, rej</span>) =&gt;</span> &#123;&#125;); <span class="hljs-comment">//这样子就可以了</span><br>&#125;)<br>  .then(<span class="hljs-function">(<span class="hljs-params">val</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;2&quot;</span>);<br>  &#125;)<br>  .then(<span class="hljs-function">(<span class="hljs-params">val</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;3&quot;</span>);<br>  &#125;);<br></code></pre></td></tr></table></figure>
+
+<h2 id="Promise-then-返回的是一个-Promise-对象"><a href="#Promise-then-返回的是一个-Promise-对象" class="headerlink" title="Promise.then 返回的是一个 Promise 对象"></a>Promise.then 返回的是一个 Promise 对象</h2><p>Promise.then 返回了一个什么呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>  resolve(<span class="hljs-string">&quot;OK&quot;</span>);<br>&#125;);<br><br><span class="hljs-keyword">const</span> res = p.then(<span class="hljs-function">(<span class="hljs-params">val</span>) =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(val);<br>&#125;);<br><br><span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">//Promise  --&gt; resule: [val]</span><br></code></pre></td></tr></table></figure>
+
+<p>Promise.then 返回了一个 Promise 对象</p>
+<p>返回的结果由 p.then 返回的结果来决定</p>
+<ol>
+<li>如果回调函数的返回结果是 非 promise 类型的 属性，则 then 方法返回的 promise 对象 p1 的状态为成功 fulfilled，同时返回的结果就是 promise 对象 p1 成功的值。需要注意的是，如果你不写 return，我们知道函数内部如果不写 return 默认返回结果是 undefined，又 undefined 也是非 promise 类型，所以 p1 状态还是成功 fulfilled，返回的 promise 成功值为 undefined。</li>
+<li>如果回调函数的返回结果是 promise 对象，则 p1 的状态就取决于 return 返回的这个 promise 对象内部的状态，内部为 resolve, 则 p1 状态为 fulfilled，内部为 reject，则 p1 状态为 rejected</li>
 </ol>
-<p>减少变化产生的工作量(现代浏览器)  </p>
-<p>在文档发生改变的时候，就只改变特定的部分，不会全部改变</p>
-<ol start="5">
-<li>绘制</li>
-</ol>
-<p>根据布局树生成绘制指令</p>
-<p>在哪个坐标画什么颜色</p>
-<p>每一层一组指令</p>
-<ol start="6">
-<li>分块</li>
-</ol>
-<p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%88%86%E5%9D%97.png" srcset="/img/loading.gif" lazyload alt="分块"></p>
-<ol start="7">
-<li>光栅化</li>
-</ol>
-<p>利用GPU进行加速</p>
-<p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%85%89%E6%A0%85%E5%8C%96.png" srcset="/img/loading.gif" lazyload alt="光栅化"></p>
-<ol start="8">
-<li>DRAW QUAD</li>
-</ol>
-<p>![DRAW QUAD](DRAW QUAD.png)</p>
-<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%A3%E6%9E%90%E5%8E%9F%E7%90%86.png" srcset="/img/loading.gif" lazyload alt="浏览器解析原理"></p>
-<p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E9%87%8D%E7%BB%98.png" srcset="/img/loading.gif" lazyload alt="重绘"></p>
-<p>css3的translate 不会导致页面的重绘，而是在draw这一块重新画出来</p>
-<p>而定位等行为会导致页面的重绘，会占用主线程</p>
+<h2 id="改变-Promise-状态的三种办法"><a href="#改变-Promise-状态的三种办法" class="headerlink" title="改变 Promise 状态的三种办法"></a>改变 Promise 状态的三种办法</h2><p>1.reject()</p>
+<p>2.resolve()</p>
+<p>3.throw Error(‘error’)</p>
+<p><strong>Promise 指定的多个回调函数也会执行的</strong></p>
+<h2 id="async-和-await"><a href="#async-和-await" class="headerlink" title="async 和 await"></a>async 和 await</h2><p>await 只能在 async 函数中才能使用</p>
+<p>async 函数的返回值为 Promise 对象</p>
+<p>Promise 对象的结果为 async 函数执行的结果</p>
 
             </div>
             <hr>
@@ -361,18 +352,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/27/Promise%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Promise的基本知识</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/28/%E5%8E%9F%E5%9E%8B%E9%93%BE/">
-                        <span class="hidden-mobile">原型链</span>
+                      <a href="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/">
+                        <span class="hidden-mobile">渲染引擎的执行原理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

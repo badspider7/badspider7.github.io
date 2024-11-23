@@ -13,7 +13,7 @@
     "version": "5.4.2"
   },
   "dependencies": {
-    "axios": "^0.24.0",
+    "axios": "^1.7.7",
     "hexo": "^5.0.0",
     "hexo-asset-image": "github:CodeFalling/hexo-asset-image",
     "hexo-cli": "^4.3.0",

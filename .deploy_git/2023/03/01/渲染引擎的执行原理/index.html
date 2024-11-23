@@ -1,0 +1,644 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#ED9282">
+  <meta name="description" content="">
+  <meta name="author" content="Badspider">
+  <meta name="keywords" content="">
+  <meta name="description" content="渲染引擎的执行原理 我们输入URL按下回车，发生了什么？   主进程中的UI线程会判断输入框中的是Query还是URL，如果是URL，则通知网络进程处理，网络进程是负责发送请求和接收响应的； UI线程得到网络进程返回的数据后，包装成渲染任务放入任务队列中，渲染进程的主线程开始渲染任务；  什么是浏览器的渲染？ 首先拿到的数据是一个    HTML字符串  –&gt;  渲染 –&gt; 像素信息(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="渲染引擎的执行原理">
+<meta property="og:url" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="念伊的小窝">
+<meta property="og:description" content="渲染引擎的执行原理 我们输入URL按下回车，发生了什么？   主进程中的UI线程会判断输入框中的是Query还是URL，如果是URL，则通知网络进程处理，网络进程是负责发送请求和接收响应的； UI线程得到网络进程返回的数据后，包装成渲染任务放入任务队列中，渲染进程的主线程开始渲染任务；  什么是浏览器的渲染？ 首先拿到的数据是一个    HTML字符串  –&gt;  渲染 –&gt; 像素信息(">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/DOM%E6%A0%91.png">
+<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/Tree.png">
+<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/CSSOM.png">
+<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%B8%83%E5%B1%80.png">
+<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%88%86%E5%9D%97.png">
+<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%85%89%E6%A0%85%E5%8C%96.png">
+<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%A3%E6%9E%90%E5%8E%9F%E7%90%86.png">
+<meta property="og:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E9%87%8D%E7%BB%98.png">
+<meta property="article:published_time" content="2023-03-01T03:44:25.000Z">
+<meta property="article:modified_time" content="2024-11-06T02:07:12.905Z">
+<meta property="article:author" content="Badspider">
+<meta property="article:tag" content="基础知识点">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://badspider.top/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/DOM%E6%A0%91.png">
+  
+  <title>渲染引擎的执行原理 - 念伊的小窝</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"badspider.top","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"🐱‍👓","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","app_key":"D8I6TpV3UhkLxcVVgWlWegOg","server_url":"https://fdhkn3cv.lc-cn-n1-shared.com","path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>念伊的小窝</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Lover/">
+                <i class="iconfont icon-lin"></i>
+                猪猪
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="渲染引擎的执行原理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-03-01 11:44" pubdate>
+        2023年3月1日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      738 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      2 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">渲染引擎的执行原理</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2024年11月6日 上午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="渲染引擎的执行原理"><a href="#渲染引擎的执行原理" class="headerlink" title="渲染引擎的执行原理"></a>渲染引擎的执行原理</h1><blockquote>
+<p>我们输入URL按下回车，发生了什么？</p>
+</blockquote>
+<ol>
+<li>主进程中的UI线程会判断输入框中的是Query还是URL，如果是URL，则通知网络进程处理，网络进程是负责发送请求和接收响应的；</li>
+<li>UI线程得到网络进程返回的数据后，包装成渲染任务放入任务队列中，渲染进程的主线程开始渲染任务；</li>
+</ol>
+<p><strong>什么是浏览器的渲染？</strong></p>
+<p>首先拿到的数据是一个    HTML字符串  –&gt;  渲染 –&gt; 像素信息(绘制指令) –&gt; GPU </p>
+<p>1.<em>PARESE HTML</em></p>
+<p>对HTML文本进行解析： 元素标签，CSS，JS</p>
+<ul>
+<li>元素标签</li>
+</ul>
+<p>生成 DOM 树 （c++对象）</p>
+<p>控制台里面的元素不是HTML，而是一个DOM树</p>
+<p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/DOM%E6%A0%91.png" srcset="/img/loading.gif" lazyload alt="DOM树"></p>
+<ol start="2">
+<li>CSS Parser</li>
+</ol>
+<p>blink内核的默认CSS样式：<a target="_blank" rel="noopener" href="https://github.com/chromium/chromium/blob/main/third_party/blink/renderer/core/html/resources/html.css">https://github.com/chromium/chromium/blob/main/third_party/blink/renderer/core/html/resources/html.css</a></p>
+<p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/Tree.png" srcset="/img/loading.gif" lazyload alt="Tree解析"></p>
+<p>所以CSS 是不会堵塞DOM的解析的，但是会堵塞DOM的渲染</p>
+<p>2.1 CSSOM</p>
+<p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/CSSOM.png" srcset="/img/loading.gif" lazyload alt="CSSOM"></p>
+<p>2.2 样式计算</p>
+<p>通过CSSOM 和 DOM 生成</p>
+<p>含有所有 CSS 的 DOM 节点</p>
+<ol start="3">
+<li>布局(layout)</li>
+</ol>
+<p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%B8%83%E5%B1%80.png" srcset="/img/loading.gif" lazyload alt="布局"></p>
+<blockquote>
+<p>display:none 和 opcity:0 的区别</p>
+<p>display:none  在生成布局树的时候就不会加进去了，没有几何信息</p>
+</blockquote>
+<p><strong>内容必须在行盒中</strong></p>
+<p><strong>行盒不能和快盒相邻</strong></p>
+<ol start="4">
+<li>分层</li>
+</ol>
+<p>减少变化产生的工作量(现代浏览器)  </p>
+<p>在文档发生改变的时候，就只改变特定的部分，不会全部改变</p>
+<ol start="5">
+<li>绘制</li>
+</ol>
+<p>根据布局树生成绘制指令</p>
+<p>在哪个坐标画什么颜色</p>
+<p>每一层一组指令</p>
+<ol start="6">
+<li>分块</li>
+</ol>
+<p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%88%86%E5%9D%97.png" srcset="/img/loading.gif" lazyload alt="分块"></p>
+<ol start="7">
+<li>光栅化</li>
+</ol>
+<p>利用GPU进行加速</p>
+<p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%85%89%E6%A0%85%E5%8C%96.png" srcset="/img/loading.gif" lazyload alt="光栅化"></p>
+<ol start="8">
+<li>DRAW QUAD</li>
+</ol>
+<p>![DRAW QUAD](DRAW QUAD.png)</p>
+<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%A3%E6%9E%90%E5%8E%9F%E7%90%86.png" srcset="/img/loading.gif" lazyload alt="浏览器解析原理"></p>
+<p><img src="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E9%87%8D%E7%BB%98.png" srcset="/img/loading.gif" lazyload alt="重绘"></p>
+<p>css3的translate 不会导致页面的重绘，而是在draw这一块重新画出来</p>
+<p>而定位等行为会导致页面的重绘，会占用主线程</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9/">基础知识点</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/27/Promise%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Promise的基本知识</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/28/%E5%8E%9F%E5%9E%8B%E9%93%BE/">
+                        <span class="hidden-mobile">原型链</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","appKey":"D8I6TpV3UhkLxcVVgWlWegOg","path":"window.location.pathname","placeholder":"Hi，我是小宁","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:;"><span>Ning</span></a> <i class="iconfont icon-aixin" style="color:red"></i> <a href="javascript:;"><span>Yi</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        赣ICP备2021011549号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=https://beian.miit.gov.cn"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>赣ICP备2021011549号-1</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+<div id="jsi-flying-fish-container"></div>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/fish.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

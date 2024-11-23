@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#ED9282">
+  <meta name="description" content="">
+  <meta name="author" content="Badspider">
+  <meta name="keywords" content="">
+  <meta name="description" content="理解 new 关键字的作用机制 理解 [[GET]]  对象有隐式原型，而函数有显示原型 隐式原型是指向显示原型的，然后一直递归下去，直到为null 就会返回undefined  new 关键字的作用机制1.执行前  1.绑定this为空对象 2.让空对象[[Prototype]] –&gt; 函数的 prototype属性 2.1 所有对象都有[[Prototype]] (__proto__)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原型链">
+<meta property="og:url" content="http://badspider.top/2023/02/28/%E5%8E%9F%E5%9E%8B%E9%93%BE/index.html">
+<meta property="og:site_name" content="念伊的小窝">
+<meta property="og:description" content="理解 new 关键字的作用机制 理解 [[GET]]  对象有隐式原型，而函数有显示原型 隐式原型是指向显示原型的，然后一直递归下去，直到为null 就会返回undefined  new 关键字的作用机制1.执行前  1.绑定this为空对象 2.让空对象[[Prototype]] –&gt; 函数的 prototype属性 2.1 所有对象都有[[Prototype]] (__proto__)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://badspider.top/2023/02/28/%E5%8E%9F%E5%9E%8B%E9%93%BE/%E5%8E%9F%E5%9E%8B%E9%93%BE.png">
+<meta property="article:published_time" content="2023-02-28T14:29:35.000Z">
+<meta property="article:modified_time" content="2024-11-17T13:58:10.673Z">
+<meta property="article:author" content="Badspider">
+<meta property="article:tag" content="基础知识点">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://badspider.top/2023/02/28/%E5%8E%9F%E5%9E%8B%E9%93%BE/%E5%8E%9F%E5%9E%8B%E9%93%BE.png">
+  
+  <title>原型链 - 念伊的小窝</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"badspider.top","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"🐱‍👓","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","app_key":"D8I6TpV3UhkLxcVVgWlWegOg","server_url":"https://fdhkn3cv.lc-cn-n1-shared.com","path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>念伊的小窝</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Lover/">
+                <i class="iconfont icon-lin"></i>
+                猪猪
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="原型链">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-02-28 22:29" pubdate>
+        2023年2月28日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">原型链</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2024年11月17日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>理解 new 关键字的作用机制</p>
+<p>理解 [[GET]] </p>
+<p>对象有隐式原型，而函数有显示原型</p>
+<p>隐式原型是指向显示原型的，然后一直递归下去，直到为null 就会返回undefined</p>
+</blockquote>
+<h2 id="new-关键字的作用机制"><a href="#new-关键字的作用机制" class="headerlink" title="new 关键字的作用机制"></a>new 关键字的作用机制</h2><p>1.执行前</p>
+<ul>
+<li>1.绑定this为空对象</li>
+<li>2.让空对象[[Prototype]] –&gt; 函数的 prototype属性</li>
+<li>2.1 所有对象都有[[Prototype]] (<code>__proto__</code>)</li>
+<li>2.2 所有的函数对象 –&gt;prototype</li>
+<li>3.正常执行函数</li>
+<li>4.如果函数返回的基本类型，返回this的值，否则返回原函数的返回值</li>
+</ul>
+<p><strong>[[GET]]</strong></p>
+<p>如果要访问对象的属性，就需要用到一个隐式方法[[GET]]，会一直沿着原型链找，直到找到NULL的话，如果找不到这个属性的话会返回一个 undefined，而不会报错</p>
+<ol>
+<li>判断对象里面有没有</li>
+<li>判断它的<code>__proto__</code>指向的对象里面有没有</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">foo</span>(<span class="hljs-params"></span>)&#123;<br>	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1</span>);<br>&#125;<br><br><span class="hljs-keyword">var</span> a = <span class="hljs-keyword">new</span> <span class="hljs-title function_">foo</span>(); <span class="hljs-comment">//返回值：this指向的对象的引用</span><br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a.<span class="hljs-property">b</span>);  <span class="hljs-comment">//undefined</span><br></code></pre></td></tr></table></figure>
+
+<p>原型链，共享方法和属性，节省内存开销</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//阿里 四面</span><br><span class="hljs-title class_">Object</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">a</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;a&quot;</span>);<br>&#125;<br><br><span class="hljs-title class_">Function</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">b</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;b&quot;</span>);<br>&#125;<br><br><span class="hljs-keyword">var</span> F = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;&#125;;<br><br><span class="hljs-keyword">var</span> f = <span class="hljs-keyword">new</span> <span class="hljs-title function_">F</span>();<br><br>f.<span class="hljs-title function_">a</span>();  <span class="hljs-comment">//a</span><br>f.<span class="hljs-title function_">b</span>();  <span class="hljs-comment">// 报错，没有b这个方法</span><br>F.<span class="hljs-title function_">a</span>();  <span class="hljs-comment">//a</span><br>F.<span class="hljs-title function_">b</span>();   <span class="hljs-comment">//b</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/2023/02/28/%E5%8E%9F%E5%9E%8B%E9%93%BE/%E5%8E%9F%E5%9E%8B%E9%93%BE.png" srcset="/img/loading.gif" lazyload alt="原型链"></p>
+<p><strong>静态方法和实例方法</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">foo</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1</span>);<br>&#125;<br><br><span class="hljs-comment">//静态方法</span><br>foo.<span class="hljs-property">a</span> = <span class="hljs-number">1</span>;  <span class="hljs-comment">//这个是写在函数上面的，实例是拿不到的</span><br><span class="hljs-keyword">var</span> bar = <span class="hljs-keyword">new</span> <span class="hljs-title function_">foo</span>();<br>bar.<span class="hljs-property">a</span>;  <span class="hljs-comment">//undefined</span><br><span class="hljs-comment">//实例方法</span><br>foo.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">a</span> = a;  <span class="hljs-comment">//这个是写在构造函数的上的，实例是可以拿到的</span><br><span class="hljs-keyword">var</span> bar = <span class="hljs-keyword">new</span> <span class="hljs-title function_">foo</span>();<br>bar.<span class="hljs-property">a</span>; <span class="hljs-comment">//1</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="一些很奇怪的问题"><a href="#一些很奇怪的问题" class="headerlink" title="一些很奇怪的问题"></a>一些很奇怪的问题</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//Object 和 Function</span><br><br><span class="hljs-comment">//关于&#123;&#125; 和 function()&#123;&#125;</span><br><span class="hljs-comment">//Object.prototype.__proto__   = null;  //不是所有对象都是 Object的实例</span><br><span class="hljs-comment">//Function.prototype.__prototype = Object.prototype;</span><br><span class="hljs-comment">//Object.__proto__  = Function.prototype  new Function</span><br><span class="hljs-comment">//Function.__proto__ = Function.prototype  new Function</span><br><br><br><span class="hljs-comment">//只要是对象就有 __proto__  ,只要是函数就有 prototype</span><br><span class="hljs-comment">//对象的隐式原型对象 指向 函数的显示原型对象</span><br><span class="hljs-comment">//函数的隐式原型对象  指向  函数的显示原型对象</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="原型链的引用"><a href="#原型链的引用" class="headerlink" title="原型链的引用"></a>原型链的引用</h2><ol>
+<li>面向对象编程 -&gt;提高代码的可复用率 -&gt; 更加合理的数据关系</li>
+<li>原型链的本质：对象的隐式原型和构造函数的显示原型的连接</li>
+<li>连接方式：new 关键字， 使用方式: [[GET]] 和 [[PUT]]</li>
+</ol>
+<h2 id="instanceof-的作用机制"><a href="#instanceof-的作用机制" class="headerlink" title="instanceof 的作用机制"></a>instanceof 的作用机制</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> <span class="hljs-title class_">Studen</span> = &#123;<br>    <span class="hljs-attr">age</span>:<span class="hljs-number">12</span>,<br>    <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;spider&quot;</span><br>&#125;<br><br><span class="hljs-keyword">var</span> s1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Student</span>;<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(s1 instanceOf <span class="hljs-title class_">Object</span>;)<br><br></code></pre></td></tr></table></figure>
+
+<p>作用：判断 s1 是不是 Object的一个实例</p>
+<ol>
+<li>s1.<code>__proto__</code> === Object.prototype</li>
+<li>s1.proto.proto === Object.prototype</li>
+<li>s1.proto = Student.prototype</li>
+<li> s1.proto.proto = Student.prototype.proto = Object.prototype //true</li>
+</ol>
+<p><strong>手写一个 instanceOf</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title class_">Object</span>.<span class="hljs-property">myInstanceOf</span> = <span class="hljs-title function_">funcrion</span>(<span class="hljs-params">obj,fun</span>)&#123;<br>    <span class="hljs-keyword">if</span>(obj === <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-comment">//找到了终点</span><br>    <br>    <span class="hljs-keyword">if</span>(<span class="hljs-title class_">Object</span>.<span class="hljs-title function_">getPrototypeOf</span>(obj) === fun.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>)&#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">myInstanceOf</span>(<span class="hljs-title class_">Object</span>.<span class="hljs-title function_">getPrototypeOf</span>(obj),fun);<br>        <span class="hljs-comment">//Object.getPrototypeOf(obj);  //返回obj的隐式原型</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="数组和类数组"><a href="#数组和类数组" class="headerlink" title="数组和类数组"></a>数组和类数组</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//数组</span><br><span class="hljs-keyword">var</span> a = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>];<br><br>a = &#123;<br>    <span class="hljs-string">&quot;0&quot;</span>:<span class="hljs-number">1</span>,<br>    <span class="hljs-string">&quot;1&quot;</span>:<span class="hljs-number">2</span>,<br>    <span class="hljs-string">&quot;2&quot;</span>:<span class="hljs-number">3</span>,<br>    <span class="hljs-string">&quot;length&quot;</span>:<span class="hljs-number">3</span>,<br>    <span class="hljs-attr">__proto</span>:<span class="hljs-title class_">Array</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span><br>&#125;<br><br><br><span class="hljs-comment">//类数组</span><br>a = &#123;<br>    <span class="hljs-string">&quot;0&quot;</span>:<span class="hljs-number">1</span>,<br>    <span class="hljs-string">&quot;1&quot;</span>:<span class="hljs-number">2</span>,<br>    <span class="hljs-string">&quot;2&quot;</span>:<span class="hljs-number">3</span>,<br>    <span class="hljs-string">&quot;length&quot;</span>:<span class="hljs-number">3</span>,<br>    <span class="hljs-attr">__proto</span>: <span class="hljs-variable constant_">XXX</span>;   <span class="hljs-comment">//这里是主要的区别，所以类数组拿不到数组的一些方法</span><br>    <span class="hljs-comment">//不能通过 Array.prototype 拿到一些数组的方法</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="RHS-读-和-LHS-写"><a href="#RHS-读-和-LHS-写" class="headerlink" title="RHS(读) 和 LHS (写)"></a>RHS(读) 和 LHS (写)</h2><p>所有的程序都是一个状态机</p>
+<p>状态机也就是数据的集合  -&gt; RHS 读和 LHS 写</p>
+<p>LHS          RHS</p>
+<p>[[PUT]]    [[GET]]</p>
+<p><strong>修改一个对象的属性</strong></p>
+<p>[[PUT]]  –&gt; LHS</p>
+<p>1.判断对象里面有没有属性</p>
+<p>如果找到了</p>
+<ul>
+<li>如果是基本类型： 覆盖</li>
+<li>如果是引用类型：<ul>
+<li>是对引用类型的引用 —&gt; 覆盖</li>
+<li>对引用类型的访问  —&gt; 修改</li>
+</ul>
+</li>
+</ul>
+<p>2.如果没有</p>
+<ul>
+<li>沿着原型链找</li>
+<li>如果没有找到，就一直找，直到原型链终点</li>
+<li>如果终点都没有的话，就会自己创建一个</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9/">基础知识点</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/01/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">渲染引擎的执行原理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
+                        <span class="hidden-mobile">变量的本质和垃圾回收</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","appKey":"D8I6TpV3UhkLxcVVgWlWegOg","path":"window.location.pathname","placeholder":"Hi，我是小宁","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:;"><span>Ning</span></a> <i class="iconfont icon-aixin" style="color:red"></i> <a href="javascript:;"><span>Yi</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        赣ICP备2021011549号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=https://beian.miit.gov.cn"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>赣ICP备2021011549号-1</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+<div id="jsi-flying-fish-container"></div>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/fish.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

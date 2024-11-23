@@ -1,0 +1,609 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#ED9282">
+  <meta name="description" content="">
+  <meta name="author" content="Badspider">
+  <meta name="keywords" content="">
+  <meta name="description" content="&#x2F;&#x2F;ready:app 初始化完成 dom-ready:一个窗口中的文本加载完成 did-finish-load:导航完成时触发 window-all-closed:所有窗口都被关闭时触发 before-quit:在关闭窗口之前出发 will-quit:在窗口关闭并且应用退出时触发 quit:当所有窗口被关闭时触发 closed：当窗口关闭时触发，此时应删除窗口引用 123456789101112">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Electron入门">
+<meta property="og:url" content="http://badspider.top/2023/06/07/Electron%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="念伊的小窝">
+<meta property="og:description" content="&#x2F;&#x2F;ready:app 初始化完成 dom-ready:一个窗口中的文本加载完成 did-finish-load:导航完成时触发 window-all-closed:所有窗口都被关闭时触发 before-quit:在关闭窗口之前出发 will-quit:在窗口关闭并且应用退出时触发 quit:当所有窗口被关闭时触发 closed：当窗口关闭时触发，此时应删除窗口引用 123456789101112">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-07T15:37:11.000Z">
+<meta property="article:modified_time" content="2024-11-06T02:05:55.928Z">
+<meta property="article:author" content="Badspider">
+<meta property="article:tag" content="Electron">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Electron入门 - 念伊的小窝</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"badspider.top","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"🐱‍👓","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","app_key":"D8I6TpV3UhkLxcVVgWlWegOg","server_url":"https://fdhkn3cv.lc-cn-n1-shared.com","path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>念伊的小窝</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Lover/">
+                <i class="iconfont icon-lin"></i>
+                猪猪
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/electron.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Electron入门">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-06-07 23:37" pubdate>
+        2023年6月7日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Electron入门</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2024年11月6日 上午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>//ready:app 初始化完成</p>
+<p>dom-ready:一个窗口中的文本加载完成</p>
+<p>did-finish-load:导航完成时触发</p>
+<p>window-all-closed:所有窗口都被关闭时触发</p>
+<p>before-quit:在关闭窗口之前出发</p>
+<p>will-quit:在窗口关闭并且应用退出时触发</p>
+<p>quit:当所有窗口被关闭时触发</p>
+<p>closed：当窗口关闭时触发，此时应删除窗口引用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> &#123; app, <span class="hljs-title class_">BrowserWindow</span> &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)<br><br><span class="hljs-comment">//当app启动之后，执行窗口创建等操作</span><br>app.<span class="hljs-title function_">whenReady</span>().<span class="hljs-title function_">then</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> mainWin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BrowserWindow</span>(&#123;<br>        <span class="hljs-attr">width</span>: <span class="hljs-number">600</span>,<br>        <span class="hljs-attr">height</span>:<span class="hljs-number">400</span><br>    &#125;)<br><br>    <span class="hljs-comment">//在当前窗口页面加载指定内容</span><br>    mainWin.<span class="hljs-title function_">loadFile</span>(<span class="hljs-string">&#x27;index.html&#x27;</span>)<br><br>    <span class="hljs-comment">//监听当前窗口的关闭</span><br>    mainWin.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;close&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;close&#x27;</span>)<br>    &#125;)<br>&#125;)<br><br><span class="hljs-comment">//当所有窗口都关闭的时候</span><br>app.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;window-all-closed&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;all window is closed&#x27;</span>)<br>    app.<span class="hljs-title function_">quit</span>()<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<h3 id="主进程和渲染进程通信"><a href="#主进程和渲染进程通信" class="headerlink" title="主进程和渲染进程通信"></a>主进程和渲染进程通信</h3><p>利用   <strong>IPCMain和IPCRenderer</strong> ，其中分为以下几种：</p>
+<p>一. 主进程给所有渲染进程发消息</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//主进程</span><br><span class="hljs-title class_">IPCMain</span>.<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;message&#x27;</span>,<span class="hljs-string">&#x27;some message&#x27;</span>);<br><br><span class="hljs-comment">//渲染进程</span><br><span class="hljs-title class_">IPCRenderer</span>.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;message&#x27;</span>,<span class="hljs-function">(<span class="hljs-params">event,data</span>)=&gt;</span>&#123;<br>	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;get mesaage:&#x27;</span>,data)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>二. 渲染进程给主进程发消息(双向)</p>
+<p>通过将 <a target="_blank" rel="noopener" href="https://www.electronjs.org/zh/docs/latest/api/ipc-renderer#ipcrendererinvokechannel-args"><code>ipcRenderer.invoke</code></a> 与 <a target="_blank" rel="noopener" href="https://www.electronjs.org/zh/docs/latest/api/ipc-main#ipcmainhandlechannel-listener"><code>ipcMain.handle</code></a> 搭配使用来完成。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//preload</span><br><span class="hljs-keyword">const</span> &#123; contextBridge, ipcRenderer &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)<br><br>contextBridge.<span class="hljs-title function_">exposeInMainWorld</span>(<span class="hljs-string">&#x27;electronAPI&#x27;</span>, &#123;<br>  <span class="hljs-attr">openFile</span>: <span class="hljs-function">() =&gt;</span> ipcRenderer.<span class="hljs-title function_">invoke</span>(<span class="hljs-string">&#x27;dialog:openFile&#x27;</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//主进程</span><br><span class="hljs-title class_">IPCMain</span>.<span class="hljs-title function_">handle</span>(<span class="hljs-string">&#x27;dialog:openFile&#x27;</span>,<span class="hljs-title class_">HandleOpenFile</span>)<br><br><span class="hljs-comment">//渲染进程</span><br><span class="hljs-keyword">const</span> filePath = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">window</span>.<span class="hljs-property">electronAPI</span>.<span class="hljs-title function_">openFile</span>()<br></code></pre></td></tr></table></figure>
+
+
+
+<p>三. 渲染进程给主进程发消息(单向)</p>
+<p>通过<strong>IPCRenderer.send</strong> API 给主进程发送消息,主进程通过 <strong>IPCMain.on</strong>来接收渲染进程发送的消息</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//主进程中</span><br><span class="hljs-title class_">IPCMain</span>.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;message&#x27;</span>,<span class="hljs-function">(<span class="hljs-params">event,data</span>)=&gt;</span>&#123;<br>    <span class="hljs-comment">//渲染进程</span><br>	<span class="hljs-keyword">const</span> webContents = event.<span class="hljs-property">sender</span><br>    <span class="hljs-comment">//主页面</span><br>   <span class="hljs-keyword">const</span> win = <span class="hljs-title class_">BrowserWindow</span>.<span class="hljs-title function_">fromWebContents</span>(webContents)<br>    win.<span class="hljs-title function_">setTitle</span>(title)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//preload</span><br><span class="hljs-keyword">const</span> &#123; contextBridge, ipcRenderer &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)<br><br>contextBridge.<span class="hljs-title function_">exposeInMainWorld</span>(<span class="hljs-string">&#x27;electronAPI&#x27;</span>, &#123;<br>  <span class="hljs-attr">sendMessage</span>: <span class="hljs-function">(<span class="hljs-params">title</span>) =&gt;</span> ipcRenderer.<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;message&#x27;</span>, title)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//render.js</span><br><span class="hljs-variable language_">window</span>.<span class="hljs-property">electronAPI</span>.<span class="hljs-title function_">sendMessage</span>(title)<br></code></pre></td></tr></table></figure>
+
+<p>四. 主进程给渲染进程</p>
+<p>将消息从主进程发送到渲染器进程时，需要指定是哪一个渲染器接收消息。 消息需要通过其 <a target="_blank" rel="noopener" href="https://www.electronjs.org/zh/docs/latest/api/web-contents"><code>WebContents</code></a> 实例发送到渲染器进程。 此 WebContents 实例包含一个 <a target="_blank" rel="noopener" href="https://www.electronjs.org/zh/docs/latest/api/web-contents#contentssendchannel-args"><code>send</code></a> 方法，其使用方式与 <code>ipcRenderer.send</code> 相同。</p>
+<p>使用 <code>webContents.send</code> API 将 IPC 消息从主进程发送到目标渲染器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//render.js</span><br><span class="hljs-variable language_">window</span>.<span class="hljs-property">electronAPI</span>.<span class="hljs-title function_">handleCounter</span>(<span class="hljs-function">(<span class="hljs-params">event, value</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> oldValue = <span class="hljs-title class_">Number</span>(counter.<span class="hljs-property">innerText</span>)<br>  <span class="hljs-keyword">const</span> newValue = oldValue + value<br>  counter.<span class="hljs-property">innerText</span> = newValue<br>  event.<span class="hljs-property">sender</span>.<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;counter-value&#x27;</span>, newValue)<br>&#125;)<br><br><span class="hljs-comment">//preload</span><br><span class="hljs-keyword">const</span> &#123; contextBridge, ipcRenderer &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;electron&#x27;</span>)<br><br>contextBridge.<span class="hljs-title function_">exposeInMainWorld</span>(<span class="hljs-string">&#x27;electronAPI&#x27;</span>, &#123;<br>  <span class="hljs-attr">handleCounter</span>: <span class="hljs-function">(<span class="hljs-params">callback</span>) =&gt;</span> ipcRenderer.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;update-counter&#x27;</span>, callback)<br>&#125;)<br><br><br><span class="hljs-comment">//MainProcess</span><br>mainWindow.<span class="hljs-property">webContents</span>.<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;update-counter&#x27;</span>, <span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
+<p>五. 渲染进程给渲染进程</p>
+<p>没有直接的方法可以使用 <code>ipcMain</code> 和 <code>ipcRenderer</code> 模块在 Electron 中的渲染器进程之间发送消息。 为此，您有两种选择：</p>
+<ul>
+<li>将主进程作为渲染器之间的消息代理。 这需要将消息从一个渲染器发送到主进程，然后主进程将消息转发到另一个渲染器。</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Electron/">Electron</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/06/14/%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">面试题汇总</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/07/Vue%E7%9A%84%E8%99%9A%E6%8B%9FDOM/">
+                        <span class="hidden-mobile">Vue的虚拟DOM</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","appKey":"D8I6TpV3UhkLxcVVgWlWegOg","path":"window.location.pathname","placeholder":"Hi，我是小宁","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:;"><span>Ning</span></a> <i class="iconfont icon-aixin" style="color:red"></i> <a href="javascript:;"><span>Yi</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        赣ICP备2021011549号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=https://beian.miit.gov.cn"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>赣ICP备2021011549号-1</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+<div id="jsi-flying-fish-container"></div>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/fish.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,604 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#ED9282">
+  <meta name="description" content="">
+  <meta name="author" content="Badspider">
+  <meta name="keywords" content="">
+  <meta name="description" content="今天开始正式学习前端了，python还在进行中，感觉还是喜欢前端一些，当然python也不能落下                          下面是我学HTML的一些笔记，都是很基础的一些，资料可以看看w3school             1.前言：  网站是每一个网页的集合，而网页是构成网站的基本元素，由图片，文字，声音，视频，链接等等，网页也称为HTML文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="day 01  学习HTML（上）">
+<meta property="og:url" content="http://badspider.top/2020/08/14/web/index.html">
+<meta property="og:site_name" content="念伊的小窝">
+<meta property="og:description" content="今天开始正式学习前端了，python还在进行中，感觉还是喜欢前端一些，当然python也不能落下                          下面是我学HTML的一些笔记，都是很基础的一些，资料可以看看w3school             1.前言：  网站是每一个网页的集合，而网页是构成网站的基本元素，由图片，文字，声音，视频，链接等等，网页也称为HTML文件">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-14T14:56:54.000Z">
+<meta property="article:modified_time" content="2020-08-27T14:20:18.957Z">
+<meta property="article:author" content="Badspider">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>day 01  学习HTML（上） - 念伊的小窝</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"badspider.top","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"🐱‍👓","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","app_key":"D8I6TpV3UhkLxcVVgWlWegOg","server_url":"https://fdhkn3cv.lc-cn-n1-shared.com","path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>念伊的小窝</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Lover/">
+                <i class="iconfont icon-lin"></i>
+                猪猪
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/g.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="day 01  学习HTML（上）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-08-14 22:56" pubdate>
+        2020年8月14日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">day 01  学习HTML（上）</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年8月27日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <div class="note note-success">
+            <p>今天开始正式学习前端了，python还在进行中，感觉还是喜欢前端一些，当然python也不能落下</p>
+          </div>
+
+<div class="note note-danger">
+            <p>下面是我学HTML的一些笔记，都是很基础的一些，资料可以看看<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/">w3school</a></p>
+          </div>
+
+<h2 id="1-前言："><a href="#1-前言：" class="headerlink" title="1.前言："></a>1.前言：</h2><p>  网站是每一个网页的集合，而网页是构成网站的基本元素，由图片，文字，声音，视频，链接等等，网页也称为<strong>HTML文件</strong><br>  html（英语：HyperText Markup Language）是一种超文本标记语言，不是编程语言<br> <strong>HTML</strong>文档的后缀名</p>
+<ul>
+<li>.html</li>
+<li>.htm</li>
+</ul>
+<p><strong>HTML标签</strong></p>
+<ul>
+<li>HTML 标签是由尖括号包围的关键词，比如 <code>&lt;html&gt;</code></li>
+<li>HTML 标签通常是成对出现的，比如 <code>&lt;b&gt;</code> 和 <code>&lt;/b&gt;</code></li>
+<li>标签对中的第一个标签是开始标签，第二个标签是结束标签</li>
+<li>开始和结束标签也被称为开放标签和闭合标签<h2 id="2-基本框架"><a href="#2-基本框架" class="headerlink" title="2.基本框架"></a>2.基本框架</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span> 标题<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>	<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>	主体<br>	<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>1.所有的标签都必须包含在&lt;&gt;中，成双成对出现，称为双标签，例如：<br><code>&lt;html&gt;(开始标签）&lt;/html&gt;(结束标签）</code><br>也会出现特殊的单标签，例如<br><code>&lt;br /&gt;</code><br>2.其中又包含这两种关系<br>包含关系：<br><code>&lt;head&gt;</code><br>        <code>&lt;title&gt;&lt;/title&gt;</code><br><code>&lt;/head&gt; </code></p>
+<p>并列关系：<br><code>&lt;head&gt; &lt;/head&gt;</code><br><code>&lt;body&gt; &lt;/body&gt;</code></p>
+<p>基本结构标签<br><code>&lt;html&gt;&lt;/html</code>&gt;HTML标签（ 根标签）<br><code>&lt;head&gt;&lt;/head&gt;</code>文档的头部<br><code>&lt;title&gt;&lt;/title&gt;</code> 文档的标题<br><code>&lt;body&gt;&lt;/body&gt;</code>文档的主体</p>
+<h2 id="2-HTML标签"><a href="#2-HTML标签" class="headerlink" title="2.HTML标签"></a>2.HTML标签</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Document<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h3 id="1-HTML语法规范"><a href="#1-HTML语法规范" class="headerlink" title="(1)HTML语法规范"></a>(1)HTML语法规范</h3><p>1.<code>&lt;!DOCTYPE&gt;</code>doctype 声明是不区分大小写的,在整个页面的最前面的，作用是告诉浏览器用的HTML是哪个版本的<br>2.lang=”en”是网页的语言为英文 （zh-CN 是中文  fr是法语）<br>3.<code>&lt;meta chasrset = &quot;UTF-8&quot;/&gt;</code>是字符编码,是防止乱码的<br>4.<strong><code>&lt;h1&gt;这个是一级标签&lt;/h1&gt;</code></strong></p>
+<h1>这是一级标签</h1>
+
+<p> <code>&lt;h2&gt;这个是二级标签&lt;/h2&gt;</code><br> <strong><h2>这是二级标签</h2></strong></p>
+<p> …………………………….<br> …………………………….<br> …………………………….<br> <code>&lt;h6&gt;这是最小的一级标签&lt;/h6&gt;</code><br> </p><h6>这是最小的一级标签</h6><p></p>
+<blockquote>
+<p>一共有6级标签，依据重要性递减，加了标题的文字会变的粗</p>
+</blockquote>
+<p>5.段落和换行标签<br><code>&lt;p&gt;我是一个段落标签&lt;/p&gt;</code><br><code>&lt;br /&gt;</code> <b>换行标签</b>，<b>/</b> 可写可不写<br>6.文本格式化标签<br>加粗——<code>&lt;strong&gt;&lt;/strong&gt; 或者 &lt;b&gt;&lt;/b&gt;</code><br>倾斜——<code>&lt;em&gt;&lt;/em&gt; 或者  &lt;i&gt;&lt;/i&gt;</code><br>删除——<code>&lt;del&gt;&lt;/-------&gt; 或者 &lt;s&gt;&lt;/s&gt;</code><br>下划线——<code>&lt;ins&gt;&lt;/ins&gt; 或者 &lt;u&gt;&lt;/u&gt;</code><br>(每一行前面的语气会比较强烈，建议用前面一个)<br>7.<code>&lt;div&gt;</code>和<code>&lt;span&gt;</code>不是标签，是用来装内容的<br><code>&lt;div&gt;这是头部&lt;/div&gt;</code>一行里面只能放一个<code>&lt;div&gt;</code><br>8.图像标签和路径<br><code>&lt;img src=&quot;图像URL&quot;/&gt;</code><br><code>&lt;img src=&quot;图像URL&quot;  alt=&quot;图像显示不出来时候的文字&quot;/&gt;</code><br><code>&lt;img src=&quot;图像URL&quot;  alt=&quot;图像显示不出来时候的文字&quot;  title=&quot;提示文本，鼠标放在图片上面时显示的文字&quot;/&gt;</code><br>9.width图像的宽度   height图像的高度    border（css)图像的边框<br><code>&lt;img  src = &quot;img.jpg&quot; width=&quot;500&quot; height=&quot;100&quot; border= &quot;15&quot;/&gt;</code><br>10.路径<br>(1)相对路径：图片相对于你的html的位置，如果在同一个位置直接引用它的文件名就可以了<br>(2)绝对路径：文件的全部路径，网络连接<br>11.超链接标签<br><code>&lt;a&gt;&lt;/a&gt;</code><br><code>&lt;a href=&quot;跳转目标&quot;  target=&quot;跳出目标窗口的方式&quot;&gt;文字&lt;/a&gt;</code><br>target—-&gt;其中_self为默认值，在当前页面打开，_blank新开一个窗口打开<br>（1）.外部链接<code>&lt;a href=&quot;http://www.baidu.com&quot;&gt;百度 &lt;/a&gt;</code><br>（2）内部链接<code>&lt;a href= &quot;index.html&quot;&gt;内部&lt;/a&gt;</code><br>（3）空链接 <code>&lt;a href=&quot;#&quot;&gt; &lt;/a&gt;</code><br> (4）下载链接 <code>&lt;a href=&quot;img.zip&quot;&gt; &lt;/a&gt;</code><br>（5）网页元素的链接<code>&lt;a href = &quot;http://xxxxx&quot;&gt;&lt;img src=&quot;img.jpg&quot;&gt;&lt;/a&gt;</code><br> (6) 锚点链接 <code>&lt;a href=&quot;#xxx&quot;&gt;锚点链接&lt;/a&gt; 在你需要跳转的地方前面写上&lt;id = &quot;xxx&quot;&gt;</code><br> 12.注释标签<br> <code>&lt;!--这是注释，是不会被执行的--&gt;</code>  快捷键  <a class="btn" href="https://qs62rd.coding-pages.com/" title="千万不要点我" target="_blank">CTRL +/</a><br> 13.特殊字符<br> 有些字符比如 <a class="btn" href="url" title="不要点，点就是error" target="_blank">空格</a>空格，<code>&lt;p&gt;</code>都是不能和平常一样的，这个时候就需要特殊字符来实现，只需要记住平常的两三个就可以了，到需要用到时候可以去查，见下方链接<br><a href="https://tool.lu/htmlentity/" target="_blank">点击跳转到特殊字符页面</a><br> <div class="note note-info">
+            <p><strong>陆续还会更新上的，目前还在学习中🎮</strong></p>
+          </div></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/HTML/">HTML</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/18/html/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">day 02 学习HTML（下）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/12/hexo/">
+                        <span class="hidden-mobile">关于用hexo和GitHub搭建自己的免费博客</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","appKey":"D8I6TpV3UhkLxcVVgWlWegOg","path":"window.location.pathname","placeholder":"Hi，我是小宁","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:;"><span>Ning</span></a> <i class="iconfont icon-aixin" style="color:red"></i> <a href="javascript:;"><span>Yi</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        赣ICP备2021011549号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=https://beian.miit.gov.cn"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>赣ICP备2021011549号-1</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+<div id="jsi-flying-fish-container"></div>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/fish.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

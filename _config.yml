@@ -103,5 +103,5 @@ theme: fluid
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@github.com:badspider7/badspider.github.io.git
+  repo: git@github.com:badspider7/badspider7.github.io.git
   branch: master

@@ -1,0 +1,653 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#ED9282">
+  <meta name="description" content="">
+  <meta name="author" content="Badspider">
+  <meta name="keywords" content="">
+  <meta name="description" content="1.第三方模块Gulp基于node平台开发的前端构建工具 将机械化操作编写成任务，想要执行机械化操作时执行一个命令行命令任务就能自动执行了 1.1Gulp能做什么 项目上线，HTML，css，js文件压缩 语法转换(es6,less,scss) 公共文件抽离 修改文件浏览器自动刷新  1.2.Gulp中提供的方法 gulp.src():获取任务要处理的文件 gulp.dest()：输出文件 gul">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gulp">
+<meta property="og:url" content="http://badspider.top/2021/04/11/Gulp/index.html">
+<meta property="og:site_name" content="念伊的小窝">
+<meta property="og:description" content="1.第三方模块Gulp基于node平台开发的前端构建工具 将机械化操作编写成任务，想要执行机械化操作时执行一个命令行命令任务就能自动执行了 1.1Gulp能做什么 项目上线，HTML，css，js文件压缩 语法转换(es6,less,scss) 公共文件抽离 修改文件浏览器自动刷新  1.2.Gulp中提供的方法 gulp.src():获取任务要处理的文件 gulp.dest()：输出文件 gul">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-11T06:35:55.000Z">
+<meta property="article:modified_time" content="2021-04-11T06:43:50.849Z">
+<meta property="article:author" content="Badspider">
+<meta property="article:tag" content="Gulp">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Gulp - 念伊的小窝</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"badspider.top","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"🐱‍👓","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","app_key":"D8I6TpV3UhkLxcVVgWlWegOg","server_url":"https://fdhkn3cv.lc-cn-n1-shared.com","path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>念伊的小窝</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Lover/">
+                <i class="iconfont icon-lin"></i>
+                猪猪
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/gulp-banner.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Gulp">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-11 14:35" pubdate>
+        2021年4月11日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Gulp</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年4月11日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="1-第三方模块Gulp"><a href="#1-第三方模块Gulp" class="headerlink" title="1.第三方模块Gulp"></a>1.第三方模块Gulp</h2><p>基于node平台开发的前端构建工具</p>
+<p>将机械化操作编写成任务，想要执行机械化操作时执行一个命令行命令任务就能自动执行了</p>
+<h4 id="1-1Gulp能做什么"><a href="#1-1Gulp能做什么" class="headerlink" title="1.1Gulp能做什么"></a>1.1Gulp能做什么</h4><ul>
+<li>项目上线，HTML，css，js文件压缩</li>
+<li>语法转换(es6,less,scss)</li>
+<li>公共文件抽离</li>
+<li>修改文件浏览器自动刷新</li>
+</ul>
+<h4 id="1-2-Gulp中提供的方法"><a href="#1-2-Gulp中提供的方法" class="headerlink" title="1.2.Gulp中提供的方法"></a>1.2.Gulp中提供的方法</h4><ul>
+<li>gulp.src():获取任务要处理的文件</li>
+<li>gulp.dest()：输出文件</li>
+<li>gulp.task():建立gulp任务</li>
+<li>gulp.watch():监控文件的变化</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> gulp = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;gulp&#x27;</span>)<br><span class="hljs-comment">//使用gulp.task()方法建立任务</span><br>gulp.<span class="hljs-title function_">task</span>(<span class="hljs-string">&#x27;first&#x27;</span>,<span class="hljs-function">()=&gt;</span>&#123;<br>    <span class="hljs-comment">//获取要处理的文件</span><br>    gulp.<span class="hljs-title function_">src</span>(<span class="hljs-string">&#x27;./src/css/base.css&#x27;</span>)<br>    <span class="hljs-comment">//将处理后的文件输出到dist目录</span><br>    .<span class="hljs-title function_">pipe</span>(gulp.<span class="hljs-title function_">dest</span>(<span class="hljs-string">&#x27;./dist/css&#x27;</span>))<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<h4 id="1-3Gulp插件"><a href="#1-3Gulp插件" class="headerlink" title="1.3Gulp插件"></a>1.3Gulp插件</h4><ul>
+<li>gulp-htmlmin：html文件压缩</li>
+<li>gulp-csso：压缩css</li>
+<li>gulp-babel：JavaScript语法转化</li>
+<li>gulp-less：less语法转化</li>
+<li>gulp-uglify：压缩混淆JavaScript</li>
+<li>gulp-file-include：公共文件包含</li>
+<li>browsersync：浏览器实时同步</li>
+</ul>
+<blockquote>
+<p> gulp-htmlmin  (只会压缩html中的代码，并不会压缩css中的代码)</p>
+<p> 使用步骤</p>
+<p> 1.下载   2.引用   3.调用</p>
+</blockquote>
+<h4 id="1-4构建任务"><a href="#1-4构建任务" class="headerlink" title="1.4构建任务"></a>1.4构建任务</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//复制文件夹</span><br>gulp.<span class="hljs-title function_">task</span>(<span class="hljs-string">&#x27;copy&#x27;</span>,<span class="hljs-function">()=&gt;</span>&#123;<br>    gulp.<span class="hljs-title function_">src</span>(<span class="hljs-string">&#x27;./src/images/*&#x27;</span>)<br>    	.<span class="hljs-title function_">pipe</span>(gulp.<span class="hljs-title function_">dest</span>(dist/images));<br>    gulp.<span class="hljs-title function_">src</span>(<span class="hljs-string">&#x27;./src/lib/*&#x27;</span>)<br>    	.<span class="hljs-title function_">pipe</span>(gulp.<span class="hljs-title function_">dest</span>(<span class="hljs-string">&#x27;dist/lib&#x27;</span>))<br>&#125;)<br><br><br><span class="hljs-comment">//构建任务</span><br>gulp.<span class="hljs-title function_">task</span>(<span class="hljs-string">&#x27;default&#x27;</span>,[<span class="hljs-string">&#x27;htmlmin&#x27;</span>,<span class="hljs-string">&#x27;cssmin&#x27;</span>,<span class="hljs-string">&#x27;copy&#x27;</span>]);<br><span class="hljs-comment">//这样子就可以一下子执行多个任务了</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-package-json文件"><a href="#2-package-json文件" class="headerlink" title="2.package.json文件"></a>2.package.json文件</h2><h4 id="2-1node-modules文件夹的问题"><a href="#2-1node-modules文件夹的问题" class="headerlink" title="2.1node_modules文件夹的问题"></a>2.1node_modules文件夹的问题</h4><ol>
+<li>文件夹以及文件过多过碎，当我们将项目整体拷贝给别人的时候，传输速度会很慢很慢</li>
+<li>复制的模块依赖关系需要被记录，确保模块的版本和当前保持一致，否则会导致当前项目运行报错</li>
+</ol>
+<h4 id="2-2package-json文件的作用"><a href="#2-2package-json文件的作用" class="headerlink" title="2.2package.json文件的作用"></a>2.2package.json文件的作用</h4><p>项目描述文件，记录了当前项目信息，例如项目名称，版本，作者，github地址，当前项目依赖了哪些第三方模块等。</p>
+<p>使用<code>npm init -y</code>命令生成</p>
+<p><strong>第一个的解决方法</strong></p>
+<p>当我们把文件传输给别人的时候，是不需要传输node_modules 文件的,packages.json 这个文件里面会保存有你下载的模块的名称和版本，只需要 <code>npm install</code>就可以下载原来所需的所有模块了</p>
+<h4 id="2-3项目依赖"><a href="#2-3项目依赖" class="headerlink" title="2.3项目依赖"></a>2.3项目依赖</h4><ul>
+<li>在项目的开发阶段和线上运营阶段，都需要依赖的第三方包，称为项目依赖</li>
+<li>使用npm install 包名命令下载的文件会默认被添加多package.json 文件的dependencies字段中</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&#123;<br>	<span class="hljs-string">&quot;dependencies&quot;</span>:&#123;<br>		<span class="hljs-string">&quot;jquery&quot;</span>:<span class="hljs-string">&quot;^3.3.1&quot;</span><br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-4开发依赖"><a href="#2-4开发依赖" class="headerlink" title="2.4开发依赖"></a>2.4开发依赖</h4><ul>
+<li>在项目的开发阶段需要依赖，线上运营阶段不需要依赖的第三方包，称为开发依赖</li>
+<li>使用 npm install 包名 –save-dev 命令将包添加到 package.json 文件的 devDependencies字段中</li>
+</ul>
+<blockquote>
+<p>使用 –save-dev 命令可以把开发依赖和项目依赖区分开来</p>
+</blockquote>
+<h4 id="2-5-项目依赖和开发依赖的下载"><a href="#2-5-项目依赖和开发依赖的下载" class="headerlink" title="2.5 项目依赖和开发依赖的下载"></a>2.5 项目依赖和开发依赖的下载</h4><p>当你使用 <code>npm install</code>的时候，是下载的全部包</p>
+<p>当你使用<code>npm install --production</code>的时候，下载的是项目依赖</p>
+<h4 id="2-6-package-lock-json文件的作用"><a href="#2-6-package-lock-json文件的作用" class="headerlink" title="2.6 package-lock.json文件的作用"></a>2.6 package-lock.json文件的作用</h4><p>当我们在下载第三方模块的时候，npm会同时产生另一个文件 package-lock.json</p>
+<ul>
+<li>锁定包的版本，确保再次下载时不会因为包版本不同而产生问题</li>
+<li>加快下载速度，因为该文件中已经记录了项目所依赖第三方包的树状结构和包的下载地址，重新安装时只需下载即可，不需要做额外的工作</li>
+</ul>
+<h2 id="3-Node-js中模块加载机制"><a href="#3-Node-js中模块加载机制" class="headerlink" title="3.Node.js中模块加载机制"></a>3.Node.js中模块加载机制</h2><h4 id="3-1-模块查找规则-当模块拥有路径但没有后缀"><a href="#3-1-模块查找规则-当模块拥有路径但没有后缀" class="headerlink" title="3.1 模块查找规则-当模块拥有路径但没有后缀"></a>3.1 模块查找规则-当模块拥有路径但没有后缀</h4><p><code>require(&#39;./find.js&#39;)</code></p>
+<p><code>require(&#39;./find&#39;)</code></p>
+<ol>
+<li><p>require方法根据模块路径查找模块，如果是完整路径，直接引入模块</p>
+</li>
+<li><p>如果模块后缀省略，先找同名js文件再找同名js文件夹</p>
+</li>
+<li><p>如果找到了同名文件夹，找文件夹中的index.js</p>
+</li>
+<li><p>如果文件夹中没有index.js就会去当前文件夹中的package.js文件中查找main选项的入口文件</p>
+</li>
+<li><p>如果找指定的入口文件不存在或者没有指定入口文件就会报错，模块没有被找到</p>
+</li>
+</ol>
+<h4 id="3-2模块查找规则-当模块没有路径且没有后缀时"><a href="#3-2模块查找规则-当模块没有路径且没有后缀时" class="headerlink" title="3.2模块查找规则-当模块没有路径且没有后缀时"></a>3.2模块查找规则-当模块没有路径且没有后缀时</h4><p><code>require(&#39;find&#39;)</code></p>
+<ol>
+<li>Node.js 会假设它是系统模块</li>
+<li>Node.js 会去node_modules文件夹中</li>
+<li>首先看是否有该名字的js文件</li>
+<li>再看是否有该名字的文件夹</li>
+<li>如果是文件夹看里面是否有index.js</li>
+<li>如果没有index.js 查看该文件夹中的package.json中的main选项确定模块入口文件</li>
+<li>否则找不到报错</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Gulp/">Gulp</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/11/Git/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Git</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/11/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF/">
+                        <span class="hidden-mobile">服务器端</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","appKey":"D8I6TpV3UhkLxcVVgWlWegOg","path":"window.location.pathname","placeholder":"Hi，我是小宁","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:;"><span>Ning</span></a> <i class="iconfont icon-aixin" style="color:red"></i> <a href="javascript:;"><span>Yi</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        赣ICP备2021011549号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=https://beian.miit.gov.cn"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>赣ICP备2021011549号-1</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+<div id="jsi-flying-fish-container"></div>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/fish.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

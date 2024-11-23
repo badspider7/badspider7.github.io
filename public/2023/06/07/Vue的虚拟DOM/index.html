@@ -1,0 +1,632 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#ED9282">
+  <meta name="description" content="">
+  <meta name="author" content="Badspider">
+  <meta name="keywords" content="">
+  <meta name="description" content="Vue的渲染机制  Vue 是如何将一份模板转换为真实的 DOM 节点的，又是如何高效地更新这些节点的呢？  虚拟DOMVDOM（其实就是一个对象）是一种编程概念，意为将目标所需的 UI 通过数据结构“虚拟”地表示出来，保存在内存中，然后将真实的 DOM 与之保持同步。 123456789const vnode &#x3D; &amp;#123;  type: &amp;#x27;div&amp;#x27;,  props: &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue的虚拟DOM">
+<meta property="og:url" content="http://badspider.top/2023/06/07/Vue%E7%9A%84%E8%99%9A%E6%8B%9FDOM/index.html">
+<meta property="og:site_name" content="念伊的小窝">
+<meta property="og:description" content="Vue的渲染机制  Vue 是如何将一份模板转换为真实的 DOM 节点的，又是如何高效地更新这些节点的呢？  虚拟DOMVDOM（其实就是一个对象）是一种编程概念，意为将目标所需的 UI 通过数据结构“虚拟”地表示出来，保存在内存中，然后将真实的 DOM 与之保持同步。 123456789const vnode &#x3D; &amp;#123;  type: &amp;#x27;div&amp;#x27;,  props: &amp;#">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cn.vuejs.org/assets/render-pipeline.03805016.png">
+<meta property="article:published_time" content="2023-06-07T13:48:43.000Z">
+<meta property="article:modified_time" content="2023-06-07T15:42:35.981Z">
+<meta property="article:author" content="Badspider">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cn.vuejs.org/assets/render-pipeline.03805016.png">
+  
+  <title>Vue的虚拟DOM - 念伊的小窝</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"badspider.top","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"🐱‍👓","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","app_key":"D8I6TpV3UhkLxcVVgWlWegOg","server_url":"https://fdhkn3cv.lc-cn-n1-shared.com","path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>念伊的小窝</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Lover/">
+                <i class="iconfont icon-lin"></i>
+                猪猪
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/render-DOM.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Vue的虚拟DOM">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-06-07 21:48" pubdate>
+        2023年6月7日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Vue的虚拟DOM</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2023年6月7日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="Vue的渲染机制"><a href="#Vue的渲染机制" class="headerlink" title="Vue的渲染机制"></a>Vue的渲染机制</h2><blockquote>
+<p> Vue 是如何将一份模板转换为真实的 DOM 节点的，又是如何高效地更新这些节点的呢？</p>
+</blockquote>
+<h2 id="虚拟DOM"><a href="#虚拟DOM" class="headerlink" title="虚拟DOM"></a>虚拟DOM</h2><p>VDOM（其实就是一个对象）是一种编程概念，意为将目标所需的 UI 通过数据结构“虚拟”地表示出来，保存在内存中，然后将真实的 DOM 与之保持同步。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> vnode = &#123;<br>  <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;div&#x27;</span>,<br>  <span class="hljs-attr">props</span>: &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;hello&#x27;</span><br>  &#125;,<br>  <span class="hljs-attr">children</span>: [<br>    <span class="hljs-comment">/* 更多 vnode */</span><br>  ]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这里所说的 <code>vnode</code> 即一个纯 JavaScript 的对象 (一个“虚拟节点”)，它代表着一个 <code>&lt;div&gt;</code> 元素。它包含我们创建实际元素所需的所有信息。它还包含更多的子节点，这使它成为虚拟 DOM 树的根节点。</p>
+<p>一个运行时渲染器将会遍历整个虚拟 DOM 树，并据此构建真实的 DOM 树。这个过程被称为<strong>挂载</strong> (mount)。</p>
+<p>如果我们有两份虚拟 DOM 树，渲染器将会有比较地遍历它们，找出它们之间的区别，并应用这其中的变化到真实的 DOM 上。这个过程被称为<strong>更新</strong> (patch)，又被称为“比对”(diffing) 或“协调”(reconciliation)。</p>
+<h2 id="渲染管线"><a href="#渲染管线" class="headerlink" title="渲染管线"></a><a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/extras/rendering-mechanism.html#render-pipeline">渲染管线</a></h2><p>从高层面的视角看，Vue 组件挂载时会发生如下几件事：</p>
+<ol>
+<li><strong>编译</strong>：Vue 模板被编译为<strong>渲染函数</strong>（render）：即用来返回虚拟 DOM 树的函数。这一步骤可以通过构建步骤提前完成，也可以通过使用运行时编译器即时完成。</li>
+<li><strong>挂载</strong>：运行时渲染器调用渲染函数，遍历返回的虚拟 DOM 树，并基于它创建实际的 DOM 节点。这一步会作为<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/extras/reactivity-in-depth.html">响应式副作用</a>执行，因此它会追踪其中所用到的所有响应式依赖。</li>
+<li><strong>更新</strong>（diff算法）：当一个依赖发生变化后，副作用会重新运行，这时候会创建一个更新后的虚拟 DOM 树。运行时渲染器遍历这棵新树，将它与旧树进行比较，然后将必要的更新应用到真实 DOM 上去。</li>
+</ol>
+<p><img src="https://cn.vuejs.org/assets/render-pipeline.03805016.png" srcset="/img/loading.gif" lazyload alt="render pipeline"></p>
+<h2 id="创建VNode"><a href="#创建VNode" class="headerlink" title="创建VNode"></a>创建VNode</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123;h&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><br><span class="hljs-keyword">const</span> vnode = <span class="hljs-title function_">h</span>(<br>  <span class="hljs-string">&#x27;div&#x27;</span>, <span class="hljs-comment">// type</span><br>  &#123; <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-attr">class</span>: <span class="hljs-string">&#x27;bar&#x27;</span> &#125;, <span class="hljs-comment">// props</span><br>  [<br>    <span class="hljs-comment">/* children */</span><br>  ]<br>)<br></code></pre></td></tr></table></figure>
+
+<p><code>h()</code> 是 <strong>hyperscript</strong> 的简称——意思是“能生成 HTML (超文本标记语言) 的 JavaScript”。这个名字来源于许多虚拟 DOM 实现默认形成的约定。一个更准确的名称应该是 <code>createVnode()</code>，但当你需要多次使用渲染函数时，一个简短的名字会更省力。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 除了类型必填以外，其他的参数都是可选的</span><br><span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;div&#x27;</span>)<br><span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;div&#x27;</span>, &#123; <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;foo&#x27;</span> &#125;)<br><br><span class="hljs-comment">// attribute 和 property 都能在 prop 中书写</span><br><span class="hljs-comment">// Vue 会自动将它们分配到正确的位置</span><br><span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;div&#x27;</span>, &#123; <span class="hljs-attr">class</span>: <span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-attr">innerHTML</span>: <span class="hljs-string">&#x27;hello&#x27;</span> &#125;)<br><br><span class="hljs-comment">// 像 `.prop` 和 `.attr` 这样的的属性修饰符</span><br><span class="hljs-comment">// 可以分别通过 `.` 和 `^` 前缀来添加</span><br><span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;div&#x27;</span>, &#123; <span class="hljs-string">&#x27;.name&#x27;</span>: <span class="hljs-string">&#x27;some-name&#x27;</span>, <span class="hljs-string">&#x27;^width&#x27;</span>: <span class="hljs-string">&#x27;100&#x27;</span> &#125;)<br><br><span class="hljs-comment">// 类与样式可以像在模板中一样</span><br><span class="hljs-comment">// 用数组或对象的形式书写</span><br><span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;div&#x27;</span>, &#123; <span class="hljs-attr">class</span>: [foo, &#123; bar &#125;], <span class="hljs-attr">style</span>: &#123; <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;red&#x27;</span> &#125; &#125;)<br><br><span class="hljs-comment">// 事件监听器应以 onXxx 的形式书写</span><br><span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;div&#x27;</span>, &#123; <span class="hljs-attr">onClick</span>: <span class="hljs-function">() =&gt;</span> &#123;&#125; &#125;)<br><br><span class="hljs-comment">// children 可以是一个字符串</span><br><span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;div&#x27;</span>, &#123; <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;foo&#x27;</span> &#125;, <span class="hljs-string">&#x27;hello&#x27;</span>)<br><br><span class="hljs-comment">// 没有 props 时可以省略不写</span><br><span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;div&#x27;</span>, <span class="hljs-string">&#x27;hello&#x27;</span>)<br><span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;div&#x27;</span>, [<span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;span&#x27;</span>, <span class="hljs-string">&#x27;hello&#x27;</span>)])<br><br><span class="hljs-comment">// children 数组可以同时包含 vnodes 与字符串</span><br><span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;div&#x27;</span>, [<span class="hljs-string">&#x27;hello&#x27;</span>, <span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;span&#x27;</span>, <span class="hljs-string">&#x27;hello&#x27;</span>)])<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="Vnodes-必须唯一"><a href="#Vnodes-必须唯一" class="headerlink" title="Vnodes 必须唯一"></a><a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/extras/render-function.html#vnodes-must-be-unique">Vnodes 必须唯一</a></h2><p>组件树中的 vnodes 必须是唯一的。下面是错误示范：</p>
+<p>js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">const</span> p = <span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;p&#x27;</span>, <span class="hljs-string">&#x27;hi&#x27;</span>)<br>  <span class="hljs-keyword">return</span> <span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;div&#x27;</span>, [<br>    <span class="hljs-comment">// 啊哦，重复的 vnodes 是无效的</span><br>    p,<br>    p<br>  ])<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果你真的非常想在页面上渲染多个重复的元素或者组件，你可以使用一个工厂函数来做这件事。比如下面的这个渲染函数就可以完美渲染出 20 个相同的段落：</p>
+<p>js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-title function_">h</span>(<br>    <span class="hljs-string">&#x27;div&#x27;</span>,<br>    <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(&#123; <span class="hljs-attr">length</span>: <span class="hljs-number">20</span> &#125;).<span class="hljs-title function_">map</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;p&#x27;</span>, <span class="hljs-string">&#x27;hi&#x27;</span>)<br>    &#125;)<br>  )<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a><a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/extras/render-function.html#v-if"><code>v-if</code></a></h3><p>模板：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;ok&quot;</span>&gt;</span>yes<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">v-else</span>&gt;</span>no<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>等价于使用如下渲染函数语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;div&#x27;</span>, [ok.<span class="hljs-property">value</span> ? <span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;div&#x27;</span>, <span class="hljs-string">&#x27;yes&#x27;</span>) : <span class="hljs-title function_">h</span>(<span class="hljs-string">&#x27;span&#x27;</span>, <span class="hljs-string">&#x27;no&#x27;</span>)])<br></code></pre></td></tr></table></figure>
+
+<p>JSX语法：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsx">&lt;div&gt;&#123;ok.<span class="hljs-property">value</span> ? <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>yes<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span> : <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>no<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>&#125;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="render函数"><a href="#render函数" class="headerlink" title="render函数"></a>render函数</h2><blockquote>
+<p>createVNode(),h(),render()三者的联系与区别</p>
+<p>干：h() 就是 createVNode()的简称，但是createVNode()函数的功能比h()函数要多且做了性能优化，渲染节点的速度也更快</p>
+<p>render —— 渲染虚拟 DOM 变成 真实dom<br>@param 参数1 要被渲染的虚拟 DOM，必选<br>@param 参数2 要渲染的位置，必选<br>@description 虚拟 DOM 创建完成后，需要使用 render 函数，才能在页面中渲染<br>render(testDiv, document.body);</p>
+</blockquote>
+<p>用于编程式地创建组件虚拟 DOM 树的函数。</p>
+<ul>
+<li><p><strong>类型</strong></p>
+  <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">ComponentOptions</span> &#123;<br>  render?<span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">this</span>: <span class="hljs-title class_">ComponentPublicInstance</span></span>) =&gt;</span> <span class="hljs-title class_">VNodeChild</span><br>&#125;<br><br><span class="hljs-keyword">type</span> <span class="hljs-title class_">VNodeChild</span> = <span class="hljs-title class_">VNodeChildAtom</span> | <span class="hljs-title class_">VNodeArrayChildren</span><br><br><span class="hljs-keyword">type</span> <span class="hljs-title class_">VNodeChildAtom</span> =<br>  | <span class="hljs-title class_">VNode</span><br>  | <span class="hljs-built_in">string</span><br>  | <span class="hljs-built_in">number</span><br>  | <span class="hljs-built_in">boolean</span><br>  | <span class="hljs-literal">null</span><br>  | <span class="hljs-literal">undefined</span><br>  | <span class="hljs-built_in">void</span><br><br><span class="hljs-keyword">type</span> <span class="hljs-title class_">VNodeArrayChildren</span> = (<span class="hljs-title class_">VNodeArrayChildren</span> | <span class="hljs-title class_">VNodeChildAtom</span>)[]<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>先创建虚拟DOM</li>
+<li>用render函数将  虚拟DOM变成 真实DOM</li>
+<li>插入到body中</li>
+</ol>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Vue/">Vue</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/06/07/Electron%E5%85%A5%E9%97%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Electron入门</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/27/Promise%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">
+                        <span class="hidden-mobile">Promise的基本知识</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","appKey":"D8I6TpV3UhkLxcVVgWlWegOg","path":"window.location.pathname","placeholder":"Hi，我是小宁","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:;"><span>Ning</span></a> <i class="iconfont icon-aixin" style="color:red"></i> <a href="javascript:;"><span>Yi</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        赣ICP备2021011549号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=https://beian.miit.gov.cn"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>赣ICP备2021011549号-1</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+<div id="jsi-flying-fish-container"></div>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/fish.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

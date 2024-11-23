@@ -1,0 +1,724 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#ED9282">
+  <meta name="description" content="">
+  <meta name="author" content="Badspider">
+  <meta name="keywords" content="">
+  <meta name="description" content="正则表达式的概述正则表达式是用于匹配字符串中字符组合的模式。在 JavaScript 中，正则表达式也是对象  正则表通常被用来检索，替换那些符合某个模式（规则）的文本，例如验证表单：用户名表只能输入英文字母，数字或者下划线，昵称输入框可以输入中文（匹配）。此外，正则表达式还常用于过滤掉页面内容中的一些敏感词汇（替换），或从字符串中获取我们想要的特定部分（提取）等  正则表达式的特点 灵活性，逻辑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式">
+<meta property="og:url" content="http://badspider.top/2021/04/11/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+<meta property="og:site_name" content="念伊的小窝">
+<meta property="og:description" content="正则表达式的概述正则表达式是用于匹配字符串中字符组合的模式。在 JavaScript 中，正则表达式也是对象  正则表通常被用来检索，替换那些符合某个模式（规则）的文本，例如验证表单：用户名表只能输入英文字母，数字或者下划线，昵称输入框可以输入中文（匹配）。此外，正则表达式还常用于过滤掉页面内容中的一些敏感词汇（替换），或从字符串中获取我们想要的特定部分（提取）等  正则表达式的特点 灵活性，逻辑">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-11T11:09:19.000Z">
+<meta property="article:modified_time" content="2021-06-11T05:49:49.490Z">
+<meta property="article:author" content="Badspider">
+<meta property="article:tag" content="正则表达式">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>正则表达式 - 念伊的小窝</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"badspider.top","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"🐱‍👓","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","app_key":"D8I6TpV3UhkLxcVVgWlWegOg","server_url":"https://fdhkn3cv.lc-cn-n1-shared.com","path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>念伊的小窝</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Lover/">
+                <i class="iconfont icon-lin"></i>
+                猪猪
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/git-banner.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="正则表达式">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-11 19:09" pubdate>
+        2021年4月11日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">正则表达式</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年6月11日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h4 id="正则表达式的概述"><a href="#正则表达式的概述" class="headerlink" title="正则表达式的概述"></a>正则表达式的概述</h4><p><strong>正则表达式</strong>是用于匹配字符串中字符组合的模式。在 JavaScript 中，正则表达式也是对象</p>
+<blockquote>
+<p>正则表通常被用来检索，替换那些符合某个模式（规则）的文本，例如验证表单：用户名表只能输入英文字母，数字或者下划线，昵称输入框可以输入中文（匹配）。此外，正则表达式还常用于过滤掉页面内容中的一些敏感词汇（替换），或从字符串中获取我们想要的特定部分（提取）等</p>
+</blockquote>
+<h5 id="正则表达式的特点"><a href="#正则表达式的特点" class="headerlink" title="正则表达式的特点"></a>正则表达式的特点</h5><ol>
+<li><p>灵活性，逻辑性和功能性非常的强</p>
+</li>
+<li><p>可以迅速地用简单的方式达到字符串的复制控制</p>
+</li>
+<li><p>对于刚接触的人来说，比较难懂，比如：^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w*$</p>
+</li>
+<li><p>实际开发，一般都是直接复制写好的正则表达式，但是要求会使用正则表达式并且根据实际情况修改正则表达式</p>
+</li>
+</ol>
+<h4 id="创建正则表达式"><a href="#创建正则表达式" class="headerlink" title="创建正则表达式"></a>创建正则表达式</h4><p>在 JavaScript 中可以通过两种方法来创建正则表达式</p>
+<ol>
+<li>通过调用 RegExp 对象的构造函数创建</li>
+</ol>
+<blockquote>
+<p>var x = new RegExp(/表达式/);</p>
+</blockquote>
+<ol start="2">
+<li>通过字面量创建</li>
+</ol>
+<blockquote>
+<p>var x = /表达式/;</p>
+</blockquote>
+<h4 id="测试正则表达式-test"><a href="#测试正则表达式-test" class="headerlink" title="测试正则表达式 test"></a>测试正则表达式 test</h4><p>test()正则对象方法，用于检测字符串是否符合该规则，该对象会返回 true 或 false ,其参数是测试字符串</p>
+<blockquote>
+<p>regexObj.test(str);</p>
+</blockquote>
+<ol>
+<li>regexObj 是写的正则表达式</li>
+<li>str 我们要测试的文本</li>
+<li>就是检测 str 文本是否符合我们写的正则表达式规范</li>
+</ol>
+<h4 id="正则表达式中的特殊字符"><a href="#正则表达式中的特殊字符" class="headerlink" title="正则表达式中的特殊字符"></a>正则表达式中的特殊字符</h4><p>一个正则表达式==可以由简单的字符构成==，比如/abc/，==也可以是简答和特殊字符的组合==，比如/ab*c/。其中特殊字符也被称为==元字符==，在正则表达式中是具有特殊意义的专用符号。如 ^ $ + - 等</p>
+<h4 id="边界符"><a href="#边界符" class="headerlink" title="边界符"></a>边界符</h4><p>正则表达式中的边界符（位置符）用来==提示字符所处的位置==,主要有两个字符</p>
+<table>
+<thead>
+<tr>
+<th>边界符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>^</td>
+<td>表示匹配行首的文本（以谁开始）</td>
+</tr>
+<tr>
+<td>$</td>
+<td>表示匹配行尾的文本（以谁结尾）</td>
+</tr>
+</tbody></table>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//边界符</span><br><span class="hljs-keyword">var</span> rg = <span class="hljs-regexp">/abc/</span>; <span class="hljs-comment">//正则表达式里面不需要加引号 不管是数字还是字符串</span><br><span class="hljs-comment">// /abc/ 只要包含有 abc这个字符串返回的都是true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;abc&quot;</span>));<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;abcd&quot;</span>));<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;aabc&quot;</span>));<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;----------------------------&quot;</span>);<br><span class="hljs-keyword">var</span> reg = <span class="hljs-regexp">/^abc/</span>;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;abc&quot;</span>)); <span class="hljs-comment">//true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;abcd&quot;</span>)); <span class="hljs-comment">//true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;aabc&quot;</span>)); <span class="hljs-comment">//false</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;-------------&quot;</span>);<br>结尾同理;<br><span class="hljs-keyword">var</span> reg = <span class="hljs-regexp">/^abc$/</span>; <span class="hljs-comment">//精确匹配 要求必须是 abc字符串才符合规范</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;abc&quot;</span>)); <span class="hljs-comment">//true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;abcd&quot;</span>)); <span class="hljs-comment">//false</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;aabc&quot;</span>)); <span class="hljs-comment">//false</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;abcabc&quot;</span>)); <span class="hljs-comment">//false</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果 ^ 和 $ 在一起就表示必须是精确匹配</p>
+</blockquote>
+<h4 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h4><p>[]表示有一系列字符可供选择，只要匹配其中一个就可以了</p>
+<blockquote>
+<p>[-] 表示范围</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> rg = <span class="hljs-regexp">/[abc]/</span>; <span class="hljs-comment">//只要包含有a 或者 有b 或者有c 都返回为true</span><br>consloe.<span class="hljs-title function_">log</span>(rg.<span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;andy&#x27;</span>));  <span class="hljs-comment">//true</span><br><span class="hljs-keyword">var</span> rg1 = <span class="hljs-regexp">/^[abc]$/</span>; <span class="hljs-comment">//三选一  只有是a 或者是b 或者是c 这三个字母才返回true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg1.<span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;a&#x27;</span>)); <span class="hljs-comment">//true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg1.<span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;b&#x27;</span>)); <span class="hljs-comment">//true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg1.<span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;c&#x27;</span>)); <span class="hljs-comment">//true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg1.<span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;aa&#x27;</span>)); <span class="hljs-comment">//false</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg1.<span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;abc&#x27;</span>)); <span class="hljs-comment">//false</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg1.<span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;bb&#x27;</span>)); <span class="hljs-comment">//false</span><br><br>consloe.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;--------------&#x27;</span>);<br><span class="hljs-keyword">var</span> rg2 = <span class="hljs-regexp">/^[a-z]$/</span>; <span class="hljs-comment">//26个英文字母任何一个字母返回 true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg2.<span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;a&#x27;</span>)); <span class="hljs-comment">//true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg2.<span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;z&#x27;</span>)); <span class="hljs-comment">//true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(rg2.<span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;A&#x27;</span>)); <span class="hljs-comment">//false</span><br><span class="hljs-comment">//字符组合</span><br><span class="hljs-keyword">var</span> reg = <span class="hljs-regexp">/^[a-zA-Z0-9]$/</span>  英文字母和数字<br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果中括号里面有^ 表示取反的意思 千万别和边界符 混淆了</p>
+</blockquote>
+<p><code>var reg1 = /^[^ a-z]$/;</code>也就是不能取这些</p>
+<h4 id="量词符"><a href="#量词符" class="headerlink" title="量词符"></a>量词符</h4><p>量词符是用来设定某个模式出现的次数</p>
+<table>
+<thead>
+<tr>
+<th>量词</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>重复零次或更多次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>重复一次或更多次</td>
+</tr>
+<tr>
+<td>？</td>
+<td>重复零次或一次</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>重复 n 次</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>重复 n 次或更多次</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>重复 n 到 m 次</td>
+</tr>
+</tbody></table>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// * 相当于 &gt;=0 可以出现0次或者很多次</span><br><span class="hljs-keyword">var</span> reg = <span class="hljs-regexp">/^a*$/</span>;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;a&quot;</span>); <span class="hljs-comment">//true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">//true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;aaa&quot;</span>); <span class="hljs-comment">//true</span><br><br><span class="hljs-comment">//+ 相当于 &gt;=1 可以出现1次或者很多次</span><br><span class="hljs-comment">//&#123;3&#125; 就是三次   &#123;3，&#125; 是大于等于3次   &#123;3，16&#125; 就是3到16次</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="预定义类"><a href="#预定义类" class="headerlink" title="预定义类"></a>预定义类</h4><p>预定义类指的是某些常见模式的简写模式</p>
+<table>
+<thead>
+<tr>
+<th align="left">预定义类</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">\d</td>
+<td>匹配 0-9 之间的任一数字，相当于[0-9]</td>
+</tr>
+<tr>
+<td align="left">\D</td>
+<td>匹配所有 0-9 以外的字符，相当于[^0-9]</td>
+</tr>
+<tr>
+<td align="left">\w</td>
+<td>匹配任意的字母，数字，下划线，相当于[A-Za-z0-9_]</td>
+</tr>
+<tr>
+<td align="left">\W</td>
+<td>除所有字母，数字，下划线以外的字符</td>
+</tr>
+<tr>
+<td align="left">\s</td>
+<td>匹配空格（包括换行符，制表符，空格符），相等于[\t\r\n\v\f]</td>
+</tr>
+<tr>
+<td align="left">\S</td>
+<td>匹配非空格的字符</td>
+</tr>
+</tbody></table>
+<h4 id="正则表达式中的替换"><a href="#正则表达式中的替换" class="headerlink" title="正则表达式中的替换"></a>正则表达式中的替换</h4><p>replace()方法可以实现替换字符串操作，用来替换掉参数可以是一个字符串或是一个正则表达式</p>
+<blockquote>
+<p>stringObject.replace(refexp/substr,replacement)</p>
+</blockquote>
+<ol>
+<li>第一个参数：被替换的字符串或者正则表达式</li>
+<li>第二个参数：替换为的字符串</li>
+<li>返回值是一个替换完毕的新字符串</li>
+</ol>
+<h4 id="正则表达式参数"><a href="#正则表达式参数" class="headerlink" title="正则表达式参数"></a>正则表达式参数</h4><blockquote>
+<p>/表达式/[switch] /andy/g</p>
+</blockquote>
+<p>switch(也称为修饰符)按照什么样的模式来匹配，有三种值</p>
+<ul>
+<li>g：全局匹配</li>
+<li>i:忽略大小写</li>
+<li>gi：全局匹配 + 忽略大小写</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/24/%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">变量提升</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/11/Git/">
+                        <span class="hidden-mobile">Git</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","appKey":"D8I6TpV3UhkLxcVVgWlWegOg","path":"window.location.pathname","placeholder":"Hi，我是小宁","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:;"><span>Ning</span></a> <i class="iconfont icon-aixin" style="color:red"></i> <a href="javascript:;"><span>Yi</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        赣ICP备2021011549号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=https://beian.miit.gov.cn"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>赣ICP备2021011549号-1</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+<div id="jsi-flying-fish-container"></div>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/fish.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,273 @@
+---
+title: 最可爱的小猪
+---
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>小艾</title>
+  <style>
+    .searchContainer {
+      display: flex;
+      justify-content: center;
+    }
+
+    .search {
+      display: inline-block;
+      width: 2em;
+      height: 2em;
+      text-align: center;
+      border: none;
+      border-radius: 20%;
+      margin-left: 1.5em;
+    }
+
+    .search i {
+      width: 2em;
+      height: 2em;
+      font-size: 25px;
+    }
+
+    .search:hover {
+      cursor: pointer;
+    }
+
+    .searchWeather {
+      height: 2em;
+      outline: none;
+      border: none;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .searchWeather:focus {
+      border-bottom: 2px solid #4285f4;
+    }
+
+    .showInfo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      /* border: 2px solid #4285f4; */
+      margin-top: 3em;
+    }
+
+    .showInfo .temperature {
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      font-size: 85px;
+      font-family: KaiTi, FZShuTi;
+      opacity: 0.5;
+      text-shadow: 4px 6px 2px #ccc;
+    }
+
+    .showInfo .city {
+      font-size: 30px;
+      font-family: "Lucida Console";
+      margin-bottom: 12px;
+    }
+
+    .showInfo .weather {
+      margin-top: 12px;
+    }
+
+    .countDown {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    .countDown .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .countDown span {
+      font-size: 40px;
+    }
+
+    .lovelyPic {
+      display: inline-block;
+      position: absolute;
+      right: -48px;
+      bottom: -15px;
+      width: 250px;
+      height: 140px;
+      background-image: url(/img/comment.webp);
+    }
+
+    @media screen and (max-width: 900px) {
+      .countDown {
+        height: 160px;
+        background-image: url(/img/comment.webp);
+        background-repeat: no-repeat;
+        background-position: 34% 0;
+      }
+
+      .lovelyPic {
+        width: 0;
+        height: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="searchContainer">
+    <input type="text" placeholder="输入你的城市..." class="searchWeather" autocomplete="off" />
+    <span class="search">
+      <i class="iconfont icon-search"></i>
+    </span>
+  </div>
+  <div class="showInfo">
+    <div class="city"></div>
+    <div class="temperature"></div>
+    <div class="weather">当前的天气为：</div>
+  </div>
+  <div class="countDown">
+    <div class="container">
+      和我的<span style="font-size: 20px; color: rgb(156, 48, 48)">小艾猪猪</span>在一起
+    </div>
+    <div class="timeBox">
+      <span class="day"></span>天 <span class="hour"></span>时
+      <span class="minute"></span>分 <span class="second"></span>秒
+    </div>
+  </div>
+  <span class="lovelyPic"></span>
+</body>
+<!-- 把汉字转换为拼音 -->
+<script src="https://cdn.jsdelivr.net/gh/zh-lx/pinyin-pro@latest/dist/pinyin-pro.js"></script>
+<!-- 获取IP地址 -->
+<!-- <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script> -->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+<script type="module">
+  let input = document.querySelector(".searchWeather");
+    let search = document.querySelector(".search");
+    let weather = document.querySelector(".weather");
+    let temperature = document.querySelector(".temperature");
+    let city = document.querySelector(".city");
+    let countDown = document.querySelector(".countDown");
+    const day = document.querySelector(".day");
+    const hour = document.querySelector(".hour");
+    const minute = document.querySelector(".minute");
+    const second = document.querySelector(".second");
+
+    // 节流，防止点击多次
+    function throttle(func, wait) {
+      var previous = 0;
+      return function () {
+        let now = Date.now();
+        let context = this;
+        let args = arguments;
+        if (now - previous > wait) {
+          func.apply(context, args);
+          previous = now;
+        }
+      };
+    }
+    let address = "";
+    //获取ip地址
+    async function getIp(){
+      const {data} = await axios({
+        method:"get",
+        url:"https://www.mxnzp.com/api/ip/self?app_id=qkojmgehinljmiur&app_secret=aU5BcjZsQStqWWNxMEtxN0w5ZlB1QT09"
+      })
+
+      console.log(data.data.ip);
+      const ip = data.data.ip;
+      address = await axios({
+        method:"get",
+        url:`https://v2.alapi.cn/api/ip?ip=${ip}&token=eETQpxcYEcdBOV4Y`
+      })
+      // console.log(address.data.data.ad_info.city);
+      getInfo(address.data.data.ad_info.city)
+    }
+    // 根据ip地址先显示当前地址的天气
+    getIp();
+ 
+    // 获取天气信息
+    async function getInfo(chengshi = "新余") {
+      try {
+        var { pinyin } = pinyinPro;
+        const { data } = await axios({
+          method: "GET",
+          url: `https://api.seniverse.com/v3/weather/now.json?key=S8iUfojW28_QulLmE&location=${chengshi}&language=zh-Hans&unit=c`,
+        });
+        const getData = data.results[0];
+        const weatherInfo = getData.now;
+        const locationInfo = getData.location;
+        // 为页面添加数据
+        city.innerHTML = pinyin(locationInfo.name) + locationInfo.name;
+        weather.innerHTML = weather.innerHTML.substr(0, 7) + weatherInfo.text;
+        temperature.innerHTML = weatherInfo.temperature + "℃";
+      } catch (err) {
+        if (err.response.status === 404) {
+          alert("sorry,找不到所在的城市");
+        } else if (err.response.status === 403) {
+          alert("欸嘿，一分钟内点太多次了");
+        } else {
+          alert("啊哦，404");
+        }
+      }
+    }
+    // 搜索特定城市天气
+    function searchInfo() {
+      let residence = input.value.trim();
+      getInfo(residence);
+    }
+    search.addEventListener(
+      "click",
+      throttle(function () {
+        // 判断输入框是否有内容
+        if (input.value.trim() !== "") {
+          searchInfo();
+          console.log(1);
+        } else alert("欸嘿，你忘记输入城市啦!");
+      }, 3000)
+    );
+
+    input.addEventListener("keyup", function (event) {
+      if (event.keyCode === 13) {
+        // 判断输入框是否有内容
+        if (input.value.trim() !== "") {
+          searchInfo();
+        } else alert("欸嘿，你忘记输入城市啦!");
+      }
+    });
+
+    setInterval(() => {
+      formatDateTime();
+    }, 1000);
+    formatDateTime();
+
+    // 在一起时间的倒计时
+    function formatDateTime() {
+      let passTime = "2019/3/17";
+      let newDate = new Date();
+      let x = newDate.valueOf() - new Date(passTime).valueOf();
+      var d = parseInt(x / 1000 / 60 / 60 / 24);
+      d = d < 10 ? "0" + d : d;
+      var h = parseInt((x / 1000 / 60 / 60) % 24);
+      h = h < 10 ? "0" + h : h;
+      var m = parseInt((x / 1000 / 60) % 60);
+      m = m < 10 ? "0" + m : m;
+      var s = parseInt((x / 1000) % 60);
+      s = s < 10 ? "0" + s : s;
+
+      day.innerHTML = d;
+      hour.innerHTML = h;
+      minute.innerHTML = m;
+      second.innerHTML = s;
+    }
+  </script>
+
+</html>

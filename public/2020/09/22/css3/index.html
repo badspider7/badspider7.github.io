@@ -1,0 +1,672 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#ED9282">
+  <meta name="description" content="">
+  <meta name="author" content="Badspider">
+  <meta name="keywords" content="">
+  <meta name="description" content="css是在&lt;head&gt;&lt;&#x2F;head&gt;之间写入的css引入样式有三种，分别是： 内部样式表：把CSS全部写到html内部，也就是中 行内样式表：适合修改一些简单样式，不是特别多的修改直接在标签上面修改&lt;div style&#x3D;&quot;color: pink;&quot;&gt;xxxxxxxxxxx&lt;div&gt; 外部样式表：适合样式特别多的情况，单独建一个CS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小艾的CSS3笔记">
+<meta property="og:url" content="http://badspider.top/2020/09/22/css3/index.html">
+<meta property="og:site_name" content="念伊的小窝">
+<meta property="og:description" content="css是在&lt;head&gt;&lt;&#x2F;head&gt;之间写入的css引入样式有三种，分别是： 内部样式表：把CSS全部写到html内部，也就是中 行内样式表：适合修改一些简单样式，不是特别多的修改直接在标签上面修改&lt;div style&#x3D;&quot;color: pink;&quot;&gt;xxxxxxxxxxx&lt;div&gt; 外部样式表：适合样式特别多的情况，单独建一个CS">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-22T08:14:42.000Z">
+<meta property="article:modified_time" content="2020-09-22T12:04:05.363Z">
+<meta property="article:author" content="Badspider">
+<meta property="article:tag" content="css3">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>小艾的CSS3笔记 - 念伊的小窝</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"badspider.top","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"🐱‍👓","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","app_key":"D8I6TpV3UhkLxcVVgWlWegOg","server_url":"https://fdhkn3cv.lc-cn-n1-shared.com","path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>念伊的小窝</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Lover/">
+                <i class="iconfont icon-lin"></i>
+                猪猪
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/school.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="小艾的CSS3笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-09-22 16:14" pubdate>
+        2020年9月22日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">小艾的CSS3笔记</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年9月22日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="css是在-lt-head-gt-lt-head-gt-之间写入的"><a href="#css是在-lt-head-gt-lt-head-gt-之间写入的" class="headerlink" title="css是在&lt;head&gt;&lt;/head&gt;之间写入的"></a>css是在<code>&lt;head&gt;&lt;/head&gt;</code>之间写入的</h2><h3 id="css引入样式有三种，分别是："><a href="#css引入样式有三种，分别是：" class="headerlink" title="css引入样式有三种，分别是："></a>css引入样式有三种，分别是：</h3><ul>
+<li>内部样式表：<br>把CSS全部写到html内部，也就是<style></style>中</li>
+<li>行内样式表：<br>适合修改一些简单样式，不是特别多的修改<br>直接在标签上面修改<br><code>&lt;div style=&quot;color: pink;&quot;&gt;xxxxxxxxxxx&lt;div&gt;</code></li>
+<li>外部样式表：<br>适合样式特别多的情况，单独建一个CSS文件<br><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;css文件路径&quot;&gt;</code></li>
+</ul>
+<p>css是由两部分组成的：</p>
+<ul>
+<li><strong>选择器以及一条或者多条声明</strong></li>
+<li>选择器是用于指定css样式的HTML标签，花括号是对该对象设置的具体样式</li>
+<li>属性和属性值以键值对出现，属性和属性值之间用“：”分开，以“；”结尾</li>
+<li>css基础选择器是由单个选择器组成的包括：<br>（1）标签选择器=====以标签名作为选择器<br>标签名{属性：属性值；}<br>（2）类选择器=====单独选择一个或者几个<br>.类名{属性：属性值；}<br>需要用class来调用<br><code>&lt;div class=&quot;类名&quot;&gt;</code><br>(3)id 选择器====只能调用一次<br>#id名{属性：属性值；}<br><code>&lt;div id=&quot;id名&quot;&gt;</code><br>（4）通配符选择器</li>
+</ul>
+<p>*{属性：属性值；}  可以把所有的标签都改变</p>
+<p>复合选择器：由两个或者更多的基础选择器组合而成的，包括：<br><strong>后代选择器，子代选择器，并集选择器，伪类选择器</strong></p>
+<ul>
+<li>后代选择器（重要） ：<br><code>元素1   元素2&#123;样式xxxxxx&#125;=======元素2必定是元素1 的孩子</code></li>
+<li>子代选择器：<br>只能选择作为某元素的最近一级子元素<br><code>元素1&gt;元素2 &#123;样式xxxxx&#125;</code></li>
+<li>并集选择器：<br>  可以选择多组标签，同时为他们定义相同的样式  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs div,">p&#123;<br>xxxxxxxxxx<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>伪类选择器：  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus">   给链接添加特殊效果<br><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:link</span>     （选择所有未被访问过的链接）<br><span class="hljs-selector-tag">a</span>: visited      (选择所有已经被访问过的链接）<br><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:hover</span>       （选择鼠标指针位于起上的链接）<br><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:active</span>        （选择活动链接，鼠标正在点着的，还没有放开的）<br></code></pre></td></tr></table></figure></li>
+<li>focus 伪类选择器<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css">   用于选取获得光标的表单元素<br><span class="hljs-selector-tag">input</span> ：focus<br>   &#123;bg-<span class="hljs-attribute">color</span>:pink&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>CSS字体属性<br>字体：标签  { font-family :”微软雅黑”;}<br>字体大小： 谷歌默认显示：16px,px（像素）大小是我们网页最常用的单位<br>P{ font-size :20px;}         </p>
+</li>
+<li><p>对齐文本—–只能是水平对齐</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span> <br>&#123;<span class="hljs-attribute">text-align</span>:center&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>文本缩进</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">text</span>-index   <span class="hljs-comment">/*给首行进行缩进*/</span><br><span class="hljs-selector-tag">div</span> &#123;<br>    <span class="hljs-attribute">text-indent</span>:<span class="hljs-number">19px</span>;<br>&#125;<br><span class="hljs-selector-tag">em</span>是一个相对单位，就是相对于当前元素的一个文字的大小<br><span class="hljs-selector-tag">div</span> &#123;<br>    <span class="hljs-attribute">text-indent</span>:<span class="hljs-number">2em</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>行间距——文字和文字行之间的距离</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span>&#123;<br>    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">26px</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="HTML元素一般分为-块元素和行元素"><a href="#HTML元素一般分为-块元素和行元素" class="headerlink" title="HTML元素一般分为  块元素和行元素"></a>HTML元素一般分为  块元素和行元素</h3><h4>*块元素</h4>
+
+<p><code>&lt;h1&gt;&lt;/h1&gt;,&lt;p&gt;,&lt;div&gt;,&lt;ul&gt;,&lt;ol&gt;,&lt;li&gt;</code>等等<br><strong>特点：</strong></p>
+<ul>
+<li>独占一行</li>
+<li>可以设置高度宽度，以及内外边距</li>
+<li>是一个容器以及盒子，里面可以放行内或者块级元素</li>
+</ul>
+<p><strong>注意：文字类的元素内不能使用块级元素</strong><br>例如<code>&lt;p&gt;</code>里面不能放<code>&lt;div&gt;,&lt;h1&gt;~~~~&lt;h6&gt;</code>等都是文字类块级标签，里面也不能放其他块级元素</p>
+<h4>*行内元素</h4>
+
+<p><code> &lt;a&gt;,&lt;strong&gt;,&lt;b&gt;,&lt;em&gt;</code>等等<br><strong>特点：</strong></p>
+<ul>
+<li>相邻行内元素在一行上，一行可以显示多个</li>
+<li>宽和高直接设置是无效的</li>
+<li>默认宽度就是本身内容的宽度</li>
+<li>行内元素只能容纳文本或者其他行内元素</li>
+</ul>
+<p><strong>注意：链接里面不能再放链接了，特殊情况下<code>&lt;a&gt;</code>里面可以放块级元素，但是给<code>&lt;a&gt;</code>转换一下块级模式最安全</strong></p>
+<h4>*行内块元素</h4>
+
+<p>同时具有块级元素和行内元素的特点，<code>&lt;img/&gt;,&lt;input/&gt;,&lt;td&gt;</code><br><strong>特点：</strong></p>
+<ul>
+<li>一行可以显示多个</li>
+<li>可以设置宽和高以及边距</li>
+</ul>
+<h4>*元素显示模式转换</h4>
+display:block ； =====行内元素转换为块链接
+display:inline;  =====块元素转换为行内元素
+display:inline-block;  =====转换为行内块元素
+
+<ul>
+<li><p>背景图像固定（背景附着）<br>backfground-attachment : scroll 滚动 /fixed  固定</p>
+</li>
+<li><p>背景复合写法<br>背景颜色  背景图片地址  背景平铺 背景图像滚动 背景  背景位置<br>background： black url(url)  no-repeat fixed center top</p>
+</li>
+<li><p>背景颜色半透明<br>background :rgba(0,0,0,0.3)<br>最后一个参数是透明度大小，区间是0~1；</p>
+</li>
+</ul>
+<p><strong>重点</strong></p>
+<h3 id="css的三大特性"><a href="#css的三大特性" class="headerlink" title="css的三大特性"></a>css的三大特性</h3><ul>
+<li>层叠性<br>样式冲突：遵循就近原则，以最后的为准，覆盖掉前面的<br>样式不冲突，不会层叠</li>
+<li>继承性<br>css中的继承：子标签会继承父标签的某些样式，如文本颜色和字号（text- ,font- ,line- ,元素开头的以及color)<br>行高的继承：如果行高没有带单位，就是当前元素文字大小的n倍</li>
+<li>优先级<br>当同一个元素指定多个选择器，就会有优先级的产生<br>选择器如果相同，则执行层叠性<br>如果是复合选择器，则会由权重叠加</li>
+</ul>
+<h3 id="css盒子模型"><a href="#css盒子模型" class="headerlink" title="css盒子模型"></a>css盒子模型</h3><ul>
+<li>盒子模型的组成<br>border 边框<br>content  内容<br>padding 内边距<br>margin   外边距</li>
+</ul>
+<p><strong>边框</strong><br>组成：边框粗细 ，边框样式，边框颜色</p>
+<h5>边框的复合写法：</h5>
+border：1px  solid red; 没有先后顺序
+边框可以分开写：
+border-top;或者 border-left; 或者 border-bottom; 或者 border-right;
+如果只需要改一条边框，可以利用层叠性来改变
+表格的细线边框
+border-collapse:collapse;   表示相邻的边框合并在一起
+边框会影响盒子实际大小
+
+<p><strong>内边距</strong><br>padding属性用于设置内边距<br>padding-left： 20px  左边距   等等<br>复合写法：</p>
+<ul>
+<li>padding： 5px； 代表上下左右都是5像素</li>
+<li>padding： 5px  10px； 代表上下边距是5像素   左右内边距是10像素</li>
+<li> padding：5px 10px  20px ； 代表上边距5像素  左右边距10像素  下边距20像素</li>
+<li>padding ：5px  10px 20px  30px；  代表上是5像素 右边距10像素 下是20像素 左是30像素<br>如果一个盒子本身没有指定width /height属性，padding则不会挤开盒子</li>
+</ul>
+<p><strong>外边距</strong><br>盒子和盒子之间的距离：<br>margin-left<br>margin-right<br>margin-top<br>margin-bottom<br>margin的复合写法和padding的一样</p>
+<p>*<em>外边距可以让块级盒子水平居中，但是必须满足两个条件：</em></p>
+<ul>
+<li>盒子必须指定了width</li>
+<li>盒子左右的外边距都设置为auto<br>margin：auto；<br>margin： 0 auto；<br>margin-left：auto；margin-right：auto；</li>
+</ul>
+<p><strong>行内元素或者行内块元素水平居中给其父元素添加text-align: center就可以了</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/css3/">css3</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/16/database/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据库原理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/09/03/music/">
+                        <span class="hidden-mobile">关于在hexo中添加全局音乐</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fDhKn3CvnxdzGnJ8ra1kWMKA-gzGzoHsz","appKey":"D8I6TpV3UhkLxcVVgWlWegOg","path":"window.location.pathname","placeholder":"Hi，我是小宁","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:;"><span>Ning</span></a> <i class="iconfont icon-aixin" style="color:red"></i> <a href="javascript:;"><span>Yi</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        赣ICP备2021011549号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=https://beian.miit.gov.cn"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>赣ICP备2021011549号-1</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+<div id="jsi-flying-fish-container"></div>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/fish.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

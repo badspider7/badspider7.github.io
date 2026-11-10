@@ -204,6 +204,577 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/11/10/agent-article-memory/" target="_self">
+          <img src="/img/post/11-10-memory.png" srcset="/img/loading.gif" lazyload alt="文章细读：anthropic-The components of agent memory">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/11/10/agent-article-memory/" target="_self">
+          文章细读：anthropic-The components of agent memory
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2026/11/10/agent-article-memory/" target="_self">
+          
+          
+            
+          
+          今天早上看微信公众号的时候，刷到anthropic 出了一篇文章：The components of agent memory,之前也看过claude code 泄露的源码，大概了解了 claude code 的上下文工程，这次看看能从这篇文章中学到什么。
+记录一下，防止之后忘记了，我觉得目前大家的上下文工程都是类似的，可能是这样子的规律吧，趋于一致。
+目前的上下文工程大致有：
+
+context 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-11-10 10:00" pubdate>
+              2026-11-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Agent/">Agent</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/agent/">agent</a>
+            
+              <a href="/tags/memory/">memory</a>
+            
+              <a href="/tags/article/">article</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/11/02/webpack4-to-rspack/" target="_self">
+          <img src="/img/top1.jpg" srcset="/img/loading.gif" lazyload alt="从 Webpack 4 到 Rspack：一次不体面的迁移">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/11/02/webpack4-to-rspack/" target="_self">
+          从 Webpack 4 到 Rspack：一次不体面的迁移
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2026/11/02/webpack4-to-rspack/" target="_self">
+          
+          
+            
+          
+          这篇文章我原本想叫《从 Webpack 3 到 Rspack》，因为记忆里一直是 3。
+写之前翻了一下仓库：迁移前的 package.json 里是 react-scripts: 2.0.4，锁文件里是 webpack@4.19.1；Electron 也不是 30，是 23.2.1。
+所以标题改成 4。不是严谨，是怕被同事看到打脸。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-11-02 20:50" pubdate>
+              2026-11-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%B7%A5%E7%A8%8B%E5%8C%96/">工程化</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Electron/">Electron</a>
+            
+              <a href="/tags/Rspack/">Rspack</a>
+            
+              <a href="/tags/Webpack/">Webpack</a>
+            
+              <a href="/tags/Monorepo/">Monorepo</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/10/18/ros-bag-playback-performance/" target="_self">
+          <img src="/img/top1.jpg" srcset="/img/loading.gif" lazyload alt="20ms 一帧、10MB/s 数据：一个 ROS 回放工具的性能账">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/10/18/ros-bag-playback-performance/" target="_self">
+          20ms 一帧、10MB/s 数据：一个 ROS 回放工具的性能账
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2026/10/18/ros-bag-playback-performance/" target="_self">
+          
+          
+            
+          
+          这个回放工具最开始不是给“大数据”设计的。
+它要读 ROS Bag，把激光、导航、图片、日志、曲线按同一个时间轴对齐；用户拖动播放头，地图、点云、图表、图片都要更新到“当前时刻”。一开始数据量不大，怎么都能跑。后来接入的设备越来越多，问题就出来了。
+实际环境里的两类设备，一类 1 秒约 2MB 数据，另一类 1 秒 10MB 以上；服务端每 500ms 下发一批，一批是 1 秒的数据；播放头 20
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-10-18 22:40" pubdate>
+              2026-10-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Electron/">Electron</a>
+            
+              <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">性能优化</a>
+            
+              <a href="/tags/ECharts/">ECharts</a>
+            
+              <a href="/tags/Worker/">Worker</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/10/14/agent-harness-context/" target="_self">
+          <img src="/img/top1.jpg" srcset="/img/loading.gif" lazyload alt="关于目前大多数Agent的 context engine 解决方案">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/10/14/agent-harness-context/" target="_self">
+          关于目前大多数Agent的 context engine 解决方案
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2026/10/14/agent-harness-context/" target="_self">
+          
+          
+            
+          
+          
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-10-14 23:05" pubdate>
+              2026-10-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Agent/">Agent</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/agent/">agent</a>
+            
+              <a href="/tags/context-engine/">context engine</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/09/27/electron-multi-window-playback/" target="_self">
+          <img src="/img/top1.jpg" srcset="/img/loading.gif" lazyload alt="Electron 多窗口回放：别让每个窗口自己数时间">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/09/27/electron-multi-window-playback/" target="_self">
+          Electron 多窗口回放：别让每个窗口自己数时间
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2026/09/27/electron-multi-window-playback/" target="_self">
+          
+          
+            
+          
+          去年做 ROS 数据回放工具的时候，有一个 bug 我记了很久。
+主窗口的时间轴走到 12.3 秒，放大出来的图表子窗口还停在 12.1 秒；再点一下暂停，两个窗口又对不上了。单看每个窗口都“在动”，放在一起就是错位。
+这个工具的主窗口负责地图、播放控制和时间轴，子窗口负责放大的曲线、图片或点云。用户经常一边看主窗口，一边把某个图表拖到副屏。两个窗口只要差 100ms，故障点就可能对不上。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-27 21:15" pubdate>
+              2026-09-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Electron/">Electron</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Electron/">Electron</a>
+            
+              <a href="/tags/IPC/">IPC</a>
+            
+              <a href="/tags/%E5%A4%9A%E7%AA%97%E5%8F%A3/">多窗口</a>
+            
+              <a href="/tags/%E5%9B%9E%E6%94%BE/">回放</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/09/14/agent-observability-opik/" target="_self">
+          <img src="/img/top1.jpg" srcset="/img/loading.gif" lazyload alt="给 Agent 平台接 Opik：先别急着做“评测平台”">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/09/14/agent-observability-opik/" target="_self">
+          给 Agent 平台接 Opik：先别急着做“评测平台”
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2026/09/14/agent-observability-opik/" target="_self">
+          
+          
+            
+          
+          上个月有个任务失败了，日志里只有一行 agent_error。我翻了半天执行消息，才发现它在第 3 步选错了工具，第 5 步上下文超限，最后模型开始胡说。
+这件事之后，我意识到 Agent 平台做到一定规模，一定会遇到三个问题：
+
+任务失败了，到底是模型、工具、上下文，还是权限？
+想换模型，怎么知道新模型在这个业务上真的更好？
+改了一版 Prompt，怎么判断有没有把别的场景改坏？
+
+这三个问题，
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-14 23:05" pubdate>
+              2026-09-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Agent/">Agent</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Opik/">Opik</a>
+            
+              <a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B/">可观测</a>
+            
+              <a href="/tags/%E8%AF%84%E6%B5%8B/">评测</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/03/openspec-spec-gate/" target="_self">
+          <img src="/img/top1.jpg" srcset="/img/loading.gif" lazyload alt="OpenSpec 很好，但我们还需要一道“不准写代码”的门禁">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/08/03/openspec-spec-gate/" target="_self">
+          OpenSpec 很好，但我们还需要一道“不准写代码”的门禁
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2026/08/03/openspec-spec-gate/" target="_self">
+          
+          
+            
+          
+          今年上半年，我们在做一个 AI Coding 工具：让产品、运营也能把一段需求变成能跑、能测的前端项目。
+最早的做法很直接：把需求丢给 Agent，让它生成代码。试了两周，问题很集中——页面能打开，但字段少了、空状态没处理、权限判断写反了。你问它为什么，它会说“我理解的需求是这样”。
+我们后来才想明白：不是模型不会写代码，是“写之前没有把需求和验收对齐”。于是开始找 spec 工具，最后选了 Op
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-03 20:35" pubdate>
+              2026-08-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Agent/">Agent</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Spec/">Spec</a>
+            
+              <a href="/tags/OpenSpec/">OpenSpec</a>
+            
+              <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/">工程化</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/12/agent-platform-architecture/" target="_self">
+          <img src="/img/top1.jpg" srcset="/img/loading.gif" lazyload alt="一个企业级 Agent 平台的架构拆解">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/07/12/agent-platform-architecture/" target="_self">
+          一个企业级 Agent 平台的架构拆解
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2026/07/12/agent-platform-architecture/" target="_self">
+          
+          
+            
+          
+          平台不是一开始就有的。
+最早每个业务都自己接模型、自己写工具、自己处理会话。邮件处理 Agent 有一套记忆，知识问答 Agent 又有一套；IM 里这个机器人能回、那个机器人不回；出了问题只能去翻各自的服务日志。重复建设不说，最麻烦的是没有统一的权限和入口。
+后来我们把共性收出来，做了一个云端 Agent 平台。它不直接跑模型，管的是“谁可以跑、跑什么、跑到哪了、花了多少”。这篇拆一下它的结构，
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-07-12 22:10" pubdate>
+              2026-07-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Agent/">Agent</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Agent/">Agent</a>
+            
+              <a href="/tags/%E6%9E%B6%E6%9E%84/">架构</a>
+            
+              <a href="/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a>
+            
+              <a href="/tags/IM/">IM</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/06/21/spec-driven-coding-ide/" target="_self">
+          <img src="/img/top1.jpg" srcset="/img/loading.gif" lazyload alt="把 PRD 变成能交付的项目：一个 Spec 驱动的 AI Coding IDE">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/06/21/spec-driven-coding-ide/" target="_self">
+          把 PRD 变成能交付的项目：一个 Spec 驱动的 AI Coding IDE
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2026/06/21/spec-driven-coding-ide/" target="_self">
+          
+          
+            
+          
+          去年底我们在做一个工具：让产品经理和后端也能把一个页面需求变成能跑、能测、能交付的前端项目。
+一开始的想法很简单：接一个 Coding Agent，把 PRD 丢进去，让它生成代码。试了两周就发现不行。页面确实能打开，但字段少了、空状态没处理、权限判断写反了。你问它为什么，它会说“我理解的需求是这样”。
+问题不在模型会不会写代码，而在“写之前有没有把需求和验收对齐”。后来这个工具慢慢变成了一条流水
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-06-21 21:40" pubdate>
+              2026-06-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Agent/">Agent</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Electron/">Electron</a>
+            
+              <a href="/tags/Agent/">Agent</a>
+            
+              <a href="/tags/Spec/">Spec</a>
+            
+              <a href="/tags/%E6%B5%8B%E8%AF%95/">测试</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2024/11/23/%E6%B1%82%E5%87%BA%E8%83%9C%E5%88%A9%E7%8E%A9%E5%AE%B6%E7%9A%84%E6%95%B0%E7%9B%AE/" target="_self">
           <img src="/img/post/leetcode.jpg" srcset="/img/loading.gif" lazyload alt="求出胜利玩家的数目">
         </a>
@@ -261,568 +832,11 @@ tag:数组 哈希表 计数
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2024/11/21/%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E8%9B%87/" target="_self">
-          <img src="/img/post/leetcode.jpg" srcset="/img/loading.gif" lazyload alt="矩阵中的蛇">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/11/21/%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E8%9B%87/" target="_self">
-          矩阵中的蛇
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2024/11/21/%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E8%9B%87/" target="_self">
-          
-          
-            
-          
-          3248. 矩阵中的蛇
-level: easy
-tag:数组 字符串 模拟
-大小为 n x n 的矩阵 grid 中有一条蛇。蛇可以朝 四个可能的方向 移动。矩阵中的每个单元格都使用位置进行标识： grid[i][j] = (i * n) + j。
-蛇从单元格 0 开始，并遵循一系列命令移动。
-给你一个整数 n 表示 grid 的大小，另给你一个字符串数组 commands，其中包括 “UP”、”
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-11-21 17:22" pubdate>
-              2024-11-21
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/">每日一题</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2024/11/13/%E9%97%AD%E5%8C%85%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E7%90%86%E8%A7%A3/" target="_self">
-          <img src="/img/top1.jpg" srcset="/img/loading.gif" lazyload alt="闭包和作用域的理解">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/11/13/%E9%97%AD%E5%8C%85%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E7%90%86%E8%A7%A3/" target="_self">
-          闭包和作用域的理解
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2024/11/13/%E9%97%AD%E5%8C%85%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E7%90%86%E8%A7%A3/" target="_self">
-          
-          
-            
-          
-          
-要完全理解闭包，首先要弄明白Javascript中的作用域的机制
-
-1234567891011121314let name = &#x27;12312313&#x27;function outFun()&#123;	let name = &#x27;test&#x27;    let age = 12    return function innerFun()&#123;		console.lo
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-11-13 11:52" pubdate>
-              2024-11-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/JavaScript%E5%9F%BA%E7%A1%80/">JavaScript基础</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2024/11/11/%E7%BB%9F%E8%AE%A1%E6%BB%A1%E8%B6%B3-K-%E7%BA%A6%E6%9D%9F%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%B0%E9%87%8F-I/" target="_self">
-          <img src="/img/post/leetcode.jpg" srcset="/img/loading.gif" lazyload alt="统计满足 K 约束的子字符串数量 I">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/11/11/%E7%BB%9F%E8%AE%A1%E6%BB%A1%E8%B6%B3-K-%E7%BA%A6%E6%9D%9F%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%B0%E9%87%8F-I/" target="_self">
-          统计满足 K 约束的子字符串数量 I
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2024/11/11/%E7%BB%9F%E8%AE%A1%E6%BB%A1%E8%B6%B3-K-%E7%BA%A6%E6%9D%9F%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%B0%E9%87%8F-I/" target="_self">
-          
-          
-            
-          
-          3258. 统计满足 K 约束的子字符串数量 I
-level: easy
-tag:滑动窗口 字符串
-给你一个 二进制 字符串 s 和一个整数 k。
-如果一个 二进制字符串 满足以下任一条件，则认为该字符串满足 k 约束：
-字符串中 0 的数量最多为 k。字符串中 1 的数量最多为 k。
-返回一个整数，表示 s 的所有满足 k 约束 的子字符串 的数量。
-示例 1：
-1234567输入：s = &q
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-11-11 11:49" pubdate>
-              2024-11-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/">每日一题</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2024/11/10/%E6%A3%80%E6%B5%8B%E7%9B%B8%E9%82%BB%E9%80%92%E5%A2%9E%E5%AD%90%E6%95%B0%E7%BB%84-II/" target="_self">
-          <img src="/img/post/leetcode.jpg" srcset="/img/loading.gif" lazyload alt="检测相邻递增子数组 II">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/11/10/%E6%A3%80%E6%B5%8B%E7%9B%B8%E9%82%BB%E9%80%92%E5%A2%9E%E5%AD%90%E6%95%B0%E7%BB%84-II/" target="_self">
-          检测相邻递增子数组 II
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2024/11/10/%E6%A3%80%E6%B5%8B%E7%9B%B8%E9%82%BB%E9%80%92%E5%A2%9E%E5%AD%90%E6%95%B0%E7%BB%84-II/" target="_self">
-          
-          
-            
-          
-          3350. 检测相邻递增子数组 II
-tag:动态规划 二分查找
-给你一个由 n 个整数组成的数组 nums ，请你找出 k 的 最大值，使得存在 两个 相邻 且长度为 k 的 严格递增 子数组。具体来说，需要检查是否存在从下标 a 和 b (a &lt; b) 开始的 两个 子数组，并满足下述全部条件：
-这两个子数组 nums[a..a + k - 1] 和 nums[b..b + k - 1]
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-11-10 23:28" pubdate>
-              2024-11-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2024/11/10/%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%8D%95%E4%B8%80%E5%85%83%E7%B4%A0/" target="_self">
-          <img src="/img/post/leetcode.jpg" srcset="/img/loading.gif" lazyload alt="有序数组中的单一元素">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/11/10/%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%8D%95%E4%B8%80%E5%85%83%E7%B4%A0/" target="_self">
-          有序数组中的单一元素
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2024/11/10/%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%8D%95%E4%B8%80%E5%85%83%E7%B4%A0/" target="_self">
-          
-          
-            
-          
-          540. 有序数组中的单一元素
-tag:数组 二分查找
-给你一个仅由整数组成的有序数组，其中每个元素都会出现两次，唯有一个数只会出现一次。
-请你找出并返回只出现一次的那个数。
-你设计的解决方案必须满足 O(log n) 时间复杂度和 O(1) 空间复杂度。
-示例 1：
-12输入: nums = [1, 1, 2, 3, 3, 4, 4, 8, 8];输出: 2;
-
-题解：1234567891011
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-11-10 23:12" pubdate>
-              2024-11-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/">每日一题</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2024/11/08/%E8%BF%94%E5%9B%9E%E5%9C%B0%E5%8C%BA%E5%8B%BE%E9%80%89%E4%B9%8B%E5%90%8E%E7%9A%84%E6%95%B0%E7%BB%84/" target="_self">
-          <img src="/img/post/leetcode.jpg" srcset="/img/loading.gif" lazyload alt="返回地区勾选之后的数组">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/11/08/%E8%BF%94%E5%9B%9E%E5%9C%B0%E5%8C%BA%E5%8B%BE%E9%80%89%E4%B9%8B%E5%90%8E%E7%9A%84%E6%95%B0%E7%BB%84/" target="_self">
-          返回地区勾选之后的数组
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2024/11/08/%E8%BF%94%E5%9B%9E%E5%9C%B0%E5%8C%BA%E5%8B%BE%E9%80%89%E4%B9%8B%E5%90%8E%E7%9A%84%E6%95%B0%E7%BB%84/" target="_self">
-          
-          
-            
-          
-          tag:树 递归
-
-题目需求， 传入一个 可以勾选的tree，第二个参数是之前勾选的treeData,第三个参数是勾选掉的节点，返回一个更新后的treeData
-
-123456789101112131415161718192021222324252627282930313233343536const treeData = [  &#123;    name: &quot;浙江省&quot;,   
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-11-08 10:57" pubdate>
-              2024-11-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2024/11/06/%E9%95%BF%E5%BA%A6%E4%B8%BAK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E8%83%BD%E9%87%8F/" target="_self">
-          <img src="/img/post/leetcode.jpg" srcset="/img/loading.gif" lazyload alt="【每日算法】长度为k的子数组的能量">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/11/06/%E9%95%BF%E5%BA%A6%E4%B8%BAK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E8%83%BD%E9%87%8F/" target="_self">
-          【每日算法】长度为k的子数组的能量
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2024/11/06/%E9%95%BF%E5%BA%A6%E4%B8%BAK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E8%83%BD%E9%87%8F/" target="_self">
-          
-          
-            
-          
-          长度为k的子数组的能量I
-tag:数组 滑动窗口
-给你一个长度为 n 的整数数组 nums 和一个正整数 k 。
-一个数组的 能量值 定义为：
-
-如果 所有 元素都是依次 连续 且 上升 的，那么能量值为 最大 的元素。
-否则为 -1 。
-
-你需要求出 nums 中所有长度为 k 的 
-子数组
- 的能量值。
-请你返回一个长度为 n - k + 1 的整数数组 results ，其中 results
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-11-06 09:47" pubdate>
-              2024-11-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/">每日一题</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2024/11/03/%E5%B9%B3%E6%96%B9%E6%95%B0%E4%B9%8B%E5%92%8C/" target="_self">
-          <img src="/img/post/leetcode.jpg" srcset="/img/loading.gif" lazyload alt="【每日算法】平方数之和">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/11/03/%E5%B9%B3%E6%96%B9%E6%95%B0%E4%B9%8B%E5%92%8C/" target="_self">
-          【每日算法】平方数之和
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2024/11/03/%E5%B9%B3%E6%96%B9%E6%95%B0%E4%B9%8B%E5%92%8C/" target="_self">
-          
-          
-            
-          
-          663.平方数之和
-tag:数学 双指针 二分查找
-给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a2 + b2 = c 。
-示例 1：
-123输入： c = 5输出： true解释： 1 * 1 + 2 * 2 = 5
-
-题解：12345678910111213141516171819/** * @param &#123;number&#125; c * @return &
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-11-03 18:31" pubdate>
-              2024-11-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/">每日一题</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2024/07/24/dify%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%9A%84%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91/" target="_self">
-          <img src="/img/post/dify.png" srcset="/img/loading.gif" lazyload alt="dify 工作流二次开发">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/07/24/dify%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%9A%84%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91/" target="_self">
-          dify 工作流二次开发
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2024/07/24/dify%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%9A%84%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91/" target="_self">
-          
-          
-            
-          
-          前言dify 的前端是用 next 来编写的(一个 react 的框架)，而其工作流使用了react-flow这个插件,最新版本名为 xyflow。我们需要参考其 workflow 定制一个属于自己的 ai 工作流，是一个有向无环图。
-
-困难1.需要在短时间内理解dify的工作流架构以及其封装的大量hooks的使用
-2.刚刚上手react
-3.配置项比较多，时间紧
-开发首先让我们来分析一下一个工作
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-24 22:32" pubdate>
-              2024-07-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%80%BB%E7%BB%93/">总结</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

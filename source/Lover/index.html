@@ -77,21 +77,36 @@ title: 最可爱的小猪
 
     .countDown {
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: center;
-      font-size: 18px;
+      align-items: flex-end;
+      gap: 10px;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 50px 12px 16px;
+      font-size: 16px;
       margin-top: 20px;
     }
 
-    .countDown .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .countDown .relationship {
+      flex: 0 0 auto;
+      white-space: nowrap;
+      line-height: 1.2;
     }
 
-    .countDown span {
-      font-size: 40px;
+    .countDown .timeBox {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    .countDown .value {
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .countDown .label {
+      font-size: 14px;
     }
 
     .lovelyPic {
@@ -104,12 +119,70 @@ title: 最可爱的小猪
       background-image: url(/img/comment.webp);
     }
 
+    .pageMessage {
+      position: fixed;
+      top: 76px;
+      left: 50%;
+      z-index: 2147483647;
+      max-width: min(420px, calc(100vw - 32px));
+      padding: 12px 18px;
+      border: 1px solid rgba(239, 128, 132, 0.28);
+      border-left: 4px solid #ef8084;
+      border-radius: 10px;
+      color: #4b5563;
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 8px 28px rgba(65, 48, 48, 0.2);
+      font-size: 14px;
+      line-height: 1.5;
+      opacity: 0;
+      transform: translate(-50%, -10px);
+      transition: opacity 180ms ease, transform 180ms ease;
+      pointer-events: none;
+    }
+
+    .pageMessage.is-visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    [data-user-color-scheme='dark'] .pageMessage {
+      color: #e5e7eb;
+      border-color: rgba(255, 143, 150, 0.24);
+      border-left-color: #ff8f96;
+      background: rgba(38, 45, 56, 0.98);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.38);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-user-color-scheme]) .pageMessage {
+        color: #e5e7eb;
+        border-color: rgba(255, 143, 150, 0.24);
+        border-left-color: #ff8f96;
+        background: rgba(38, 45, 56, 0.98);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.38);
+      }
+    }
+
     @media screen and (max-width: 900px) {
       .countDown {
-        height: 160px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: baseline;
+        padding: 0 12px 16px;
+        min-height: 160px;
         background-image: url(/img/comment.webp);
         background-repeat: no-repeat;
         background-position: 34% 0;
+      }
+
+      .countDown .timeBox {
+        flex-wrap: wrap;
+        justify-content: center;
+        white-space: normal;
+      }
+
+      .countDown .value {
+        font-size: 26px;
       }
 
       .lovelyPic {
@@ -133,18 +206,21 @@ title: 最可爱的小猪
     <div class="weather">当前的天气为：</div>
   </div>
   <div class="countDown">
-    <div class="container">
-      和我的<span style="font-size: 20px; color: rgb(156, 48, 48)">小艾猪猪</span>在一起
+    <div class="relationship">
+      和<span style="font-size: 16px; color: rgb(156, 48, 48)">老大</span>在一起
     </div>
     <div class="timeBox">
-      <span class="day"></span>天 <span class="hour"></span>时
-      <span class="minute"></span>分 <span class="second"></span>秒
+      <span class="value day"></span><span class="label">天</span>
+      <span class="value hour"></span><span class="label">时</span>
+      <span class="value minute"></span><span class="label">分</span>
+      <span class="value second"></span><span class="label">秒</span>
     </div>
   </div>
   <span class="lovelyPic"></span>
+  <div class="pageMessage" role="status" aria-live="polite"></div>
 </body>
 <!-- 把汉字转换为拼音 -->
-<script src="https://cdn.jsdelivr.net/gh/zh-lx/pinyin-pro@latest/dist/pinyin-pro.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.29.5/dist/index.js"></script>
 <!-- 获取IP地址 -->
 <!-- <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script> -->
 <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
@@ -160,6 +236,19 @@ title: 最可爱的小猪
     const hour = document.querySelector(".hour");
     const minute = document.querySelector(".minute");
     const second = document.querySelector(".second");
+    const pageMessage = document.querySelector(".pageMessage");
+    // Keep the toast outside theme wrappers that create their own stacking context.
+    document.body.appendChild(pageMessage);
+    let messageTimer;
+
+    function showMessage(message) {
+      pageMessage.textContent = message;
+      pageMessage.classList.add("is-visible");
+      clearTimeout(messageTimer);
+      messageTimer = setTimeout(() => {
+        pageMessage.classList.remove("is-visible");
+      }, 2800);
+    }
 
     // 节流，防止点击多次
     function throttle(func, wait) {
@@ -177,45 +266,59 @@ title: 最可爱的小猪
     let address = "";
     //获取ip地址
     async function getIp(){
-      const {data} = await axios({
-        method:"get",
-        url:"https://www.mxnzp.com/api/ip/self?app_id=qkojmgehinljmiur&app_secret=aU5BcjZsQStqWWNxMEtxN0w5ZlB1QT09"
-      })
+      try {
+        const {data} = await axios({
+          method:"get",
+          url:"https://www.mxnzp.com/api/ip/self?app_id=qkojmgehinljmiur&app_secret=aU5BcjZsQStqWWNxMEtxN0w5ZlB1QT09"
+        });
 
-      console.log(data.data.ip);
-      const ip = data.data.ip;
-      address = await axios({
-        method:"get",
-        url:`https://v2.alapi.cn/api/ip?ip=${ip}&token=eETQpxcYEcdBOV4Y`
-      })
-      // console.log(address.data.data.ad_info.city);
-      getInfo(address.data.data.ad_info.city)
+        const cityName = data?.data?.city;
+        if (!cityName) throw new Error("IP 定位接口没有返回城市名");
+        getInfo(cityName);
+      } catch (err) {
+        console.error("IP 定位失败：", err);
+        // IP 定位不可用时，仍尝试显示默认城市天气。
+        getInfo();
+      }
+    //   const ip = data.data.ip;
+    //   address = await axios({
+    //     method:"get",
+    //     url:`https://v2.alapi.cn/api/ip?ip=${ip}&token=eETQpxcYEcdBOV4Y`
+    //   })
+    //   console.log(address.data.data.ad_info.city);
+    //   getInfo(address.data.data.ad_info.city)
+    // }
     }
     // 根据ip地址先显示当前地址的天气
     getIp();
  
     // 获取天气信息
-    async function getInfo(chengshi = "新余") {
+    async function getInfo(chengshi = "北京") {
       try {
-        var { pinyin } = pinyinPro;
         const { data } = await axios({
           method: "GET",
-          url: `https://api.seniverse.com/v3/weather/now.json?key=S8iUfojW28_QulLmE&location=${chengshi}&language=zh-Hans&unit=c`,
+          url: `https://api.seniverse.com/v3/weather/now.json?key=S8iUfojW28_QulLmE&location=${encodeURIComponent(chengshi)}&language=zh-Hans&unit=c`,
         });
-        const getData = data.results[0];
+        const getData = data?.results?.[0];
+        if (!getData?.now || !getData?.location) {
+          throw new Error("天气接口返回的数据格式不正确");
+        }
         const weatherInfo = getData.now;
         const locationInfo = getData.location;
         // 为页面添加数据
-        city.innerHTML = pinyin(locationInfo.name) + locationInfo.name;
+        const cityPinyin = window.pinyinPro?.pinyin?.(locationInfo.name);
+        city.innerHTML = (cityPinyin ? cityPinyin + " " : "") + locationInfo.name;
         weather.innerHTML = weather.innerHTML.substr(0, 7) + weatherInfo.text;
         temperature.innerHTML = weatherInfo.temperature + "℃";
       } catch (err) {
-        if (err.response.status === 404) {
-          alert("sorry,找不到所在的城市");
-        } else if (err.response.status === 403) {
-          alert("欸嘿，一分钟内点太多次了");
+        console.error("获取天气失败：", err);
+        const status = err.response?.status;
+        if (status === 404) {
+          showMessage("找不到这个城市，请检查名称后重试");
+        } else if (status === 403) {
+          showMessage("请求太频繁啦，请稍后再试");
         } else {
-          alert("啊哦，404");
+          showMessage("天气加载失败，请检查网络或稍后重试");
         }
       }
     }
@@ -231,7 +334,7 @@ title: 最可爱的小猪
         if (input.value.trim() !== "") {
           searchInfo();
           console.log(1);
-        } else alert("欸嘿，你忘记输入城市啦!");
+        } else showMessage("先输入城市名称再搜索哦");
       }, 3000)
     );
 
@@ -240,7 +343,7 @@ title: 最可爱的小猪
         // 判断输入框是否有内容
         if (input.value.trim() !== "") {
           searchInfo();
-        } else alert("欸嘿，你忘记输入城市啦!");
+        } else showMessage("先输入城市名称再搜索哦");
       }
     });
 

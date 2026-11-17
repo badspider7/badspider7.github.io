@@ -3,8 +3,8 @@ title: 小艾的CSS3笔记
 date: 2020-09-22 16:14:42
 tags: css3
 categories: 前端
-index_img: /img/0922.jpg
-banner_img: /img/school.jpg
+index_img: https://img.badspider.top/posts/007c4498b9a28581def75f00.jpg
+banner_img: https://img.badspider.top/posts/75a5c91b847d5bc04384b8b4.jpg
 ---
 ## css是在```<head></head>```之间写入的
 

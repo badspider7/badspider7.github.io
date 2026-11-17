@@ -3,8 +3,8 @@ title: SassScript
 date: 2021-05-25 15:29:25
 tags: css
 categories: 前端
-index_img: /img/sass.gif
-banner_img: /img/sass.jpg
+index_img: https://img.badspider.top/posts/8109c4ddcf56a2b7ae8a61d8.gif
+banner_img: https://img.badspider.top/posts/c7ca2da1a3a9b293106507b1.jpg
 ---
 # SassScript
 

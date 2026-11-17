@@ -3,8 +3,8 @@ title: Hello World
 date: 2020-08-2 10:26:13
 tags: hello world
 categories: blog
-index_img: /img/hello.jpg
-banner_img: /img/a.jpg
+index_img: https://img.badspider.top/posts/b811f107bded7d15b39f1b08.png
+banner_img: https://img.badspider.top/posts/f84570f67d714ff7d454bbb0.jpg
 ---
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 

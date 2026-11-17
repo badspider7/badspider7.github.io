@@ -3,8 +3,8 @@ title: day 02 学习HTML（下）
 date: 2020-08-18 16:18:19
 tags: HTML
 categories: 前端
-index_img: /img/html2.jpg
-banner_img: /img/g.jpg
+index_img: https://img.badspider.top/posts/5d817e89679acac432fb12d3.jpg
+banner_img: https://img.badspider.top/posts/fb993d53916dfa6c53d58225.jpg
 ---
 {% note danger %}
 下面是我学HTML的一些笔记，零零碎碎的，你们可以看看这个[w3school](https://www.w3school.com.cn/)

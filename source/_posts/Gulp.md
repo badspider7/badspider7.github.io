@@ -3,8 +3,8 @@ title: Gulp
 date: 2021-04-11 14:35:55
 tags: Gulp
 categories: 后端
-index_img: /img/gulp-index.jpg
-banner_img: /img/gulp-banner.png
+index_img: https://img.badspider.top/posts/cdff6768a9e39e64b4eb786b.jpg
+banner_img: https://img.badspider.top/posts/673c61c63d96334e3bf20169.png
 ---
 ## 1.第三方模块Gulp
 

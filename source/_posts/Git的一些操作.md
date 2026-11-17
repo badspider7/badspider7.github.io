@@ -2,7 +2,7 @@
 title: Git的一些操作
 date: 2023-2-20 22:29:35
 tags: 后端
-index_img: /img/Git.jpeg
+index_img: https://img.badspider.top/posts/6ef220affd2992bd55a0900f.png
 banner_img:
 ---
 

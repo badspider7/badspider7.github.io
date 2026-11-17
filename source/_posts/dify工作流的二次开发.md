@@ -3,14 +3,14 @@ title: dify 工作流二次开发
 date: 2024-7-24 22:32:12
 tags: 总结
 category: 前端
-index_img: /img/post/dify.png
+index_img: https://img.badspider.top/posts/db075c347b8e548ce09ee747.png
 ---
 
 ### 前言
 
 [dify](https://github.com/langgenius/dify/tree/main/web) 的前端是用 next 来编写的(一个 react 的框架)，而其工作流使用了[react-flow](https://github.com/xyflow/xyflow)这个插件,最新版本名为 xyflow。我们需要参考其 workflow 定制一个属于自己的 ai 工作流，是一个有向无环图。
 
-![](https://img.badspider.top/%E5%8D%9A%E5%AE%A2/dify.jpg?e=1729933704&token=O5FexAXMDVkC96l0JKtw-Lt-5pW8odocO8uOerZ4:HZrH0ICHd9dPoIvbKMuiHwNCwyA=)
+![](https://img.badspider.top/posts/7c71eb0ca8e81074d4f224f6.jpg)
 
 ### 困难
 

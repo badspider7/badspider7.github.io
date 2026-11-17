@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="念伊的小窝">
 <meta property="og:description" content="1.HTML1.src 和 href 的区别src 和 href 都是用来引用外部的资源，它们的区别如下：  src： 表示对资源的引用，它指向的内容会嵌入到当前标签所在的位置。src 会将其指向的资源下载并应⽤到⽂档内，如请求 js 脚本。当浏览器解析到该元素时，会暂停其他资源的下载和处理，直到将该资源加载、编译、执⾏完毕，所以⼀般 js 脚本会放在页面底部。  href： 表示超文本引用，它指">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b0a8a139519f46dfa2d1992c58eb5397~tplv-k3u1fbpfcp-watermark.awebp">
+<meta property="og:image" content="https://img.badspider.top/posts/e3d3defde2678dd95dcd6a67.webp">
 <meta property="article:published_time" content="2023-02-22T14:29:35.000Z">
-<meta property="article:modified_time" content="2026-11-09T02:53:00.242Z">
+<meta property="article:modified_time" content="2026-11-17T02:14:18.631Z">
 <meta property="article:author" content="Badspider">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b0a8a139519f46dfa2d1992c58eb5397~tplv-k3u1fbpfcp-watermark.awebp">
+<meta name="twitter:image" content="https://img.badspider.top/posts/e3d3defde2678dd95dcd6a67.webp">
   
   <title>面试题 - 念伊的小窝</title>
 
@@ -67,6 +67,7 @@
 
   
 <link rel="stylesheet" href="/css/iconfont.css">
+<link rel="stylesheet" href="/css/sticky-pin.css">
 
 
 
@@ -256,7 +257,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2026年11月9日 上午
+                  本文最后更新于：2026年11月17日 上午
                 
               </p>
             
@@ -276,7 +277,7 @@
 
 <h5 id="3-DOCTYPE-文档类型-的作用"><a href="#3-DOCTYPE-文档类型-的作用" class="headerlink" title="3.DOCTYPE(文档类型)的作用"></a>3.DOCTYPE(文档类型)的作用</h5><p>DOCTYPE 是 HTML5 中一种标准通用标记语言的文档类型声明，它的目的是<strong>告诉浏览器（解析器）应该以什么样（html 或 xhtml）的文档类型定义来解析文档</strong>，不同的渲染模式会影响浏览器对 CSS 代码甚⾄ JavaScript 脚本的解析。它必须声明在 HTML ⽂档的第⼀⾏。一般指定了之后会以标准模式来进行文档解析，否则就以兼容模式进行解析。在标准模式下，浏览器的解析规则都是按照最新的标准进行解析的。</p>
 <h5 id="4-script-标签中的-defer-和-async-的区别"><a href="#4-script-标签中的-defer-和-async-的区别" class="headerlink" title="4.script 标签中的 defer 和 async 的区别"></a>4.script 标签中的 defer 和 async 的区别</h5><p>如果没有 defer 或 async 属性，浏览器会立即加载并执行相应的脚本。它不会等待后续加载的文档元素，读取到就会开始加载和执行，这样就阻塞了后续文档的加载。</p>
-<p>下图可以直观的看出三者之间的区别: <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b0a8a139519f46dfa2d1992c58eb5397~tplv-k3u1fbpfcp-watermark.awebp" srcset="/img/loading.gif" lazyload alt="image.png"> 其中蓝色代表 js 脚本网络加载时间，红色代表 js 脚本执行时间，绿色代表 html 解析。</p>
+<p>下图可以直观的看出三者之间的区别: <img src="https://img.badspider.top/posts/e3d3defde2678dd95dcd6a67.webp" srcset="/img/loading.gif" lazyload alt="image.png"> 其中蓝色代表 js 脚本网络加载时间，红色代表 js 脚本执行时间，绿色代表 html 解析。</p>
 <p><strong>defer 和 async 属性都是去异步加载外部的 JS 脚本文件，它们都不会阻塞页面的解析</strong>，其区别如下：</p>
 <ul>
 <li><strong>执行顺序：</strong> 多个带 async 属性的标签，不能保证加载的顺序；多个带 defer 属性的标签，按照加载顺序执行；</li>

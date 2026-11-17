@@ -3,8 +3,8 @@ title: 关于用hexo和GitHub搭建自己的免费博客
 date: 2020-08-12 10:26:13
 tags: hexo
 categories: blog
-index_img: /img/hexo.jpg
-banner_img: /img/3.jpg
+index_img: https://img.badspider.top/posts/ef0c9861d032efaf201c1613.jpg
+banner_img: https://img.badspider.top/posts/2eca9b14eb894b4ee30c7929.jpg
 ---
 @[TOC]( )
 # 前言
@@ -25,31 +25,31 @@ banner_img: /img/3.jpg
 ### 1.1下载node.js
 - Node.js 的实质是一个JavaScript运行环境,在这里我们使用它来生成我们博客的静态页面------- ==Node.js==[官网](http://nodejs.cn/).
 - 根据你的电脑下载对应的版本就可以了
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810214856831.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JsYWNrX1NwaWRlckM=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img.badspider.top/posts/2464bddca7f3461d4966b5c8.png)
 **（注意下载的是msi）**
 ###   1.2 搭建node.js的环境
 - 这里直接就一直点==next==就ok了，不用点别的
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810215147363.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JsYWNrX1NwaWRlckM=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img.badspider.top/posts/cd75a9dae47652fbd2161952.png)
 - 当你安装完成之后，查看一下是否安装成功
 - 用win+R输入cmd打开电脑的终端，输入node -v，查看是否安装成功
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810215458159.png)
+![在这里插入图片描述](https://img.badspider.top/posts/94d777a71e6e9b4358e8f4b5.png)
 **如果出现版本号就说明安装成功了**
 
 ##  2.Git
 ###  2.1 下载Git
 Git的 [官网](https://git-scm.com/) 根据自己的电脑下载对应的版本就可以了
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810215945900.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JsYWNrX1NwaWRlckM=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img.badspider.top/posts/b6aeeb2b32211d8813441a72.png)
 ###  2.2 安装Git
 - 和上面安装一样，一直==next==就可以了
 **当然如果你不安装在c盘的话就自己选一个别的盘安装（最好不要安装在c盘）**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810220035692.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JsYWNrX1NwaWRlckM=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img.badspider.top/posts/81fe3e866f0a0fe3491db2f0.png)
 ###  2.3判断git安装成功
-在桌面鼠标点击右键，有Git GUI Here和Git Bash Here，则安装成功![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810220527448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JsYWNrX1NwaWRlckM=,size_16,color_FFFFFF,t_70)
+在桌面鼠标点击右键，有Git GUI Here和Git Bash Here，则安装成功![在这里插入图片描述](https://img.badspider.top/posts/a3b01d9ba4daf06b0e65fb2d.png)
 
 
 
 或者你看看新安装的程序里面有没有这三个
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810220516596.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JsYWNrX1NwaWRlckM=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img.badspider.top/posts/fce151987affa1c58aba424c.png)
 ##  3.安装淘宝镜像
 - 在桌面鼠标右键或者任意一个地方，选择Git Bash Here
 - 输入下面的代码，静静等待就可以了
@@ -65,11 +65,11 @@ npm install hexo-cli -g
 npm install hexo-deployer-git --save
 ```
 可以用`hexo -v`来检查是否安装成功
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810221842905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JsYWNrX1NwaWRlckM=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img.badspider.top/posts/c5432338885acb4e7119c941.png)
 ### 2.初始化博客
 进入该文件夹右键 Git Bash Here，输入以下命令
 - 输入  ```hexo  init ```初始化自己的博客
-- 然后你就可以看到你的myblog文件夹里面多了好多文件，其中有一个_config.yml文件![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810222427595.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JsYWNrX1NwaWRlckM=,size_16,color_FFFFFF,t_70)
+- 然后你就可以看到你的myblog文件夹里面多了好多文件，其中有一个_config.yml文件![在这里插入图片描述](https://img.badspider.top/posts/e4e3eb1c3f9c36e01591251f.png)
 这个就是你的基本配置文件
 
 #  在本地安装完成了
@@ -82,7 +82,7 @@ $ hexo server
 ```j
 INFO Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810224147173.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JsYWNrX1NwaWRlckM=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img.badspider.top/posts/9f440cdffdeb76c859cfc7ff.png)
 #  将博客部署到 GitHub上面去
 - 到目前为止，我们的本地博客就成功搭建了，但是现在我们只能通过本地连接查看博客，我们要做的是让其他人也能够访问我们的博客，这就需要我们将博客部署到Github Pages上
 ##  1.注册GitHub账户：
@@ -90,7 +90,7 @@ INFO Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.
 
 ##  2.创建项目代码库
 点击 ==New repository==开始创建
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810224738547.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JsYWNrX1NwaWRlckM=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img.badspider.top/posts/63531c924f46efb528b17899.png)
 ##  3.配置==ssh==密匙
 - 只有配置好 SSH 密钥后，我们才可以通过 git 操作实现本地代码库与 Github 代码库同步，在你第一次新建的文件夹里面（如：我的文件夹为：D\blog） Git Bash Here 输入以下命令
 ```j
@@ -117,13 +117,13 @@ $ clip < ~/.ssh/id_rsa.pub
 
 ##  4.在GitHub中添加你的公匙
 ###  4.1登陆 GitHub，进入 Settings：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810225604719.png)
+![在这里插入图片描述](https://img.badspider.top/posts/156ffd826557bae01e77d197.png)
 ###  4.2点击 ==SHH and GPG Keys==
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810225700749.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JsYWNrX1NwaWRlckM=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img.badspider.top/posts/4f161730071be2b86b20be25.png)
 ###  4.3选择 ==New SSH Key：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810225800165.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JsYWNrX1NwaWRlckM=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img.badspider.top/posts/48ecd8f90f73319f48d35e2b.png)
 ###  4.4粘贴密匙：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810225739776.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JsYWNrX1NwaWRlckM=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img.badspider.top/posts/d3ca336aae84bc2748643d2a.png)
 ###  4.5测试
 输入以下命令：
 ```j
@@ -146,7 +146,7 @@ $ git config --global user.email "此处填你的邮箱"
 - 一、登录 Github 打开自己的项目 yourname.github.io
 - 二、鼠标移到 Clone or download 按钮，选择 Use SSH
 - 三、一键复制地址
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200810230750561.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JsYWNrX1NwaWRlckM=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img.badspider.top/posts/578190e0af2b2d5e67cbec6b.png)
 
 - 四、打开你创建的 Hexo 文件夹（如：D:\\myblog），右键打开该文件夹下的 _config.yml 文件，在文件的最下面有==deploy==
 **改成如下的样子：**

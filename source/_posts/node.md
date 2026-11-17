@@ -3,8 +3,8 @@ title: Node
 date: 2021-03-29 19:06:07
 tags: Node
 categories: 后端
-index_img: /img/node.jpeg
-banner_img: /img/top8.jpg
+index_img: https://img.badspider.top/posts/f95fd7b6af8df65804575362.jpg
+banner_img: https://img.badspider.top/posts/1df30aaa5f766b042fd6f1bf.jpg
 ---
 
 #### 1.能学到啥

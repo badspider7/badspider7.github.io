@@ -3,7 +3,7 @@ title: 检测相邻递增子数组 II
 date: 2024-11-10 23:28:54
 tags: 算法
 categories: 算法
-index_img: /img/post/leetcode.jpg
+index_img: https://img.badspider.top/posts/097dc8ca58e965152c121727.jpg
 banner_img:
 ---
 

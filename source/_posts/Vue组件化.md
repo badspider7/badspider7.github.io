@@ -3,7 +3,7 @@ title: Vue组件化
 date: 2021-05-25 15:03:37
 tags: Vue
 categories: 前端
-index_img: /img/Vue.jpg
+index_img: https://img.badspider.top/posts/ca26d098583f1758bcf35d5c.jpg
 banner_img: 
 ---
 ## 1.组件注册

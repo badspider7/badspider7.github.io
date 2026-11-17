@@ -3,8 +3,8 @@ title: day 01  学习HTML（上）
 date: 2020-08-14 22:56:54
 tags: HTML
 categories: 前端
-index_img: /img/html.jpg
-banner_img: /img/g.jpg
+index_img: https://img.badspider.top/posts/4bcb79f23461d0bdb16392a4.jpg
+banner_img: https://img.badspider.top/posts/fb993d53916dfa6c53d58225.jpg
 ---
 {% note success %}
 今天开始正式学习前端了，python还在进行中，感觉还是喜欢前端一些，当然python也不能落下

@@ -3,8 +3,8 @@ title: Vue 路由
 date: 2021-05-31 19:15:21
 tags: Vue
 categories: 前端
-index_img: /img/Vue-router.jpeg
-banner_img: /img/vueRouter.jpg
+index_img: https://img.badspider.top/posts/2d3f1b929bcc9d966a72efd8.jpg
+banner_img: https://img.badspider.top/posts/b6d0ed1bfd169da5b067a50f.jpg
 ---
 
 ## 1.路由的基本概念与原理
@@ -21,7 +21,7 @@ banner_img: /img/vueRouter.jpg
 ##### 1.1.1 后端路由
 
 - 概念：根据不同的`用户URL请求` 返回不同的内容
-- 本质：`URL请求地址`与`服务器资源`之间的对应关系![屏幕截图 2021-05-25 105809](./vueRouter.jpg)
+- 本质：`URL请求地址`与`服务器资源`之间的对应关系![屏幕截图 2021-05-25 105809](https://img.badspider.top/posts/d2fea76d212528d9cf41640f.png)
 
 ##### 1.1.2 SPA(Single Page Application)
 
@@ -40,7 +40,7 @@ banner_img: /img/vueRouter.jpg
 - 概念： 根据不同的`用户事件`，显示不同的页面内容
 - 本质： `用户事件`与`事件处理函数`之间的对应关系
 
-![屏幕截图 2021-05-25 105736](C:\Users\yellowapple\Desktop\屏幕截图 2021-05-25 105736.png)
+![前端路由示意图](https://img.badspider.top/posts/9df643f1449526b359eb614e.svg)
 
 ##### 1.1.4 实现简易前端路由
 

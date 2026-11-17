@@ -3,8 +3,8 @@ title: 关于在hexo中添加全局音乐
 date: 2020-09-03 19:24:31
 tags: aplyer
 categories: hexo
-index_img: /img/top7.jpg
-banner_img: /img/top9.jpg
+index_img: https://img.badspider.top/posts/f389746243b27c30327740f1.jpg
+banner_img: https://img.badspider.top/posts/b8433accadfab6720bcbafbd.jpg
 ---
 <h3>使用音乐平台提供插件</h3>
 以网易云为例，网页端点击生成<b>外链播放器</b>即可生成外链代码，如我的某个歌单生成<a href="https://music.163.com/#/outchain/0/2205641361/">外链</a>

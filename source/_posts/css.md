@@ -3,8 +3,8 @@ title: 小艾的CSS笔记下
 date: 2020-08-27 10:26:13
 tags: css
 categories: 前端
-index_img: /img/top6.jpg
-banner_img: /img/3.jpg
+index_img: https://img.badspider.top/posts/3db6107e0856720592142f86.jpg
+banner_img: https://img.badspider.top/posts/2eca9b14eb894b4ee30c7929.jpg
 ---
 ##  三种布局方式：
 - 标准流

@@ -3,7 +3,7 @@ title: Promise的基本知识
 date: 2023-03-27 21:45:51
 category: 前端
 tags: 基础知识点
-index_img: /img/promise.jpeg
+index_img: https://img.badspider.top/posts/18eb1ec368633c9acd24aa11.jpg
 ---
 
 ## Promise

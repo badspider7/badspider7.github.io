@@ -2,7 +2,7 @@
 title: node的简单爬虫
 date: 2021-12-19 22:29:35
 tags: 后端
-index_img: /img/spider.jpg
+index_img: https://img.badspider.top/posts/4962c056fd371fa654373412.jpg
 banner_img:
 ---
 

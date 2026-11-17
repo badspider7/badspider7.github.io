@@ -3,8 +3,8 @@ title: mongoDB快速指南
 date: 2021-12-12 14:59:07
 tags: mongoDB
 categories: 前端
-index_img: /img/小雪.png
-banner_img: /img/雨水.png
+index_img: https://img.badspider.top/posts/9f99b2701633d7d04ea97f8c.png
+banner_img: https://img.badspider.top/posts/a19813caa0e21e62ebf16283.png
 ---
 
 ### 1.基础概念

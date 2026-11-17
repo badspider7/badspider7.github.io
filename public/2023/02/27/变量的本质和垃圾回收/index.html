@@ -23,19 +23,19 @@
 <meta property="og:site_name" content="念伊的小窝">
 <meta property="og:description" content="12345678910111213var b1 &#x3D;1 , b2 &#x3D; b1;b2 &#x3D;2 ;  &#x2F;&#x2F;RHS   right hand search  右查询读的是内存中的值&#x2F;&#x2F;由于基本类型是不可修改的，所以这里是先申请了栈里的一块空间，然后赋值为2，然后b指向那个新的地址，旧地方的地址会被垃圾回收给清除掉console.log(b1,b1);    &#x2F;&#x2F; 1  2var r1 &#x3D; &amp;#123;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://badspider.top/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E6%A0%88.png">
-<meta property="og:image" content="http://badspider.top/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/heap.png">
-<meta property="og:image" content="http://badspider.top/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E6%B5%85%E6%8B%B7%E8%B4%9D.png">
-<meta property="og:image" content="http://badspider.top/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6.png">
-<meta property="og:image" content="http://badspider.top/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E8%BF%9B%E7%A8%8B.png">
-<meta property="og:image" content="http://badspider.top/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5%E6%A0%88.png">
-<meta property="og:image" content="http://badspider.top/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/D%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97.png">
+<meta property="og:image" content="https://img.badspider.top/posts/2f69eb22e9779c1dcf37d5bf.png">
+<meta property="og:image" content="https://img.badspider.top/posts/e6257cb60b236b0c447876c0.png">
+<meta property="og:image" content="https://img.badspider.top/posts/4e232a9ab9c932e5bd10c93f.png">
+<meta property="og:image" content="https://img.badspider.top/posts/38f8789ebd9ede74a2077543.png">
+<meta property="og:image" content="https://img.badspider.top/posts/b0fdcd98cba2f7e0745e6268.png">
+<meta property="og:image" content="https://img.badspider.top/posts/386d194621e1ed9153804c9d.png">
+<meta property="og:image" content="https://img.badspider.top/posts/683012f0da976672a2599f40.png">
 <meta property="article:published_time" content="2023-02-27T04:00:45.000Z">
-<meta property="article:modified_time" content="2026-11-09T02:53:00.246Z">
+<meta property="article:modified_time" content="2026-11-17T02:14:18.632Z">
 <meta property="article:author" content="Badspider">
 <meta property="article:tag" content="基础知识点">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://badspider.top/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E6%A0%88.png">
+<meta name="twitter:image" content="https://img.badspider.top/posts/2f69eb22e9779c1dcf37d5bf.png">
   
   <title>变量的本质和垃圾回收 - 念伊的小窝</title>
 
@@ -73,6 +73,7 @@
 
   
 <link rel="stylesheet" href="/css/iconfont.css">
+<link rel="stylesheet" href="/css/sticky-pin.css">
 
 
 
@@ -262,7 +263,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2026年11月9日 上午
+                  本文最后更新于：2026年11月17日 上午
                 
               </p>
             
@@ -293,7 +294,7 @@
 <p>3.数据稳定，每一个类型的大小都是确定的</p>
 <p>4.容量小</p>
 </blockquote>
-<p><img src="/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E6%A0%88.png" srcset="/img/loading.gif" lazyload alt="栈"></p>
+<p><img src="https://img.badspider.top/posts/2f69eb22e9779c1dcf37d5bf.png" srcset="/img/loading.gif" lazyload alt="栈"></p>
 <p><strong>2.Reference Type（引用类型）</strong></p>
 <blockquote>
 <p><strong>Heap</strong></p>
@@ -304,7 +305,7 @@
 <li>不同数据间内存不连续 </li>
 </ol>
 </blockquote>
-<p><img src="/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/heap.png" srcset="/img/loading.gif" lazyload alt="heap"></p>
+<p><img src="https://img.badspider.top/posts/e6257cb60b236b0c447876c0.png" srcset="/img/loading.gif" lazyload alt="heap"></p>
 <h1 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h1><p><strong><code>Object</code></strong> 是 JavaScript 的一种 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures">数据类型</a> 。它用于存储各种键值集合和更复杂的实体。Objects 可以通过 <code>Object()</code> 构造函数或者使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Object_initializer">对象字面量</a> 的方式创建。</p>
 <p>对象是存在堆heap里的，因为对象的大小是不确定而且是可变的，所以不能放在栈里</p>
 <h1 id="特殊的字符串"><a href="#特殊的字符串" class="headerlink" title="特殊的字符串"></a>特殊的字符串</h1><p>字符串是无法修改的，是基本数据类型，但是其大小又是不确定的。修改值只会重新开辟一块内存空间</p>
@@ -314,14 +315,14 @@
 
 
 
-<p><img src="/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E6%B5%85%E6%8B%B7%E8%B4%9D.png" srcset="/img/loading.gif" lazyload alt="浅拷贝"></p>
+<p><img src="https://img.badspider.top/posts/4e232a9ab9c932e5bd10c93f.png" srcset="/img/loading.gif" lazyload alt="浅拷贝"></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 深拷贝</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">clone2</span>(<span class="hljs-params">obj</span>)&#123;<br>	<span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span> obj !== <span class="hljs-string">&quot;object&quot;</span> || obj === <span class="hljs-literal">null</span>)&#123;<br>		<span class="hljs-keyword">return</span> obj;<br>    &#125;<br>    <br>    <span class="hljs-keyword">var</span> clone = <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(obj)? [] : &#123;&#125;;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> key <span class="hljs-keyword">in</span> obj)&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span> obj[key] === <span class="hljs-string">&#x27;object&#x27;</span>)&#123;<br>            clone[key] = <span class="hljs-title function_">clone2</span>(obj[key]);<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>        clone[key] = obj[key];<br>    	&#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> clone;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
 <h1 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a><strong>垃圾回收机制</strong></h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> foo = &#123;<span class="hljs-attr">a</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">b</span>:&#123;<span class="hljs-attr">x</span>:<span class="hljs-number">2</span>&#125;&#125;;<br><span class="hljs-keyword">var</span> bar = foo.<span class="hljs-property">b</span>;<br>bar.<span class="hljs-property">c</span> = foo;<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(bar.<span class="hljs-property">c</span>.<span class="hljs-property">a</span>);<br></code></pre></td></tr></table></figure>
 
-<p><img src="/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6.png" srcset="/img/loading.gif" lazyload alt="垃圾回收"></p>
+<p><img src="https://img.badspider.top/posts/38f8789ebd9ede74a2077543.png" srcset="/img/loading.gif" lazyload alt="垃圾回收"></p>
 <h1 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h1><blockquote>
 <p>理解new关键字的作用机制</p>
 <p>理解 [[GET]]</p>
@@ -340,7 +341,7 @@
 <p>插件进程</p>
 <p>渲染进程（内核）</p>
 <p>渲染进程是运行在沙箱中的，保证用户的安全，主要是<strong>渲染引擎</strong>和<strong>JS解析引擎</strong></p>
-<p><img src="/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E8%BF%9B%E7%A8%8B.png" srcset="/img/loading.gif" lazyload alt="浏览器的进程"></p>
+<p><img src="https://img.badspider.top/posts/b0fdcd98cba2f7e0745e6268.png" srcset="/img/loading.gif" lazyload alt="浏览器的进程"></p>
 <p><strong>浏览器内核执行机制</strong> </p>
 <p>浏览器内核也就是渲染进程分别由渲染引擎和JS解析引擎构成</p>
 <p>渲染引擎用来渲染页面，JS解析引擎用来解析JS代码，但是两个进程是不能直接通信的，就需要一个中间人来搭建桥梁，也就是<strong>事件循环</strong></p>
@@ -370,9 +371,9 @@
 </ul>
 <p><strong>只有同步任务执行完了，才会执行异步任务，那么怎么判断同步任务执行完成了呢？</strong></p>
 <p>也就是看栈，如果执行栈空了，就说明同步任务执行完了，可以去执行任务队列中的任务了</p>
-<p><img src="/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5%E6%A0%88.png" srcset="/img/loading.gif" lazyload alt="同步和异步栈"></p>
+<p><img src="https://img.badspider.top/posts/386d194621e1ed9153804c9d.png" srcset="/img/loading.gif" lazyload alt="同步和异步栈"></p>
 <p>​                             <em>任务队列</em></p>
-<p><img src="/2023/02/27/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%92%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/D%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97.png" srcset="/img/loading.gif" lazyload alt="任务队列"></p>
+<p><img src="https://img.badspider.top/posts/683012f0da976672a2599f40.png" srcset="/img/loading.gif" lazyload alt="任务队列"></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> flag = <span class="hljs-literal">true</span>;<br><br><span class="hljs-keyword">while</span>(flag)&#123;<br>	<span class="hljs-title function_">setTimeOut</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>        flag = <span class="hljs-literal">false</span>;<br>    &#125;,<span class="hljs-number">10</span>);<br>&#125;<br><br><span class="hljs-comment">//请问这个循环会结束吗？</span><br><br><span class="hljs-comment">//答案是不会的，因为JS是单线程的，为了j所以就有了异步和同步，只有执行完同步才会执行异步的任务，这里面会一直执行循环，也就是同步的任务栈中的任务是一直有新的任务压栈的，是不会为空的，所以异步任务的任务队列是执行不到的</span><br></code></pre></td></tr></table></figure>
 
 

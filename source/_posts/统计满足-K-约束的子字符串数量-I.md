@@ -3,7 +3,7 @@ title: 统计满足 K 约束的子字符串数量 I
 date: 2024-11-11 11:49:55
 tags: 每日一题
 categories: 算法
-index_img: /img/post/leetcode.jpg
+index_img: https://img.badspider.top/posts/097dc8ca58e965152c121727.jpg
 banner_img:
 ---
 

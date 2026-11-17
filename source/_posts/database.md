@@ -3,8 +3,8 @@ title: 数据库原理
 date: 2020-11-16 20:54:39
 tags: 数据库
 categories: 技术
-index_img: /img/dog.jpg
-banner_img: /img/sql.jpg
+index_img: https://img.badspider.top/posts/3ed3f570c8b8dda31a7fd972.jpg
+banner_img: https://img.badspider.top/posts/255132140709c11eddf29bb1.jpg
 ---
 <h1>1.关系模型的一些术语</h1>
 <ul>

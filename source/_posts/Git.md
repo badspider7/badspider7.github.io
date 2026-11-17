@@ -3,8 +3,8 @@ title: Git
 date: 2021-04-11 14:45:09
 tags: Git
 categories: 后端
-index_img: /img/git-index.jpeg
-banner_img: /img/git-banner.jpg
+index_img: https://img.badspider.top/posts/b4d5af6be5e1f8575568e43b.jpg
+banner_img: https://img.badspider.top/posts/1418f5ae1e5176ab91830807.jpg
 ---
 ###  1.提交步骤
 

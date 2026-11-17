@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="念伊的小窝">
 <meta property="og:description" content="前言dify 的前端是用 next 来编写的(一个 react 的框架)，而其工作流使用了react-flow这个插件,最新版本名为 xyflow。我们需要参考其 workflow 定制一个属于自己的 ai 工作流，是一个有向无环图。  困难1.需要在短时间内理解dify的工作流架构以及其封装的大量hooks的使用 2.刚刚上手react 3.配置项比较多，时间紧 开发首先让我们来分析一下一个工作">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.badspider.top/%E5%8D%9A%E5%AE%A2/dify.jpg?e=1729933704&token=O5FexAXMDVkC96l0JKtw-Lt-5pW8odocO8uOerZ4:HZrH0ICHd9dPoIvbKMuiHwNCwyA=">
+<meta property="og:image" content="https://img.badspider.top/posts/7c71eb0ca8e81074d4f224f6.jpg">
 <meta property="article:published_time" content="2024-07-24T14:32:12.000Z">
-<meta property="article:modified_time" content="2026-11-09T02:53:00.234Z">
+<meta property="article:modified_time" content="2026-11-17T02:14:18.627Z">
 <meta property="article:author" content="Badspider">
 <meta property="article:tag" content="总结">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.badspider.top/%E5%8D%9A%E5%AE%A2/dify.jpg?e=1729933704&token=O5FexAXMDVkC96l0JKtw-Lt-5pW8odocO8uOerZ4:HZrH0ICHd9dPoIvbKMuiHwNCwyA=">
+<meta name="twitter:image" content="https://img.badspider.top/posts/7c71eb0ca8e81074d4f224f6.jpg">
   
   <title>dify 工作流二次开发 - 念伊的小窝</title>
 
@@ -67,6 +67,7 @@
 
   
 <link rel="stylesheet" href="/css/iconfont.css">
+<link rel="stylesheet" href="/css/sticky-pin.css">
 
 
 
@@ -256,13 +257,13 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2026年11月9日 上午
+                  本文最后更新于：2026年11月17日 上午
                 
               </p>
             
             <div class="markdown-body">
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p><a target="_blank" rel="noopener" href="https://github.com/langgenius/dify/tree/main/web">dify</a> 的前端是用 next 来编写的(一个 react 的框架)，而其工作流使用了<a target="_blank" rel="noopener" href="https://github.com/xyflow/xyflow">react-flow</a>这个插件,最新版本名为 xyflow。我们需要参考其 workflow 定制一个属于自己的 ai 工作流，是一个有向无环图。</p>
-<p><img src="https://img.badspider.top/%E5%8D%9A%E5%AE%A2/dify.jpg?e=1729933704&token=O5FexAXMDVkC96l0JKtw-Lt-5pW8odocO8uOerZ4:HZrH0ICHd9dPoIvbKMuiHwNCwyA=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://img.badspider.top/posts/7c71eb0ca8e81074d4f224f6.jpg" srcset="/img/loading.gif" lazyload></p>
 <h3 id="困难"><a href="#困难" class="headerlink" title="困难"></a>困难</h3><p>1.需要在短时间内理解dify的工作流架构以及其封装的大量hooks的使用</p>
 <p>2.刚刚上手react</p>
 <p>3.配置项比较多，时间紧</p>

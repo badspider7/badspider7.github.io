@@ -3,7 +3,7 @@ title: 【每日算法】长度为k的子数组的能量
 date: 2024-11-06 9:47:01
 tags: 每日一题
 categories: 算法
-index_img: /img/post/leetcode.jpg
+index_img: https://img.badspider.top/posts/097dc8ca58e965152c121727.jpg
 banner_img: 
 ---
 

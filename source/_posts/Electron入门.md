@@ -3,8 +3,8 @@ title: Electron入门
 date: 2023-06-07 23:37:11
 tags: Electron
 categories: 前端
-index_img: /img/electron.jpeg
-banner_img: /img/electron.jpeg
+index_img: https://img.badspider.top/posts/ec012af0f7dbe4b16232d519.jpg
+banner_img: https://img.badspider.top/posts/ec012af0f7dbe4b16232d519.jpg
 ---
 //ready:app 初始化完成
 

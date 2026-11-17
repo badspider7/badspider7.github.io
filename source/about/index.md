@@ -6,7 +6,7 @@ layout: about
 
 **关于我**
 
-> <strong>享受生活，不断成长</strong>
+> <strong>stay hungry stay foolish （求知若饥，虚心若愚）</strong>
 
 <div style="font-size: 2em;border-bottom:1px solid #ccc;margin-top:2em;margin-bottom:.75em"> 🎉 联系方式</div>
 
@@ -15,7 +15,7 @@ layout: about
 
 <!-- <div style="font-size: 2em;border-bottom:1px solid #ccc;margin-top:2em;margin-bottom:.75em"> 🎄 我的兴趣</div>
 
-- 🦹Electron\Rust\Tauri
+- 🦹Agent\性能优化\Electron\Rust\Python
 - 🎮 炉石\lol
 - 📖 阅读
 - 👂 网易云 -->

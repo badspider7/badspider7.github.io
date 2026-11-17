@@ -3,8 +3,8 @@ title: Vue的虚拟DOM
 date: 2023-06-07 21:48:43
 tags: Vue
 categories: 前端
-index_img: /img/render-DOM.png
-banner_img: /img/render-DOM.png
+index_img: https://img.badspider.top/posts/03805016b77acfd1a47e9247.png
+banner_img: https://img.badspider.top/posts/03805016b77acfd1a47e9247.png
 ---
 ## Vue的渲染机制
 
@@ -40,7 +40,7 @@ const vnode = {
 2. **挂载**：运行时渲染器调用渲染函数，遍历返回的虚拟 DOM 树，并基于它创建实际的 DOM 节点。这一步会作为[响应式副作用](https://cn.vuejs.org/guide/extras/reactivity-in-depth.html)执行，因此它会追踪其中所用到的所有响应式依赖。
 3. **更新**（diff算法）：当一个依赖发生变化后，副作用会重新运行，这时候会创建一个更新后的虚拟 DOM 树。运行时渲染器遍历这棵新树，将它与旧树进行比较，然后将必要的更新应用到真实 DOM 上去。
 
-![render pipeline](https://cn.vuejs.org/assets/render-pipeline.03805016.png)
+![render pipeline](https://img.badspider.top/posts/03805016b77acfd1a47e9247.png)
 
 ## 创建VNode
 
